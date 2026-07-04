@@ -47,12 +47,29 @@ export function useWallet() {
     const saved = sessionStorage.getItem("connected_wallet")
     if (saved) {
       const addr = saved
-      setWallet(prev => ({
-        ...prev,
-        address: addr,
-        shortAddress: shortenAddress(addr),
-        isConnected: true,
-      }))
+      // Detect chain to ensure it's still BNB Chain
+      const eth = (window as unknown as { ethereum?: { request: (args: { method: string }) => Promise<string> } }).ethereum
+      if (eth) {
+        eth.request({ method: "eth_chainId" })
+          .then((chainIdHex) => {
+            const chainId = parseInt(chainIdHex, 16)
+            if (chainId === 56) {
+              setWallet(prev => ({
+                ...prev,
+                address: addr,
+                shortAddress: shortenAddress(addr),
+                chainId,
+                isConnected: true,
+              }))
+            } else {
+              // Switch required, but don't force reload loop. Just keep disconnected until they switch
+              sessionStorage.removeItem("connected_wallet")
+            }
+          })
+          .catch(() => {
+            sessionStorage.removeItem("connected_wallet")
+          })
+      }
     }
   }, [])
 
@@ -67,13 +84,8 @@ export function useWallet() {
         setWallet(initialState)
         sessionStorage.removeItem("connected_wallet")
       } else {
-        setWallet(prev => ({
-          ...prev,
-          address: accs[0],
-          shortAddress: shortenAddress(accs[0]),
-          isConnected: true,
-        }))
-        sessionStorage.setItem("connected_wallet", accs[0])
+        // Just reload to re-run the restore/check flow safely
+        window.location.reload()
       }
     }
 
@@ -104,17 +116,58 @@ export function useWallet() {
           request: (args: { method: string; params?: unknown[] }) => Promise<unknown>
         }
 
-        const accounts = await eth.request({ method: "eth_requestAccounts" }) as string[]
-        const chainIdHex = await eth.request({ method: "eth_chainId" }) as string
+        // 1. Switch/Add BNB Chain (Chain ID: 56, Hex: 0x38)
+        const bnbChainIdHex = "0x38"
+        let chainSwitched = false
 
+        try {
+          await eth.request({
+            method: "wallet_switchEthereumChain",
+            params: [{ chainId: bnbChainIdHex }],
+          })
+          chainSwitched = true
+        } catch (switchError: any) {
+          // 4902 indicates the chain has not been added to the wallet
+          if (switchError.code === 4902) {
+            try {
+              await eth.request({
+                method: "wallet_addEthereumChain",
+                params: [
+                  {
+                    chainId: bnbChainIdHex,
+                    chainName: "BNB Smart Chain",
+                    rpcUrls: ["https://bsc-dataseed.binance.org/"],
+                    nativeCurrency: {
+                      name: "BNB",
+                      symbol: "BNB",
+                      decimals: 18,
+                    },
+                    blockExplorerUrls: ["https://bscscan.com"],
+                  },
+                ],
+              })
+              chainSwitched = true
+            } catch (addError) {
+              throw new Error("Failed to add BNB Smart Chain to wallet.")
+            }
+          } else {
+            throw new Error("Please switch to BNB Smart Chain to connect.")
+          }
+        }
+
+        if (!chainSwitched) {
+          throw new Error("Connection cancelled: BNB Smart Chain required.")
+        }
+
+        // 2. Request accounts after ensuring BNB chain
+        const accounts = await eth.request({ method: "eth_requestAccounts" }) as string[]
         const address = accounts[0]
-        const chainId = parseInt(chainIdHex, 16)
 
         sessionStorage.setItem("connected_wallet", address)
         setWallet({
           address,
           shortAddress: shortenAddress(address),
-          chainId,
+          chainId: 56,
           isConnected: true,
           isConnecting: false,
           error: null,
