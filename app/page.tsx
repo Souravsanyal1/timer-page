@@ -861,24 +861,136 @@ export default function FocusTimerPage() {
 
 
 
-          {/* ══════ BODY LINKS ══════ */}
+          {/* ══════ BODY NAV LINKS ══════ */}
           <div className="flex flex-wrap justify-center gap-8 py-10 border-t border-border mt-8">
-            <button
-              onClick={() => setWalletModalOpen(true)}
-              className="text-xs text-foreground/45 tracking-wider uppercase hover:text-foreground/75 transition-colors cursor-pointer"
-            >
+            <a href="#supported-wallets" className="text-xs text-foreground/45 tracking-wider uppercase hover:text-foreground/75 transition-colors">
               Supported Wallets
-            </button>
-            <a href="#about" className="text-xs text-foreground/45 tracking-wider uppercase hover:text-foreground/75 transition-colors">
+            </a>
+            <a href="#about-us" className="text-xs text-foreground/45 tracking-wider uppercase hover:text-foreground/75 transition-colors">
               About Us
             </a>
-            <a href="#" className="text-xs text-foreground/45 tracking-wider uppercase hover:text-foreground/75 transition-colors">
+            <a href="#privacy" className="text-xs text-foreground/45 tracking-wider uppercase hover:text-foreground/75 transition-colors">
               Privacy
             </a>
-            <a href="#" className="text-xs text-foreground/45 tracking-wider uppercase hover:text-foreground/75 transition-colors">
+            <a href="#terms" className="text-xs text-foreground/45 tracking-wider uppercase hover:text-foreground/75 transition-colors">
               Terms
             </a>
           </div>
+
+          {/* ══════ SUPPORTED WALLETS SECTION ══════ */}
+          <section id="supported-wallets" className="py-20 border-t border-border">
+            <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.7 }} viewport={{ once: true }} className="text-center mb-12">
+              <p className="text-[10px] font-semibold text-foreground/40 uppercase tracking-[0.35em] mb-3">Web3</p>
+              <h2 className="text-3xl md:text-5xl font-black text-foreground" style={{ letterSpacing: "-0.03em" }}>
+                Supported{" "}
+                <span style={{ background: "linear-gradient(135deg,#FFB000,#FF8A00)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>
+                  Wallets
+                </span>
+              </h2>
+              <p className="text-foreground/40 text-sm mt-3 max-w-sm mx-auto">Connect your preferred Web3 wallet to unlock all Elite Force features.</p>
+            </motion.div>
+            <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.15 }} viewport={{ once: true }}
+              className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-3xl mx-auto">
+              {[
+                { name: "MetaMask", color: "#F6851B", desc: "Browser extension" },
+                { name: "Trust Wallet", color: "#3375BB", desc: "Mobile wallet" },
+                { name: "TokenPocket", color: "#2A8AF6", desc: "Multi-chain DeFi" },
+                { name: "1inch Wallet", color: "#F5525B", desc: "Best swap rates" },
+              ].map((w) => (
+                <button key={w.name} onClick={() => setWalletModalOpen(true)}
+                  className="group flex flex-col items-center gap-3 p-5 rounded-2xl border border-border hover:border-orange-500/40 transition-all duration-300 hover:scale-[1.03] cursor-pointer"
+                  style={{ background: "var(--card, rgba(255,255,255,0.03))" }}>
+                  <div className="w-12 h-12 rounded-2xl flex items-center justify-center text-xl font-black text-white"
+                    style={{ background: w.color }}>
+                    {w.name[0]}
+                  </div>
+                  <div className="text-center">
+                    <p className="text-foreground font-semibold text-sm">{w.name}</p>
+                    <p className="text-foreground/40 text-xs mt-0.5">{w.desc}</p>
+                  </div>
+                </button>
+              ))}
+            </motion.div>
+          </section>
+
+          {/* ══════ ABOUT US SECTION ══════ */}
+          <section id="about-us" className="py-20 border-t border-border">
+            <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.7 }} viewport={{ once: true }} className="text-center mb-12">
+              <p className="text-[10px] font-semibold text-foreground/40 uppercase tracking-[0.35em] mb-3">Who We Are</p>
+              <h2 className="text-3xl md:text-5xl font-black text-foreground" style={{ letterSpacing: "-0.03em" }}>
+                About{" "}
+                <span style={{ background: "linear-gradient(135deg,#FFB000,#FF8A00)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>
+                  Us
+                </span>
+              </h2>
+            </motion.div>
+            <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.15 }} viewport={{ once: true }}
+              className="max-w-3xl mx-auto grid md:grid-cols-2 gap-6">
+              {[
+                { title: "Our Mission", desc: "Elite Force is a 6-month accountability challenge built to transform habits, boost productivity, and create a community of driven individuals who refuse to settle." },
+                { title: "Who We Build For", desc: "Builders, students, athletes, and dreamers — anyone who wants to lock in, track their progress, and grow alongside a community that holds each other accountable." },
+                { title: "Web3 Native", desc: "By integrating blockchain wallets, we ensure transparency, ownership, and verifiable progress milestones that no centralized platform can replicate." },
+                { title: "The 6-Month Window", desc: "Starting now and ending January 3, 2027 — 6 months of focused execution. Every session tracked. Every streak counted. Every milestone celebrated." },
+              ].map((item, i) => (
+                <motion.div key={item.title} initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: i * 0.1 }} viewport={{ once: true }}
+                  className="p-6 rounded-2xl border border-border" style={{ background: "var(--card, rgba(255,255,255,0.03))" }}>
+                  <h3 className="text-foreground font-bold text-base mb-2">{item.title}</h3>
+                  <p className="text-foreground/50 text-sm leading-relaxed">{item.desc}</p>
+                </motion.div>
+              ))}
+            </motion.div>
+          </section>
+
+          {/* ══════ PRIVACY SECTION ══════ */}
+          <section id="privacy" className="py-20 border-t border-border">
+            <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.7 }} viewport={{ once: true }} className="max-w-2xl mx-auto">
+              <p className="text-[10px] font-semibold text-foreground/40 uppercase tracking-[0.35em] mb-3 text-center">Legal</p>
+              <h2 className="text-3xl md:text-4xl font-black text-foreground text-center mb-10" style={{ letterSpacing: "-0.03em" }}>
+                Privacy{" "}
+                <span style={{ background: "linear-gradient(135deg,#FFB000,#FF8A00)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>
+                  Policy
+                </span>
+              </h2>
+              {[
+                { title: "Data We Collect", body: "We collect only what is necessary: wallet addresses (public, on-chain), session activity data, and streak counts. We never collect private keys or seed phrases." },
+                { title: "How We Use It", body: "Your data is used solely to display your progress, leaderboard standing, and community stats. We do not sell or share your data with third parties." },
+                { title: "Cookies", body: "We use essential cookies only — for theme preferences and session state. No advertising or tracking cookies are used." },
+                { title: "Your Rights", body: "You can disconnect your wallet and clear your session data at any time through the Settings panel. All on-chain data remains public as part of the blockchain." },
+              ].map((item, i) => (
+                <motion.div key={item.title} initial={{ opacity: 0, x: -16 }} whileInView={{ opacity: 1, x: 0 }} transition={{ duration: 0.5, delay: i * 0.08 }} viewport={{ once: true }}
+                  className="mb-6 p-5 rounded-xl border border-border" style={{ background: "var(--card, rgba(255,255,255,0.03))" }}>
+                  <h3 className="text-foreground font-semibold text-sm mb-1.5">{item.title}</h3>
+                  <p className="text-foreground/45 text-sm leading-relaxed">{item.body}</p>
+                </motion.div>
+              ))}
+            </motion.div>
+          </section>
+
+          {/* ══════ TERMS SECTION ══════ */}
+          <section id="terms" className="py-20 border-t border-border">
+            <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.7 }} viewport={{ once: true }} className="max-w-2xl mx-auto">
+              <p className="text-[10px] font-semibold text-foreground/40 uppercase tracking-[0.35em] mb-3 text-center">Legal</p>
+              <h2 className="text-3xl md:text-4xl font-black text-foreground text-center mb-10" style={{ letterSpacing: "-0.03em" }}>
+                Terms of{" "}
+                <span style={{ background: "linear-gradient(135deg,#FFB000,#FF8A00)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>
+                  Service
+                </span>
+              </h2>
+              {[
+                { title: "Acceptance", body: "By using Elite Force, you agree to these terms. The platform is provided as-is for accountability and productivity tracking purposes only." },
+                { title: "Wallet Responsibility", body: "You are solely responsible for your wallet and private keys. Elite Force never has access to your funds. Always verify contract addresses before any on-chain actions." },
+                { title: "Community Standards", body: "Users are expected to engage respectfully across all community channels (Telegram, WhatsApp, Discord). Harassment, spam, or abuse will result in removal." },
+                { title: "Limitation of Liability", body: "Elite Force is not liable for any losses, missed goals, or technical issues. Session data is stored locally and may be reset. Always keep personal records." },
+              ].map((item, i) => (
+                <motion.div key={item.title} initial={{ opacity: 0, x: 16 }} whileInView={{ opacity: 1, x: 0 }} transition={{ duration: 0.5, delay: i * 0.08 }} viewport={{ once: true }}
+                  className="mb-6 p-5 rounded-xl border border-border" style={{ background: "var(--card, rgba(255,255,255,0.03))" }}>
+                  <h3 className="text-foreground font-semibold text-sm mb-1.5">{item.title}</h3>
+                  <p className="text-foreground/45 text-sm leading-relaxed">{item.body}</p>
+                </motion.div>
+              ))}
+            </motion.div>
+          </section>
+
 
           {/* ══════ FOOTER ══════ */}
           <footer className="py-6 border-t border-border">
