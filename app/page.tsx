@@ -379,6 +379,115 @@ function SettingsDrawer({ open, onClose }: { open: boolean; onClose: () => void 
   );
 }
 
+/* ─────────────── Animated Coming Soon ─────────────── */
+function AnimatedComingSoon() {
+  const coming = "COMING".split("");
+  const soon = "SOON".split("");
+
+  const containerVariants = {
+    animate: {
+      transition: {
+        staggerChildren: 0.08,
+      }
+    }
+  } as const;
+
+  const letterVariants = {
+    initial: {
+      rotateX: 90,
+      y: 20,
+      opacity: 0,
+      filter: "blur(8px)",
+    },
+    animate: {
+      rotateX: 0,
+      y: 0,
+      opacity: 1,
+      filter: "blur(0px)",
+      transition: {
+        duration: 0.6,
+        ease: [0.2, 0.65, 0.3, 0.9] as const,
+      }
+    }
+  } as const;
+
+  return (
+    <motion.div
+      variants={containerVariants}
+      initial="initial"
+      animate="animate"
+      className="mt-8 flex items-center justify-center gap-3 font-black uppercase tracking-[0.25em]"
+      style={{ fontSize: "clamp(1.5rem, 4vw, 3rem)", perspective: "1000px" }}
+    >
+      {/* COMING */}
+      <div className="flex gap-[0.1em]" style={{ transformStyle: "preserve-3d" }}>
+        {coming.map((char, i) => (
+          <motion.span
+            key={`c-${i}`}
+            variants={letterVariants}
+            animate={{
+              rotateX: 0,
+              y: [0, -6, 0],
+              opacity: 1,
+              filter: "blur(0px)",
+            }}
+            transition={{
+              y: {
+                duration: 2.5,
+                repeat: Infinity,
+                ease: "easeInOut",
+                delay: i * 0.1 + 0.6,
+              },
+              rotateX: { duration: 0.6, ease: [0.2, 0.65, 0.3, 0.9], delay: i * 0.06 },
+              opacity: { duration: 0.4, delay: i * 0.06 },
+              filter: { duration: 0.4, delay: i * 0.06 },
+            }}
+            className="inline-block text-foreground"
+            style={{ transformStyle: "preserve-3d" }}
+          >
+            {char}
+          </motion.span>
+        ))}
+      </div>
+
+      {/* SOON */}
+      <div className="flex gap-[0.1em]" style={{ transformStyle: "preserve-3d" }}>
+        {soon.map((char, i) => (
+          <motion.span
+            key={`s-${i}`}
+            variants={letterVariants}
+            animate={{
+              rotateX: 0,
+              y: [0, -6, 0],
+              opacity: 1,
+              filter: "blur(0px)",
+            }}
+            transition={{
+              y: {
+                duration: 2.5,
+                repeat: Infinity,
+                ease: "easeInOut",
+                delay: (coming.length + i) * 0.1 + 0.6,
+              },
+              rotateX: { duration: 0.6, ease: [0.2, 0.65, 0.3, 0.9], delay: (coming.length + i) * 0.06 },
+              opacity: { duration: 0.4, delay: (coming.length + i) * 0.06 },
+              filter: { duration: 0.4, delay: (coming.length + i) * 0.06 },
+            }}
+            className="inline-block"
+            style={{
+              transformStyle: "preserve-3d",
+              color: "#FF8A00",
+              textShadow: "0 0 25px rgba(255,138,0,0.35)",
+            }}
+          >
+            {char}
+          </motion.span>
+        ))}
+      </div>
+    </motion.div>
+  );
+}
+
 /* ═══════════════════════════════════════════════ MAIN PAGE ═══════════════════════════════════════════════ */
 export default function FocusTimerPage() {
   const [isLoading, setIsLoading] = useState(true);
@@ -510,22 +619,7 @@ export default function FocusTimerPage() {
               </div>
 
               {/* ── Coming Soon Text ── */}
-              <motion.div
-                className="mt-8 flex items-center justify-center gap-3 font-black uppercase tracking-[0.25em]"
-                style={{ fontSize: "clamp(1.5rem, 4vw, 3rem)" }}
-                animate={{
-                  opacity: [0.6, 1, 0.6],
-                  scale: [0.98, 1, 0.98]
-                }}
-                transition={{
-                  duration: 2.5,
-                  ease: "easeInOut",
-                  repeat: Infinity,
-                }}
-              >
-                <span className="text-foreground">COMING</span>
-                <span style={{ color: "#FF8A00", textShadow: "0 0 20px rgba(255,138,0,0.3)" }}>SOON</span>
-              </motion.div>
+              <AnimatedComingSoon />
             </motion.div>
 
             {/* Flip text subtitle - removed */}
