@@ -1115,18 +1115,15 @@ export default function FocusTimerPage() {
                   Policy
                 </span>
               </h2>
-              {[
-                { title: "Data We Collect", body: "We collect only what is necessary: wallet addresses (public, on-chain), session activity data, and streak counts. We never collect private keys or seed phrases." },
-                { title: "How We Use It", body: "Your data is used solely to display your progress, leaderboard standing, and community stats. We do not sell or share your data with third parties." },
-                { title: "Cookies", body: "We use essential cookies only — for theme preferences and session state. No advertising or tracking cookies are used." },
-                { title: "Your Rights", body: "You can disconnect your wallet and clear your session data at any time through the Settings panel. All on-chain data remains public as part of the blockchain." },
-              ].map((item, i) => (
-                <motion.div key={item.title} initial={{ opacity: 0, x: -16 }} whileInView={{ opacity: 1, x: 0 }} transition={{ duration: 0.5, delay: i * 0.08 }} viewport={{ once: true }}
-                  className="mb-6 p-5 rounded-xl border border-border" style={{ background: "var(--card, rgba(255,255,255,0.03))" }}>
-                  <h3 className="text-foreground font-semibold text-sm mb-1.5">{item.title}</h3>
-                  <p className="text-foreground/45 text-sm leading-relaxed">{item.body}</p>
-                </motion.div>
-              ))}
+              <FaqAccordion
+                title=""
+                items={[
+                  { question: "Data We Collect", answer: "We collect only what is necessary: wallet addresses (public, on-chain), session activity data, and streak counts. We never collect private keys or seed phrases." },
+                  { question: "How We Use It", answer: "Your data is used solely to display your progress, leaderboard standing, and community stats. We do not sell or share your data with third parties." },
+                  { question: "Cookies", answer: "We use essential cookies only — for theme preferences and session state. No advertising or tracking cookies are used." },
+                  { question: "Your Rights", answer: "You can disconnect your wallet and clear your session data at any time through the Settings panel. All on-chain data remains public as part of the blockchain." },
+                ]}
+              />
             </motion.div>
           </section>
 
