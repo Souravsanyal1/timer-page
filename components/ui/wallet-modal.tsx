@@ -81,10 +81,34 @@ const WalletIcons: Record<string, React.ReactNode> = {
 
 
 const WALLETS = [
-  { id: "MetaMask",     name: "MetaMask",      desc: "Popular Ethereum wallet" },
-  { id: "TokenPocket",  name: "TokenPocket",   desc: "Multi-chain DeFi wallet" },
-  { id: "Trust",        name: "Trust Wallet",  desc: "Multi-chain mobile wallet" },
-  { id: "OneInch",      name: "1inch Wallet",  desc: "Best swap rates & DeFi" },
+  {
+    id: "MetaMask",
+    name: "MetaMask",
+    desc: "Popular Ethereum wallet",
+    detectKey: "isMetaMask",
+    installUrl: "https://metamask.io/download/",
+  },
+  {
+    id: "TokenPocket",
+    name: "TokenPocket",
+    desc: "Multi-chain DeFi wallet",
+    detectKey: "isTokenPocket",
+    installUrl: "https://www.tokenpocket.pro/en/download/app",
+  },
+  {
+    id: "Trust",
+    name: "Trust Wallet",
+    desc: "Multi-chain mobile wallet",
+    detectKey: "isTrust",
+    installUrl: "https://trustwallet.com/download",
+  },
+  {
+    id: "OneInch",
+    name: "1inch Wallet",
+    desc: "Best swap rates & DeFi",
+    detectKey: "isOneInch",
+    installUrl: "https://1inch.io/wallet/",
+  },
 ]
 
 interface WalletModalProps {
@@ -95,8 +119,35 @@ interface WalletModalProps {
 export function WalletModal({ open, onClose }: WalletModalProps) {
   const { wallet, connect, disconnect } = useWallet()
   const [connecting, setConnecting] = useState<string | null>(null)
+  const [detected, setDetected] = useState<Set<string>>(new Set())
 
-  async function handleConnect(walletId: string, walletName: string) {
+  // Detect installed wallets from window.ethereum provider flags
+  useEffect(() => {
+    if (typeof window === "undefined") return
+    const eth = (window as unknown as { ethereum?: Record<string, boolean> }).ethereum
+    if (!eth) return
+
+    const found = new Set<string>()
+    // MetaMask: isMetaMask true but NOT TokenPocket/Trust/1inch
+    if (eth.isMetaMask && !eth.isTokenPocket && !eth.isTrust && !eth.isOneInch) found.add("MetaMask")
+    if (eth.isTokenPocket) found.add("TokenPocket")
+    if (eth.isTrust || eth.isTrustWallet) found.add("Trust")
+    if (eth.isOneInch) found.add("OneInch")
+    // Fallback: if ethereum exists and nothing specific detected, assume MetaMask
+    if (found.size === 0 && eth) found.add("MetaMask")
+
+    setDetected(found)
+  }, [open])
+
+  // Sort: detected wallets first
+  const sortedWallets = [...WALLETS].sort((a, b) => {
+    const aDetected = detected.has(a.id) ? 0 : 1
+    const bDetected = detected.has(b.id) ? 0 : 1
+    return aDetected - bDetected
+  })
+
+  async function handleConnect(walletId: string, walletName: string, isDetected: boolean) {
+    if (!isDetected) return // Don't connect if not installed
     setConnecting(walletId)
     const result = await connect(walletName)
     setConnecting(null)
@@ -241,39 +292,84 @@ export function WalletModal({ open, onClose }: WalletModalProps) {
                   </button>
                 </div>
               ) : (
-                /* Wallet List */
+              /* Wallet List */
                 <div className="p-3 flex flex-col gap-1.5">
+                  {/* Info banner */}
+                  <div className="flex items-center gap-2 px-3 py-2 rounded-lg bg-white/3 border border-white/5 mb-1">
+                    <svg className="w-3.5 h-3.5 text-white/40 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                      <circle cx="12" cy="12" r="10"/><path d="M12 8v4m0 4h.01"/>
+                    </svg>
+                    <p className="text-white/40 text-xs">Wallet must have at least one account</p>
+                  </div>
+
                   {wallet.error && (
                     <div className="px-3 py-2 rounded-lg bg-red-500/10 border border-red-500/20 text-red-400 text-xs mb-1">
                       {wallet.error}
                     </div>
                   )}
-                  {WALLETS.map((w) => (
-                    <button
-                      key={w.id}
-                      onClick={() => handleConnect(w.id, w.name)}
-                      disabled={!!connecting}
-                      className="group flex items-center gap-3 w-full px-3 py-3 rounded-xl hover:bg-white/5 transition-all active:scale-[0.98] disabled:opacity-60 text-left"
-                    >
-                      <div className="w-11 h-11 rounded-xl flex items-center justify-center bg-white/5 group-hover:bg-white/10 transition-colors shrink-0">
-                        {WalletIcons[w.id]}
+
+                  {sortedWallets.map((w) => {
+                    const isDetected = detected.has(w.id)
+                    return (
+                      <div key={w.id} className="relative">
+                        <button
+                          onClick={() => handleConnect(w.id, w.name, isDetected)}
+                          disabled={!!connecting || !isDetected}
+                          className={`group flex items-center gap-3 w-full px-3 py-3 rounded-xl transition-all active:scale-[0.98] text-left ${
+                            isDetected
+                              ? "hover:bg-white/5 cursor-pointer"
+                              : "opacity-40 cursor-not-allowed"
+                          }`}
+                        >
+                          <div className="relative w-11 h-11 shrink-0">
+                            <div className={`w-11 h-11 rounded-xl flex items-center justify-center transition-colors ${
+                              isDetected ? "bg-white/5 group-hover:bg-white/10" : "bg-white/3"
+                            }`}>
+                              {WalletIcons[w.id]}
+                            </div>
+                            {/* Detected green dot */}
+                            {isDetected && (
+                              <span className="absolute -top-0.5 -right-0.5 w-3 h-3 bg-green-400 rounded-full border-2 border-[#111] animate-pulse" />
+                            )}
+                          </div>
+
+                          <div className="flex-1 min-w-0">
+                            <div className="flex items-center gap-2">
+                              <p className="text-white text-sm font-medium">{w.name}</p>
+                              {isDetected && (
+                                <span className="px-1.5 py-0.5 rounded-full text-[10px] font-semibold"
+                                  style={{ background: 'rgba(74,222,128,0.15)', color: '#4ade80' }}>
+                                  Detected
+                                </span>
+                              )}
+                            </div>
+                            <p className="text-white/40 text-xs">{w.desc}</p>
+                          </div>
+
+                          {connecting === w.id ? (
+                            <svg className="w-4 h-4 text-orange-400 animate-spin shrink-0" viewBox="0 0 24 24" fill="none">
+                              <circle cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="2" strokeOpacity="0.25"/>
+                              <path d="M22 12a10 10 0 0 0-10-10" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
+                            </svg>
+                          ) : isDetected ? (
+                            <svg className="w-4 h-4 text-white/20 group-hover:text-white/50 transition-colors shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                              <path d="M9 18l6-6-6-6"/>
+                            </svg>
+                          ) : (
+                            <a
+                              href={w.installUrl}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              onClick={e => e.stopPropagation()}
+                              className="text-[10px] font-semibold px-2 py-1 rounded-full border border-white/15 text-white/40 hover:text-white hover:border-white/30 transition-colors shrink-0"
+                            >
+                              Install
+                            </a>
+                          )}
+                        </button>
                       </div>
-                      <div className="flex-1 min-w-0">
-                        <p className="text-white text-sm font-medium">{w.name}</p>
-                        <p className="text-white/40 text-xs">{w.desc}</p>
-                      </div>
-                      {connecting === w.id ? (
-                        <svg className="w-4 h-4 text-orange-400 animate-spin shrink-0" viewBox="0 0 24 24" fill="none">
-                          <circle cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="2" strokeOpacity="0.25"/>
-                          <path d="M22 12a10 10 0 0 0-10-10" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
-                        </svg>
-                      ) : (
-                        <svg className="w-4 h-4 text-white/20 group-hover:text-white/50 transition-colors shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                          <path d="M9 18l6-6-6-6"/>
-                        </svg>
-                      )}
-                    </button>
-                  ))}
+                    )
+                  })}
                 </div>
               )}
 
