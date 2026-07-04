@@ -832,8 +832,8 @@ export default function FocusTimerPage() {
                     </svg>
                   </div>
                   <div className="text-center">
-                    <p className="text-white font-bold text-sm">WhatsApp</p>
-                    <p className="text-white/30 text-xs mt-0.5 group-hover:text-[#25D366] transition-colors">Message us ↗</p>
+                    <p className="text-foreground font-bold text-sm">WhatsApp</p>
+                    <p className="text-foreground/50 text-xs mt-0.5 group-hover:text-[#25D366] transition-colors">Message us ↗</p>
                   </div>
                 </a>
 
