@@ -7,6 +7,7 @@ import { cn } from "@/lib/utils"
 interface FlipFadeTextProps {
     /**
      * Array of words to cycle through
+     * @default ["LOADING", "COMPUTING", "SEARCHING", "RETRIEVING", "ASSEMBLING"]
      */
     words?: string[]
     /**
@@ -39,10 +40,12 @@ interface FlipFadeTextProps {
     exitStaggerDelay?: number
 }
 
+const defaultWords = ["LOADING", "COMPUTING", "SEARCHING", "RETRIEVING", "ASSEMBLING"]
+
 // Memoized Letter component for performance
 const Letter = memo(function Letter({
     char,
-    letterDuration,
+    letterDuration
 }: {
     char: string
     letterDuration: number
@@ -80,7 +83,7 @@ const Letter = memo(function Letter({
             }}
             className="inline-block"
         >
-            {char === " " ? "\u00A0" : char}
+            {char}
         </motion.span>
     )
 })
@@ -91,7 +94,7 @@ const Word = memo(function Word({
     staggerDelay,
     exitStaggerDelay,
     letterDuration,
-    textClassName,
+    textClassName
 }: {
     text: string
     staggerDelay: number
@@ -104,7 +107,7 @@ const Word = memo(function Word({
     return (
         <motion.div
             className={cn(
-                "flex gap-[0.05em] font-black uppercase tracking-[0.2em]",
+                "flex gap-[0.1em] font-bold uppercase tracking-wider",
                 textClassName
             )}
             initial="initial"
@@ -122,7 +125,6 @@ const Word = memo(function Word({
                     opacity: 1,
                     transition: {
                         staggerChildren: exitStaggerDelay,
-                        staggerDirection: -1,
                     },
                 },
             }}
@@ -139,16 +141,17 @@ const Word = memo(function Word({
 })
 
 export function FlipFadeText({
-    words = ["COMING SOON"],
+    words = defaultWords,
     interval = 2500,
     className,
     textClassName,
     letterDuration = 0.6,
-    staggerDelay = 0.08,
-    exitStaggerDelay = 0.04,
+    staggerDelay = 0.1,
+    exitStaggerDelay = 0.05,
 }: FlipFadeTextProps) {
     const [index, setIndex] = useState(0)
 
+    // Memoize the interval callback
     const updateIndex = useCallback(() => {
         setIndex((prev) => (prev + 1) % words.length)
     }, [words.length])
@@ -158,14 +161,12 @@ export function FlipFadeText({
         return () => clearInterval(timer)
     }, [updateIndex, interval])
 
+    // Memoize the current word
     const currentWord = useMemo(() => words[index], [words, index])
 
     return (
-        <div className={cn("flex items-center justify-center", className)}>
-            <div
-                className="relative flex items-center justify-center"
-                style={{ perspective: "1000px" }}
-            >
+        <div className={cn("flex items-center justify-center min-h-[120px]", className)}>
+            <div className="relative flex items-center justify-center" style={{ perspective: "1000px" }}>
                 <AnimatePresence mode="wait">
                     <Word
                         key={currentWord}

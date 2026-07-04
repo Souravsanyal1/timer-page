@@ -500,13 +500,13 @@ export default function FocusTimerPage() {
                 style={{ fontSize: "clamp(2.8rem, 9vw, 7rem)" }}
               >
                 <FlipFadeText
-                  words={["COMING SOON"]}
-                  interval={3000}
+                  words={["COMING", "SOON"]}
+                  interval={2000}
                   letterDuration={0.55}
-                  staggerDelay={0.07}
+                  staggerDelay={0.08}
                   exitStaggerDelay={0.04}
-                  className="py-2"
-                  textClassName="text-white"
+                  className="min-h-[1.3em] py-0"
+                  textClassName="text-white text-[1em] tracking-[0.2em] font-black"
                 />
               </div>
 
