@@ -535,7 +535,7 @@ export default function FocusTimerPage() {
             exit={{ opacity: 0 }}
             transition={{ duration: 0.5 }}
           >
-            <Atom color="#32cd32" size="medium" text="" textColor="" />
+            <Atom color="#32cd32" size="large" text="" textColor="" />
           </motion.div>
         )}
       </AnimatePresence>
