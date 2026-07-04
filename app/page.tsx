@@ -23,6 +23,7 @@ import { GlowBorderCard } from "@/components/ui/glow-border-card";
 import { useTimer, formatTime } from "@/hooks/use-timer";
 import { WalletModal, WalletIcons } from "@/components/ui/wallet-modal";
 import { FaqAccordion } from "@/components/ui/faq-accordion";
+import LogoIcon from "@/assets/logo/logo-icon";
 
 /* ─────────────── 6-Month Countdown (ends Jan 3, 2027 12:00 AM) ─────────────── */
 // Target: January 3, 2027 at 00:00:00 local time
@@ -1187,13 +1188,11 @@ export default function FocusTimerPage() {
 
 
           {/* ══════ FOOTER ══════ */}
-          <footer className="py-6 border-t border-border">
-            <div className="flex items-center justify-center gap-2">
-              <div className="w-6 h-6 rounded-full flex items-center justify-center border border-orange-500/20"
-                style={{ background: "rgba(255,138,0,0.08)" }}>
-                <Timer className="w-3 h-3 text-orange-400" />
-              </div>
-              <span className="text-foreground font-bold text-sm">Elite Force</span>
+          <footer className="py-8 border-t border-border">
+            <div className="flex flex-col items-center justify-center gap-3">
+              <LogoIcon size={48} />
+              <span className="text-foreground font-black text-base tracking-wide">Elite Force</span>
+              <p className="text-foreground/30 text-xs">© 2026 Elite Force. All rights reserved.</p>
             </div>
           </footer>
         </div>
