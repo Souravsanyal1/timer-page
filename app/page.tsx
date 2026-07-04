@@ -235,7 +235,7 @@ function HeroTimer({ remaining, total, status }: { remaining: number; total: num
   );
 }
 
-/* ─────────────── Stat Card ─────────────── */
+/* ─────────────── Stat Card (StackedLogos-style) ─────────────── */
 function StatCard({ icon: Icon, label, value, unit, color, delay }: {
   icon: React.ElementType; label: string; value: number; unit: string; color: string; delay: number;
 }) {
@@ -264,42 +264,46 @@ function StatCard({ icon: Icon, label, value, unit, color, delay }: {
   return (
     <motion.div
       ref={ref}
-      initial={{ opacity: 0, y: 40 }}
+      initial={{ opacity: 0, y: 30 }}
       whileInView={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.6, delay, ease: [0.22, 1, 0.36, 1] }}
+      transition={{ duration: 0.5, delay, ease: [0.22, 1, 0.36, 1] }}
       viewport={{ once: true }}
-      whileHover={{ y: -4, scale: 1.02 }}
-      className="relative group cursor-pointer w-full rounded-3xl"
+      className="group relative flex flex-col gap-4 p-6 cursor-pointer transition-all duration-300"
+      style={{ borderRight: "1px solid rgba(255,255,255,0.07)", borderBottom: "1px solid rgba(255,255,255,0.07)" }}
+      onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.background = `${color}0d`; }}
+      onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.background = "transparent"; }}
     >
-      <GlowBorderCard
-        width="100%"
-        borderRadius="1.5rem"
-        animationDuration={6}
-        gradientColors={[color, `${color}99`, `${color}44`, `${color}11`, `${color}44`, `${color}99`, color]}
-        borderWidth="1.5px"
-        blurAmount="6px"
-        inset="-1.5px"
-        className="p-6"
-      >
-        <div className="flex items-center justify-between mb-4">
-          <div className="w-10 h-10 rounded-2xl flex items-center justify-center"
-            style={{ background: `${color}12`, border: `1px solid ${color}25` }}>
-            <Icon className="w-5 h-5" style={{ color }} />
-          </div>
-          <div className="text-[10px] font-semibold px-2 py-1 rounded-full border border-foreground/10 text-foreground/60"
-            style={{ background: `${color}12`, color }}>
-            Live
-          </div>
+      {/* Top row: icon + live badge */}
+      <div className="flex items-center justify-between">
+        <div
+          className="w-10 h-10 rounded-2xl flex items-center justify-center transition-transform duration-300 group-hover:scale-110 group-hover:-translate-y-0.5"
+          style={{ background: `${color}15`, border: `1px solid ${color}25` }}
+        >
+          <Icon className="w-5 h-5" style={{ color }} />
         </div>
+        <span
+          className="text-[9px] font-bold uppercase tracking-[0.25em] px-2 py-0.5 rounded-full"
+          style={{ background: `${color}18`, color, border: `1px solid ${color}30` }}
+        >
+          Live
+        </span>
+      </div>
 
-        <div className="mt-2">
-          <div className="flex items-end gap-1 mb-1">
-            <span className="text-3xl font-black text-foreground tabular-nums">{displayed}</span>
-            <span className="text-sm text-foreground/40 mb-1">{unit}</span>
-          </div>
-          <p className="text-sm text-foreground/50 font-medium">{label}</p>
-        </div>
-      </GlowBorderCard>
+      {/* Number + unit */}
+      <div className="flex items-end gap-1.5">
+        <span className="text-4xl font-black tabular-nums leading-none" style={{ color }}>
+          {displayed}
+        </span>
+        <span className="text-sm text-white/30 mb-1 font-medium">{unit}</span>
+      </div>
+
+      {/* Label */}
+      <p className="text-xs text-white/40 font-semibold uppercase tracking-[0.15em]">{label}</p>
+
+      {/* Accent bottom bar */}
+      <div className="absolute bottom-0 left-6 right-6 h-px rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+        style={{ background: `linear-gradient(90deg, transparent, ${color}, transparent)` }}
+      />
     </motion.div>
   );
 }
@@ -560,8 +564,52 @@ export default function FocusTimerPage() {
                 </span>
               </h2>
             </motion.div>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-              {stats.map((stat) => <StatCard key={stat.label} {...stat} />)}
+
+            {/* StackedLogos-style stats grid */}
+            <div
+              className="relative w-full"
+              onMouseMove={(e) => {
+                const rect = e.currentTarget.getBoundingClientRect();
+                e.currentTarget.style.setProperty("--sx", `${e.clientX - rect.left}px`);
+                e.currentTarget.style.setProperty("--sy", `${e.clientY - rect.top}px`);
+              }}
+            >
+              {/* Ambient mouse glow */}
+              <div
+                className="stats-mouse-glow pointer-events-none absolute inset-0 z-0 opacity-0 transition-opacity duration-300"
+                style={{ background: "radial-gradient(600px circle at var(--sx,50%) var(--sy,50%), rgba(255,138,0,0.06), transparent 60%)" }}
+              />
+              {/* Border glow */}
+              <div
+                className="stats-border-glow pointer-events-none absolute inset-0 z-10 opacity-0 transition-opacity duration-300"
+                style={{
+                  background: "radial-gradient(500px circle at var(--sx,50%) var(--sy,50%), rgba(255,180,0,0.7), transparent 40%)",
+                  maskImage: "repeating-linear-gradient(to right, transparent, transparent calc(33.333% - 1px), black calc(33.333% - 1px), black 33.333%), repeating-linear-gradient(to bottom, transparent, transparent calc(50% - 1px), black calc(50% - 1px), black 50%)",
+                  WebkitMaskImage: "repeating-linear-gradient(to right, transparent, transparent calc(33.333% - 1px), black calc(33.333% - 1px), black 33.333%), repeating-linear-gradient(to bottom, transparent, transparent calc(50% - 1px), black calc(50% - 1px), black 50%)",
+                  maskComposite: "add",
+                  WebkitMaskComposite: "source-over",
+                }}
+              />
+              <div
+                className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3"
+                style={{ borderTop: "1px solid rgba(255,255,255,0.07)", borderLeft: "1px solid rgba(255,255,255,0.07)" }}
+                onMouseEnter={(e) => {
+                  const wrap = e.currentTarget.parentElement;
+                  if (wrap) {
+                    (wrap.querySelector(".stats-mouse-glow") as HTMLElement).style.opacity = "1";
+                    (wrap.querySelector(".stats-border-glow") as HTMLElement).style.opacity = "1";
+                  }
+                }}
+                onMouseLeave={(e) => {
+                  const wrap = e.currentTarget.parentElement;
+                  if (wrap) {
+                    (wrap.querySelector(".stats-mouse-glow") as HTMLElement).style.opacity = "0";
+                    (wrap.querySelector(".stats-border-glow") as HTMLElement).style.opacity = "0";
+                  }
+                }}
+              >
+                {stats.map((stat) => <StatCard key={stat.label} {...stat} />)}
+              </div>
             </div>
           </section>
 
