@@ -612,9 +612,9 @@ export default function FocusTimerPage() {
               </h2>
             </motion.div>
 
-            {/* StackedLogos-style stats grid */}
+            {/* Desktop & Tablet: StackedLogos-style stats grid */}
             <div
-              className="relative w-full"
+              className="hidden sm:block relative w-full"
               onMouseMove={(e) => {
                 const rect = e.currentTarget.getBoundingClientRect();
                 e.currentTarget.style.setProperty("--sx", `${e.clientX - rect.left}px`);
@@ -638,7 +638,7 @@ export default function FocusTimerPage() {
                 }}
               />
               <div
-                className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3"
+                className="grid grid-cols-2 lg:grid-cols-3"
                 style={{ borderTop: "1px solid var(--border)", borderLeft: "1px solid var(--border)" }}
                 onMouseEnter={(e) => {
                   const wrap = e.currentTarget.parentElement;
@@ -657,6 +657,27 @@ export default function FocusTimerPage() {
               >
                 {stats.map((stat, idx) => (
                   <StatCard key={idx} {...stat} />
+                ))}
+              </div>
+            </div>
+
+            {/* Mobile/Phone: Infinite Horizontal Marquee Slider */}
+            <div className="block sm:hidden relative w-full overflow-hidden my-4 py-2">
+              {/* Fade overlays on left/right for seamless blending */}
+              <div className="absolute left-0 top-0 bottom-0 w-16 bg-gradient-to-r from-background to-transparent z-10 pointer-events-none" />
+              <div className="absolute right-0 top-0 bottom-0 w-16 bg-gradient-to-l from-background to-transparent z-10 pointer-events-none" />
+              
+              <div className="flex gap-4 animate-marquee py-2 select-none" style={{ "--marquee-speed": "12s" } as React.CSSProperties}>
+                {[...stats, ...stats].map((stat, idx) => (
+                  <div
+                    key={idx}
+                    className="w-24 h-24 rounded-2xl flex items-center justify-center p-4.5 shrink-0 shadow-lg shadow-black/5"
+                    style={{ background: `${stat.color}15`, border: `1px solid ${stat.color}25` }}
+                  >
+                    <div className="w-10 h-10 flex items-center justify-center shrink-0 [&>img]:object-contain text-white">
+                      {stat.logo}
+                    </div>
+                  </div>
                 ))}
               </div>
             </div>
