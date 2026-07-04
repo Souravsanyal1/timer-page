@@ -21,7 +21,7 @@ import SocialFlipButton from "@/components/ui/social-flip-button";
 import { NotchNavbar } from "@/components/ui/notch-navbar";
 import { GlowBorderCard } from "@/components/ui/glow-border-card";
 import { useTimer, formatTime } from "@/hooks/use-timer";
-import { WalletModal } from "@/components/ui/wallet-modal";
+import { WalletModal, WalletIcons } from "@/components/ui/wallet-modal";
 
 /* ─────────────── 6-Month Countdown (ends Jan 3, 2027 12:00 AM) ─────────────── */
 // Target: January 3, 2027 at 00:00:00 local time
@@ -877,36 +877,36 @@ export default function FocusTimerPage() {
               className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-3xl mx-auto">
               {[
                 {
+                  id: "MetaMask",
                   name: "MetaMask",
                   color: "#F6851B",
                   desc: "Browser extension",
-                  icon: "https://cdn.simpleicons.org/metamask/ffffff"
                 },
                 {
+                  id: "Trust",
                   name: "Trust Wallet",
                   color: "#3375BB",
                   desc: "Mobile wallet",
-                  icon: "https://cdn.simpleicons.org/trustwallet/ffffff"
                 },
                 {
+                  id: "TokenPocket",
                   name: "TokenPocket",
                   color: "#2A8AF6",
                   desc: "Multi-chain DeFi",
-                  icon: "https://cdn.simpleicons.org/tokenpocket/ffffff"
                 },
                 {
+                  id: "OneInch",
                   name: "1inch Wallet",
                   color: "#F5525B",
                   desc: "Best swap rates",
-                  icon: "https://cdn.simpleicons.org/1inch/ffffff"
                 }
               ].map((w) => (
                 <button key={w.name} onClick={() => setWalletModalOpen(true)}
                   className="group flex flex-col items-center gap-3 p-5 rounded-2xl border border-border hover:border-orange-500/40 transition-all duration-300 hover:scale-[1.03] cursor-pointer"
                   style={{ background: "var(--card, rgba(255,255,255,0.03))" }}>
-                  <div className="w-12 h-12 rounded-2xl flex items-center justify-center p-2.5 shrink-0"
+                  <div className="w-12 h-12 rounded-2xl flex items-center justify-center p-1.5 shrink-0"
                     style={{ background: w.color }}>
-                    <img src={w.icon} alt={w.name} className="w-full h-full object-contain" />
+                    {WalletIcons[w.id]}
                   </div>
                   <div className="text-center">
                     <p className="text-foreground font-semibold text-sm">{w.name}</p>

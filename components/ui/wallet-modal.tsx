@@ -4,7 +4,7 @@ import { motion, AnimatePresence } from "framer-motion"
 import { useWallet } from "@/hooks/use-wallet"
 
 // Wallet icons — official logo accurate representations
-const WalletIcons: Record<string, React.ReactNode> = {
+export const WalletIcons: Record<string, React.ReactNode> = {
   MetaMask: (
     // Official MetaMask Fox SVG downloaded from wikimedia
     <img src="/wallets/metamask.svg" alt="" aria-hidden="true" className="w-9 h-9 object-contain" />
