@@ -455,7 +455,7 @@ export default function FocusTimerPage() {
             transition={{ duration: 0.5 }}
           >
             <KineticTextLoader text="Loading" />
-            <p className="text-foreground/45 text-xs tracking-[0.4em] uppercase">Initializing Focus OS</p>
+            <p className="text-foreground/45 text-xs tracking-[0.4em] uppercase">Initializing Elite Force</p>
           </motion.div>
         )}
       </AnimatePresence>
