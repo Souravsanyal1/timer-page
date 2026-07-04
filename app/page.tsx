@@ -23,6 +23,7 @@ import { GlowBorderCard } from "@/components/ui/glow-border-card";
 import { useTimer, formatTime } from "@/hooks/use-timer";
 import { WalletModal, WalletIcons } from "@/components/ui/wallet-modal";
 import { FaqAccordion } from "@/components/ui/faq-accordion";
+import { StaggeredGrid } from "@/components/ui/staggered-grid";
 
 /* ─────────────── 6-Month Countdown (ends Jan 3, 2027 12:00 AM) ─────────────── */
 // Target: January 3, 2027 at 00:00:00 local time
@@ -596,9 +597,48 @@ export default function FocusTimerPage() {
                 </span>
               </h2>
             </motion.div>
-            <div>
-              <ExpandableBentoGrid items={presets.slice(0, 3).map((p) => ({ ...p, icon: p.icon }))} />
-            </div>
+          </section>
+
+          {/* ══════ SCROLLING ANIMATION SECTION ══════ */}
+          <section className="py-20 border-t border-border overflow-hidden">
+            <StaggeredGrid
+              images={[
+                "https://images.unsplash.com/photo-1639762681485-074b7f938ba0?q=80&w=600&auto=format&fit=cover",
+                "https://images.unsplash.com/photo-1642104704074-907c0698cbd9?q=80&w=600&auto=format&fit=cover",
+                "https://images.unsplash.com/photo-1620641788421-7a1c342ea42e?q=80&w=600&auto=format&fit=cover",
+                "https://images.unsplash.com/photo-1634973357973-f2ed255753e1?q=80&w=600&auto=format&fit=cover",
+                "https://images.unsplash.com/photo-1644024227282-3532454f76cc?q=80&w=600&auto=format&fit=cover",
+                "https://images.unsplash.com/photo-1639762681057-408e52192e55?q=80&w=600&auto=format&fit=cover"
+              ]}
+              bentoItems={[
+                {
+                  id: 1,
+                  title: "EFC Staking",
+                  subtitle: "Lock to Commit",
+                  description: "Stake EFC to reinforce your daily goals and earn yields.",
+                  icon: <Brain className="w-5 h-5 text-orange-500" />,
+                  image: "https://images.unsplash.com/photo-1639762681485-074b7f938ba0?q=80&w=600&auto=format&fit=cover"
+                },
+                {
+                  id: 2,
+                  title: "On-Chain Milestones",
+                  subtitle: "Verifiable Streaks",
+                  description: "Your session history is permanently backed on the blockchain.",
+                  icon: <Target className="w-5 h-5 text-orange-500" />,
+                  image: "https://images.unsplash.com/photo-1642104704074-907c0698cbd9?q=80&w=600&auto=format&fit=cover"
+                },
+                {
+                  id: 3,
+                  title: "Governance",
+                  subtitle: "Holders Decide",
+                  description: "Use EFC voting power to shape focus epochs and reward structures.",
+                  icon: <Flame className="w-5 h-5 text-orange-500" />,
+                  image: "https://images.unsplash.com/photo-1620641788421-7a1c342ea42e?q=80&w=600&auto=format&fit=cover"
+                }
+              ]}
+              centerText="ELITE FORCE"
+              showFooter={false}
+            />
           </section>
 
           {/* ══════ STATS ══════ */}
