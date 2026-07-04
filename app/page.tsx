@@ -494,8 +494,29 @@ export default function FocusTimerPage() {
                 BUILD
               </div>
 
-              {/* ── 6-Month Countdown embedded in hero ── */}
-              <SixMonthCountdown />
+              {/* ── Coming Soon Text in place of Timer ── */}
+              <div className="my-12 py-3 flex flex-col items-center gap-3">
+                <div className="flex items-center gap-2">
+                  <div className="w-1.5 h-1.5 rounded-full animate-pulse" style={{ background: "#FF8A00" }} />
+                  <span className="text-[11px] font-semibold text-foreground/35 uppercase tracking-[0.4em]">
+                    6-Month Deadline
+                  </span>
+                  <div className="w-1.5 h-1.5 rounded-full animate-pulse" style={{ background: "#FF8A00" }} />
+                </div>
+                <h2 
+                  className="font-black uppercase tracking-[0.2em] select-none"
+                  style={{
+                    fontSize: "clamp(2.2rem, 6vw, 4.5rem)",
+                    background: "linear-gradient(135deg, #FFB000 0%, #FF8A00 50%, #FF6B00 100%)",
+                    WebkitBackgroundClip: "text",
+                    WebkitTextFillColor: "transparent",
+                    backgroundClip: "text",
+                    filter: "drop-shadow(0 0 30px rgba(255, 138, 0, 0.2))"
+                  }}
+                >
+                  Coming Soon
+                </h2>
+              </div>
 
               <div className="block text-foreground font-black"
                 style={{ fontSize: "clamp(3.5rem,11vw,8.5rem)" }}>
