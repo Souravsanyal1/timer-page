@@ -20,6 +20,7 @@ import SocialFlipButton from "@/components/ui/social-flip-button";
 import { NotchNavbar } from "@/components/ui/notch-navbar";
 import { GlowBorderCard } from "@/components/ui/glow-border-card";
 import { useTimer, formatTime } from "@/hooks/use-timer";
+import { WalletModal } from "@/components/ui/wallet-modal";
 
 /* ─────────────── 6-Month Countdown (ends Jan 3, 2027 12:00 AM) ─────────────── */
 // Target: January 3, 2027 at 00:00:00 local time
@@ -457,6 +458,7 @@ function AnimatedComingSoon() {
 export default function FocusTimerPage() {
   const [isLoading, setIsLoading] = useState(true);
   const [settingsOpen, setSettingsOpen] = useState(false);
+  const [walletModalOpen, setWalletModalOpen] = useState(false);
   const [isMuted, setIsMuted] = useState(false);
 
   const [timerState, timerControls] = useTimer(25 * 60);
@@ -539,6 +541,7 @@ export default function FocusTimerPage() {
       </AnimatePresence>
 
       <SettingsDrawer open={settingsOpen} onClose={() => setSettingsOpen(false)} />
+      <WalletModal open={walletModalOpen} onClose={() => setWalletModalOpen(false)} />
 
       {/* ── ASH COLOR BACKGROUND ── */}
       <main className="relative min-h-screen overflow-x-hidden bg-background text-foreground" style={{ fontFamily: "'Inter',sans-serif" }}>
@@ -868,10 +871,13 @@ export default function FocusTimerPage() {
                 <span className="text-foreground font-bold text-sm">Elite Force</span>
                 <span className="text-foreground/25 text-sm">— 6 months. Stay locked in.</span>
               </div>
-              <div className="flex gap-6 text-xs text-foreground/45 tracking-wider uppercase">
-                {["Privacy", "Terms", "GitHub", "Docs"].map((l) => (
-                  <a key={l} href="#" className="hover:text-foreground/75 transition-colors">{l}</a>
-                ))}
+              <div className="flex gap-6 text-xs text-foreground/45 tracking-wider uppercase items-center">
+                <a href="#about" className="hover:text-foreground/75 transition-colors">About Us</a>
+                <button onClick={() => setWalletModalOpen(true)} className="hover:text-foreground/75 transition-colors cursor-pointer uppercase text-xs tracking-wider">
+                  Supported Wallets
+                </button>
+                <a href="#" className="hover:text-foreground/75 transition-colors">Privacy</a>
+                <a href="#" className="hover:text-foreground/75 transition-colors">Terms</a>
               </div>
               <p className="text-xs text-foreground/30">Deadline: Jan 3, 2027 · 12:00 AM</p>
             </div>
