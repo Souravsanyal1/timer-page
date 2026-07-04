@@ -498,22 +498,6 @@ export default function FocusTimerPage() {
                 ELITE
               </div>
 
-              {/* ── Coming Soon Text in place of Timer ── */}
-              <div
-                className="my-6 py-2 flex flex-col items-center"
-                style={{ fontSize: "clamp(2.8rem, 9vw, 7rem)" }}
-              >
-                <FlipFadeText
-                  words={["COMING", "SOON"]}
-                  interval={2000}
-                  letterDuration={0.55}
-                  staggerDelay={0.08}
-                  exitStaggerDelay={0.04}
-                  className="min-h-[1.3em] py-0"
-                  textClassName="text-white text-[1em] tracking-[0.2em] font-black"
-                />
-              </div>
-
               <div className="block font-black mt-1"
                 style={{
                   fontSize: "clamp(3.5rem,11vw,8.5rem)",
@@ -523,6 +507,15 @@ export default function FocusTimerPage() {
                   backgroundClip: "text",
                 }}>
                 FORCE
+              </div>
+
+              {/* ── Coming Soon Text ── */}
+              <div
+                className="mt-8 flex items-center justify-center gap-3 font-black uppercase tracking-[0.25em]"
+                style={{ fontSize: "clamp(1.5rem, 4vw, 3rem)" }}
+              >
+                <span className="text-white">COMING</span>
+                <span style={{ color: "#FF8A00" }}>SOON</span>
               </div>
             </motion.div>
 
