@@ -6,8 +6,7 @@ import { useWallet } from "@/hooks/use-wallet"
 // Wallet icons — official logo accurate representations
 export const WalletIcons: Record<string, React.ReactNode> = {
   MetaMask: (
-    // Official MetaMask Fox SVG downloaded from wikimedia
-    <img src="/wallets/metamask.svg" alt="" aria-hidden="true" className="w-9 h-9 object-contain" />
+    <svg xmlns="http://www.w3.org/2000/svg" className="w-9 h-9" viewBox="0 0 24 24"><title>metamask</title><g fill="none"><path fill="#ff5c16" d="m19.821 19.918l-3.877-1.131l-2.924 1.712h-2.04l-2.926-1.712l-3.875 1.13L3 16.02l1.179-4.327L3 8.034L4.179 3.5l6.056 3.544h3.53L19.821 3.5L21 8.034l-1.179 3.658L21 16.02z"/><path fill="#ff5c16" d="m4.18 3.5l6.055 3.547l-.24 2.434zm3.875 12.52l2.665 1.99l-2.665.777zm2.452-3.286l-.512-3.251l-3.278 2.21h-.002v.001l.01 2.275l1.33-1.235zM19.82 3.5l-6.056 3.547l.24 2.434zm-3.875 12.52l-2.665 1.99l2.665.777zm1.339-4.326v-.002zl-3.279-2.21l-.512 3.25h2.451l1.33 1.236z"/><path fill="#e34807" d="m8.054 18.787l-3.875 1.13L3 16.022h5.054zm2.452-6.054l.74 4.7l-1.026-2.614l-3.497-.85l1.33-1.236zm5.44 6.054l3.875 1.13L21 16.022h-5.055zm-2.452-6.054l-.74 4.7l1.026-2.614l3.497-.85l-1.331-1.236z"/><path fill="#ff8d5d" d="m3 16.02l1.179-4.328h2.535l.01 2.276l3.496.85l1.026 2.613l-.527.576l-2.665-1.989H3zm18 0l-1.179-4.328h-2.535l-.01 2.276l-3.496.85l-1.026 2.613l.527.576l2.665-1.989H21zm-7.235-8.976h-3.53l-.24 2.435l1.251 7.95h1.508l1.252-7.95z"/><path fill="#661800" d="M4.179 3.5L3 8.034l1.179 3.658h2.535l3.28-2.211zm5.594 10.177H8.625l-.626.6l2.222.54zM19.821 3.5L21 8.034l-1.179 3.658h-2.535l-3.28-2.211zm-5.593 10.177h1.15l.626.6l-2.224.541zm-1.209 5.271l.262-.94l-.527-.575h-1.509l-.527.575l.262.94"/><path fill="#c0c4cd" d="M13.02 18.948V20.5h-2.04v-1.552z"/><path fill="#e7ebf6" d="m8.055 18.785l2.927 1.714v-1.552l-.262-.94zm7.89 0L13.02 20.5v-1.552l.262-.94z"/></g></svg>
   ),
   TokenPocket: (
     // TokenPocket exact brand: blue gradient bg, wallet+arrow icon
@@ -30,24 +29,7 @@ export const WalletIcons: Record<string, React.ReactNode> = {
     </svg>
   ),
   Trust: (
-    // Trust Wallet exact official logo: blue bg, white shield with checkmark
-    <svg viewBox="0 0 40 40" className="w-9 h-9" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <defs>
-        <linearGradient id="tw-bg" x1="0" y1="0" x2="40" y2="40" gradientUnits="userSpaceOnUse">
-          <stop offset="0%" stopColor="#3375BB"/>
-          <stop offset="100%" stopColor="#1C5DA0"/>
-        </linearGradient>
-      </defs>
-      <rect width="40" height="40" rx="11" fill="url(#tw-bg)"/>
-      {/* Shield */}
-      <path d="M20 7L9 11.5V20C9 26.3 13.8 32.1 20 33.5C26.2 32.1 31 26.3 31 20V11.5L20 7Z"
-        fill="white" fillOpacity="0.12"/>
-      <path d="M20 7L9 11.5V20C9 26.3 13.8 32.1 20 33.5C26.2 32.1 31 26.3 31 20V11.5L20 7Z"
-        stroke="white" strokeWidth="2" strokeLinejoin="round" fill="none"/>
-      {/* Checkmark */}
-      <path d="M14.5 20.5L18 24L25.5 16.5"
-        stroke="white" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
-    </svg>
+    <svg xmlns="http://www.w3.org/2000/svg" className="w-9 h-9" viewBox="0 0 48 48" stroke="#006aff" strokeWidth="3.5" fill="none"><title>trust-wallet</title><path fill="none" stroke="#006aff" stroke-linecap="round" stroke-linejoin="round" d="M24 43.5c1.35-.062 8.977-4.15 11.767-8.742s4.268-16.815 4.37-24.879C32.072 9.88 26.853 7.352 24 4.5c-2.855 2.855-8.062 5.38-16.138 5.38c0 8.065 1.68 20.217 4.371 24.878S22.65 43.561 24 43.5"/></svg>
   ),
   OneInch: (
     // 1inch exact brand: red gradient bg, unicorn silhouette

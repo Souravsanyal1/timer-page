@@ -692,7 +692,7 @@ export default function FocusTimerPage() {
               {/* Fade overlays on left/right for seamless blending */}
               <div className="absolute left-0 top-0 bottom-0 w-16 bg-gradient-to-r from-background to-transparent z-10 pointer-events-none" />
               <div className="absolute right-0 top-0 bottom-0 w-16 bg-gradient-to-l from-background to-transparent z-10 pointer-events-none" />
-              
+
               <div className="flex gap-4 animate-marquee py-2 select-none" style={{ "--marquee-speed": "12s" } as React.CSSProperties}>
                 {[...stats, ...stats].map((stat, idx) => (
                   <div
@@ -1057,25 +1057,25 @@ export default function FocusTimerPage() {
                   {
                     id: "MetaMask",
                     name: "MetaMask",
-                    color: "#F6851B",
+                    color: "#ffd9b5ff",
                     desc: "Browser extension",
                   },
                   {
                     id: "Trust",
                     name: "Trust Wallet",
-                    color: "#3375BB",
+                    color: "#9fcdffff",
                     desc: "Mobile wallet",
                   },
                   {
                     id: "TokenPocket",
                     name: "TokenPocket",
-                    color: "#2A8AF6",
+                    color: "#a8d1ffff",
                     desc: "Multi-chain DeFi",
                   },
                   {
                     id: "OneInch",
                     name: "1inch Wallet",
-                    color: "#F5525B",
+                    color: "#ffb0b4ff",
                     desc: "Best swap rates",
                   }
                 ].map((w) => (
