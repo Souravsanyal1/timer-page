@@ -880,33 +880,33 @@ export default function FocusTimerPage() {
                   name: "MetaMask",
                   color: "#F6851B",
                   desc: "Browser extension",
-                  icon: "https://cdn.simpleicons.org/metamask/F6851B"
+                  icon: "https://cdn.simpleicons.org/metamask/ffffff"
                 },
                 {
                   name: "Trust Wallet",
                   color: "#3375BB",
                   desc: "Mobile wallet",
-                  icon: "https://cdn.simpleicons.org/trustwallet/3375BB"
+                  icon: "https://cdn.simpleicons.org/trustwallet/ffffff"
                 },
                 {
                   name: "TokenPocket",
                   color: "#2A8AF6",
                   desc: "Multi-chain DeFi",
-                  icon: "https://cdn.simpleicons.org/tokenpocket/2A8AF6"
+                  icon: "https://cdn.simpleicons.org/tokenpocket/ffffff"
                 },
                 {
                   name: "1inch Wallet",
                   color: "#F5525B",
                   desc: "Best swap rates",
-                  icon: "https://cdn.simpleicons.org/1inch/F5525B"
+                  icon: "https://cdn.simpleicons.org/1inch/ffffff"
                 }
               ].map((w) => (
                 <button key={w.name} onClick={() => setWalletModalOpen(true)}
                   className="group flex flex-col items-center gap-3 p-5 rounded-2xl border border-border hover:border-orange-500/40 transition-all duration-300 hover:scale-[1.03] cursor-pointer"
                   style={{ background: "var(--card, rgba(255,255,255,0.03))" }}>
-                  <div className="w-12 h-12 rounded-2xl flex items-center justify-center text-xl font-black text-white"
+                  <div className="w-12 h-12 rounded-2xl flex items-center justify-center p-2.5 shrink-0"
                     style={{ background: w.color }}>
-                    {w.name[0]}
+                    <img src={w.icon} alt={w.name} className="w-full h-full object-contain" />
                   </div>
                   <div className="text-center">
                     <p className="text-foreground font-semibold text-sm">{w.name}</p>
