@@ -123,12 +123,18 @@ export function NotchNavbar({ className, ...props }: React.HTMLAttributes<HTMLEl
                 
                 <div className="flex gap-4 pl-4 border-l border-foreground/10 shrink-0 items-center">
                   <ThemeToggle />
-                  <Link href="/login" className="text-sm font-medium text-foreground/70 hover:text-foreground transition-colors whitespace-nowrap">
-                    Log in
-                  </Link>
-                  <Link href="/signup" className="px-3 py-1.5 text-sm font-medium text-background bg-foreground rounded-2xl hover:bg-foreground/90 transition-colors shadow-sm shadow-foreground/10 whitespace-nowrap">
-                    Sign up
-                  </Link>
+                  <button
+                    onClick={() => alert('Connect Wallet coming soon!')}
+                    className="flex items-center gap-2 px-4 py-1.5 text-sm font-semibold text-white rounded-2xl transition-all whitespace-nowrap shadow-md hover:shadow-lg active:scale-95"
+                    style={{ background: 'linear-gradient(135deg, #FF8A00, #e67600)' }}
+                  >
+                    <svg xmlns="http://www.w3.org/2000/svg" className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                      <rect x="2" y="7" width="20" height="14" rx="2" ry="2"/>
+                      <path d="M16 3H8a2 2 0 0 0-2 2v2h12V5a2 2 0 0 0-2-2z"/>
+                      <circle cx="16" cy="14" r="1" fill="currentColor"/>
+                    </svg>
+                    Connect Wallet
+                  </button>
                 </div>
               </nav>
 
@@ -187,20 +193,18 @@ export function NotchNavbar({ className, ...props }: React.HTMLAttributes<HTMLEl
                ))}
                <div className="h-px bg-foreground/10 my-2" />
                <div className="flex flex-col gap-2">
-                 <Link 
-                    href="/login" 
-                    className="flex items-center gap-3 p-3 rounded-lg hover:bg-foreground/5 transition-colors font-medium text-foreground/90"
-                    onClick={() => setIsMobileMenuOpen(false)}
+                 <button
+                   onClick={() => { alert('Connect Wallet coming soon!'); setIsMobileMenuOpen(false); }}
+                   className="flex items-center justify-center gap-2 p-3 rounded-xl font-semibold text-white transition-all active:scale-95"
+                   style={{ background: 'linear-gradient(135deg, #FF8A00, #e67600)' }}
                  >
-                   Log in
-                 </Link>
-                 <Link 
-                    href="/signup" 
-                    className="flex items-center justify-center gap-2 p-3 rounded-lg bg-foreground text-background font-medium mt-2"
-                    onClick={() => setIsMobileMenuOpen(false)}
-                 >
-                   Sign up
-                 </Link>
+                   <svg xmlns="http://www.w3.org/2000/svg" className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                     <rect x="2" y="7" width="20" height="14" rx="2" ry="2"/>
+                     <path d="M16 3H8a2 2 0 0 0-2 2v2h12V5a2 2 0 0 0-2-2z"/>
+                     <circle cx="16" cy="14" r="1" fill="currentColor"/>
+                   </svg>
+                   Connect Wallet
+                 </button>
                </div>
              </nav>
 
