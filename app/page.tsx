@@ -890,14 +890,14 @@ export default function FocusTimerPage() {
               <div
                 className="wallets-mouse-glow pointer-events-none absolute inset-0 z-10 opacity-0 transition-opacity duration-300"
                 style={{
-                  background: "radial-gradient(500px circle at var(--wx,50%) var(--wy,50%), rgba(255,138,0,0.08), transparent 70%)",
+                  background: "radial-gradient(500px circle at var(--wx,50%) var(--wy,50%), rgba(50,205,50,0.08), transparent 70%)",
                 }}
               />
               {/* Border glow overlay */}
               <div
                 className="wallets-border-glow pointer-events-none absolute inset-0 z-20"
                 style={{
-                  background: "radial-gradient(600px circle at var(--wx,50%) var(--wy,50%), rgba(255,138,0,0.9), transparent 40%)",
+                  background: "radial-gradient(600px circle at var(--wx,50%) var(--wy,50%), rgba(50,205,50,0.9), transparent 40%)",
                   maskImage: "repeating-linear-gradient(to right, transparent, transparent calc(25% - 1px), black calc(25% - 1px), black 25%), linear-gradient(to bottom, black 0, black 1px, transparent 1px, transparent calc(100% - 1px), black calc(100% - 1px), black 100%)",
                   WebkitMaskImage: "repeating-linear-gradient(to right, transparent, transparent calc(25% - 1px), black calc(25% - 1px), black 25%), linear-gradient(to bottom, black 0, black 1px, transparent 1px, transparent calc(100% - 1px), black calc(100% - 1px), black 100%)",
                   maskComposite: "add",
@@ -954,16 +954,15 @@ export default function FocusTimerPage() {
                     desc: "Best swap rates",
                   }
                 ].map((w) => (
-                  <button
+                  <div
                     key={w.name}
-                    onClick={() => setWalletModalOpen(true)}
-                    className="group relative flex flex-col items-center justify-center gap-4 py-12 px-6 transition-all duration-300 cursor-pointer"
+                    className="group relative flex flex-col items-center justify-center gap-4 py-12 px-6 transition-all duration-300 cursor-default"
                     style={{
                       borderRight: "1px solid var(--border)",
                       borderBottom: "1px solid var(--border)",
                     }}
                     onMouseEnter={(e) => {
-                      (e.currentTarget as HTMLElement).style.background = "rgba(255,138,0,0.04)";
+                      (e.currentTarget as HTMLElement).style.background = "rgba(50,205,50,0.04)";
                     }}
                     onMouseLeave={(e) => {
                       (e.currentTarget as HTMLElement).style.background = "transparent";
@@ -987,7 +986,7 @@ export default function FocusTimerPage() {
                       className="absolute bottom-0 left-6 right-6 h-px rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"
                       style={{ background: `linear-gradient(90deg, transparent, ${w.color}, transparent)` }}
                     />
-                  </button>
+                  </div>
                 ))}
               </div>
             </motion.div>
