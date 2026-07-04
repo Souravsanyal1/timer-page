@@ -7,6 +7,8 @@ import { ThemeToggle } from "@/components/theme-toggle"
 import LogoIcon from '@/assets/logo/logo-icon'
 import { motion, AnimatePresence } from "framer-motion"
 import { useTheme } from "next-themes"
+import { useWallet } from "@/hooks/use-wallet"
+import { WalletModal } from "@/components/ui/wallet-modal"
 
 // Helper component for navigation links (removed icons)
 const NavLink = ({ href, label }: { href: string; label: string }) => (
@@ -42,6 +44,8 @@ const MobileThemeToggle = () => {
 
 export function NotchNavbar({ className, ...props }: React.HTMLAttributes<HTMLElement> & { logo?: React.ReactNode }) {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
+  const [walletModalOpen, setWalletModalOpen] = useState(false)
+  const { wallet } = useWallet()
 
   // Navigation items configuration (removed icons, updated items)
   const items = {
@@ -123,18 +127,29 @@ export function NotchNavbar({ className, ...props }: React.HTMLAttributes<HTMLEl
                 
                 <div className="flex gap-4 pl-4 border-l border-foreground/10 shrink-0 items-center">
                   <ThemeToggle />
-                  <button
-                    onClick={() => alert('Connect Wallet coming soon!')}
-                    className="flex items-center gap-2 px-4 py-1.5 text-sm font-semibold text-white rounded-2xl transition-all whitespace-nowrap shadow-md hover:shadow-lg active:scale-95"
-                    style={{ background: 'linear-gradient(135deg, #FF8A00, #e67600)' }}
-                  >
-                    <svg xmlns="http://www.w3.org/2000/svg" className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                      <rect x="2" y="7" width="20" height="14" rx="2" ry="2"/>
-                      <path d="M16 3H8a2 2 0 0 0-2 2v2h12V5a2 2 0 0 0-2-2z"/>
-                      <circle cx="16" cy="14" r="1" fill="currentColor"/>
-                    </svg>
-                    Connect Wallet
-                  </button>
+                  {wallet.isConnected ? (
+                    <button
+                      onClick={() => setWalletModalOpen(true)}
+                      className="flex items-center gap-2 px-3 py-1.5 text-sm font-semibold rounded-2xl border transition-all whitespace-nowrap hover:scale-[1.02] active:scale-95"
+                      style={{ borderColor: '#FF8A00', color: '#FF8A00', background: 'rgba(255,138,0,0.08)' }}
+                    >
+                      <div className="w-2 h-2 rounded-full bg-green-400 animate-pulse" />
+                      {wallet.shortAddress}
+                    </button>
+                  ) : (
+                    <button
+                      onClick={() => setWalletModalOpen(true)}
+                      className="flex items-center gap-2 px-4 py-1.5 text-sm font-semibold text-white rounded-2xl transition-all whitespace-nowrap shadow-md hover:shadow-lg hover:scale-[1.02] active:scale-95"
+                      style={{ background: 'linear-gradient(135deg, #FF8A00, #e67600)' }}
+                    >
+                      <svg xmlns="http://www.w3.org/2000/svg" className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                        <rect x="2" y="7" width="20" height="14" rx="2" ry="2"/>
+                        <path d="M16 3H8a2 2 0 0 0-2 2v2h12V5a2 2 0 0 0-2-2z"/>
+                        <circle cx="16" cy="14" r="1" fill="currentColor"/>
+                      </svg>
+                      Connect Wallet
+                    </button>
+                  )}
                 </div>
               </nav>
 
@@ -193,24 +208,36 @@ export function NotchNavbar({ className, ...props }: React.HTMLAttributes<HTMLEl
                ))}
                <div className="h-px bg-foreground/10 my-2" />
                <div className="flex flex-col gap-2">
-                 <button
-                   onClick={() => { alert('Connect Wallet coming soon!'); setIsMobileMenuOpen(false); }}
-                   className="flex items-center justify-center gap-2 p-3 rounded-xl font-semibold text-white transition-all active:scale-95"
-                   style={{ background: 'linear-gradient(135deg, #FF8A00, #e67600)' }}
-                 >
-                   <svg xmlns="http://www.w3.org/2000/svg" className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                     <rect x="2" y="7" width="20" height="14" rx="2" ry="2"/>
-                     <path d="M16 3H8a2 2 0 0 0-2 2v2h12V5a2 2 0 0 0-2-2z"/>
-                     <circle cx="16" cy="14" r="1" fill="currentColor"/>
-                   </svg>
-                   Connect Wallet
-                 </button>
+                 {wallet.isConnected ? (
+                   <button
+                     onClick={() => { setWalletModalOpen(true); setIsMobileMenuOpen(false); }}
+                     className="flex items-center justify-center gap-2 p-3 rounded-xl font-semibold transition-all active:scale-95 border"
+                     style={{ borderColor: '#FF8A00', color: '#FF8A00', background: 'rgba(255,138,0,0.08)' }}
+                   >
+                     <div className="w-2 h-2 rounded-full bg-green-400 animate-pulse" />
+                     {wallet.shortAddress}
+                   </button>
+                 ) : (
+                   <button
+                     onClick={() => { setWalletModalOpen(true); setIsMobileMenuOpen(false); }}
+                     className="flex items-center justify-center gap-2 p-3 rounded-xl font-semibold text-white transition-all active:scale-95"
+                     style={{ background: 'linear-gradient(135deg, #FF8A00, #e67600)' }}
+                   >
+                     <svg xmlns="http://www.w3.org/2000/svg" className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                       <rect x="2" y="7" width="20" height="14" rx="2" ry="2"/>
+                       <path d="M16 3H8a2 2 0 0 0-2 2v2h12V5a2 2 0 0 0-2-2z"/>
+                       <circle cx="16" cy="14" r="1" fill="currentColor"/>
+                     </svg>
+                     Connect Wallet
+                   </button>
+                 )}
                </div>
              </nav>
 
           </motion.div>
         )}
       </AnimatePresence>
+      <WalletModal open={walletModalOpen} onClose={() => setWalletModalOpen(false)} />
     </>
   )
 }
