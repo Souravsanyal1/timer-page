@@ -672,8 +672,8 @@ export default function FocusTimerPage() {
                 className="contact-border-glow pointer-events-none absolute inset-0 z-20"
                 style={{
                   background: "radial-gradient(600px circle at var(--mx,50%) var(--my,50%), rgba(255,138,0,0.9), transparent 40%)",
-                  maskImage: "repeating-linear-gradient(to right, transparent, transparent calc(33.333% - 1px), black calc(33.333% - 1px), black 33.333%), linear-gradient(to bottom, black 0, black 1px, transparent 1px, transparent calc(100% - 1px), black calc(100% - 1px), black 100%)",
-                  WebkitMaskImage: "repeating-linear-gradient(to right, transparent, transparent calc(33.333% - 1px), black calc(33.333% - 1px), black 33.333%), linear-gradient(to bottom, black 0, black 1px, transparent 1px, transparent calc(100% - 1px), black calc(100% - 1px), black 100%)",
+                  maskImage: "repeating-linear-gradient(to right, transparent, transparent calc(25% - 1px), black calc(25% - 1px), black 25%), linear-gradient(to bottom, black 0, black 1px, transparent 1px, transparent calc(100% - 1px), black calc(100% - 1px), black 100%)",
+                  WebkitMaskImage: "repeating-linear-gradient(to right, transparent, transparent calc(25% - 1px), black calc(25% - 1px), black 25%), linear-gradient(to bottom, black 0, black 1px, transparent 1px, transparent calc(100% - 1px), black calc(100% - 1px), black 100%)",
                   maskComposite: "add",
                   WebkitMaskComposite: "source-over",
                   opacity: 0,
@@ -681,7 +681,7 @@ export default function FocusTimerPage() {
                 }}
               />
 
-              <div className="grid grid-cols-3 w-full"
+              <div className="grid grid-cols-2 lg:grid-cols-4 w-full"
                 onMouseEnter={(e) => {
                   const glow = e.currentTarget.parentElement?.querySelector(".contact-border-glow") as HTMLElement;
                   if (glow) glow.style.opacity = "1";
@@ -763,6 +763,32 @@ export default function FocusTimerPage() {
                   <div className="text-center">
                     <p className="text-white font-bold text-sm">YouTube</p>
                     <p className="text-white/30 text-xs mt-0.5 group-hover:text-[#FF0000] transition-colors">Subscribe ↗</p>
+                  </div>
+                </a>
+
+                {/* Twitter / X */}
+                <a
+                  href="https://twitter.com/EliteForce"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group relative flex flex-col items-center justify-center gap-4 py-12 px-6 transition-all duration-300"
+                  style={{ borderRight: "1px solid rgba(255,255,255,0.07)", borderTop: "1px solid rgba(255,255,255,0.07)", borderBottom: "1px solid rgba(255,255,255,0.07)" }}
+                  onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.background = "rgba(255,255,255,0.05)"; }}
+                  onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.background = "transparent"; }}
+                >
+                  <div className="w-14 h-14 rounded-2xl flex items-center justify-center transition-transform duration-300 group-hover:scale-110 group-hover:-translate-y-1"
+                    style={{ background: "linear-gradient(135deg,#1a1a1a,#000000)", border: "1px solid rgba(255,255,255,0.12)", boxShadow: "0 8px 32px rgba(0,0,0,0)" }}
+                    onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.boxShadow = "0 8px 32px rgba(255,255,255,0.2)"; }}
+                    onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.boxShadow = "0 8px 32px rgba(0,0,0,0)"; }}
+                  >
+                    {/* X (Twitter) logo */}
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="white">
+                      <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.744l7.737-8.835L1.254 2.25H8.08l4.253 5.622L18.244 2.25Zm-1.161 17.52h1.833L7.084 4.126H5.117L17.083 19.77Z"/>
+                    </svg>
+                  </div>
+                  <div className="text-center">
+                    <p className="text-white font-bold text-sm">Twitter</p>
+                    <p className="text-white/30 text-xs mt-0.5 group-hover:text-white transition-colors">Follow us ↗</p>
                   </div>
                 </a>
               </div>
