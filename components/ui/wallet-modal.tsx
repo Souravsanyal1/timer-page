@@ -23,58 +23,45 @@ const WalletIcons: Record<string, React.ReactNode> = {
       <path d="M35.3 20l-7.4-2.2 2.2 3.4-3.3 6.5 4.4-.1h6.6l-2.5-7.6zM12.1 17.8L4.7 20 2.2 27.6h6.6l4.4.1-3.3-6.5 2.2-3.4zM22.2 22.1l.5-8.3 2.1-5.7h-9.6l2.1 5.7.5 8.3.2 2.9v6.1h3.9v-6.1l.3-2.9z" fill="#F5841F" stroke="#F5841F" strokeWidth=".25" strokeLinecap="round" strokeLinejoin="round"/>
     </svg>
   ),
-  WalletConnect: (
+  TokenPocket: (
     <svg viewBox="0 0 40 40" className="w-9 h-9" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <circle cx="20" cy="20" r="20" fill="#3B99FC"/>
-      <path d="M12.5 16.9c4.1-4 10.9-4 15 0l.5.5a.5.5 0 0 1 0 .7l-1.7 1.7a.3.3 0 0 1-.4 0l-.7-.7c-2.9-2.8-7.5-2.8-10.4 0l-.7.7a.3.3 0 0 1-.4 0L12 17.6a.5.5 0 0 1 0-.7l.5-.5zm18.5 3.4l1.5 1.5a.5.5 0 0 1 0 .7l-6.8 6.6a.5.5 0 0 1-.7 0l-4.8-4.7a.1.1 0 0 0-.2 0l-4.8 4.7a.5.5 0 0 1-.7 0L7.5 22.5a.5.5 0 0 1 0-.7L9 20.3a.5.5 0 0 1 .7 0l4.8 4.7a.1.1 0 0 0 .2 0l4.8-4.7a.5.5 0 0 1 .7 0l4.8 4.7a.1.1 0 0 0 .2 0l4.8-4.7a.5.5 0 0 1 .7 0z" fill="white"/>
-    </svg>
-  ),
-  Coinbase: (
-    <svg viewBox="0 0 40 40" className="w-9 h-9" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <circle cx="20" cy="20" r="20" fill="#0052FF"/>
-      <path fillRule="evenodd" clipRule="evenodd" d="M20 8C13.4 8 8 13.4 8 20s5.4 12 12 12 12-5.4 12-12S26.6 8 20 8zm-3 9a1 1 0 0 0-1 1v4a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1v-4a1 1 0 0 0-1-1h-6z" fill="white"/>
+      <circle cx="20" cy="20" r="20" fill="#2980FE"/>
+      <rect x="10" y="11" width="20" height="14" rx="3" fill="white" fillOpacity="0.15" stroke="white" strokeWidth="1.5"/>
+      <rect x="10" y="11" width="20" height="6" rx="3" fill="white" fillOpacity="0.3"/>
+      <circle cx="14" cy="14" r="1.5" fill="white"/>
+      <rect x="13" y="20" width="14" height="2" rx="1" fill="white" fillOpacity="0.6"/>
+      <rect x="13" y="23.5" width="8" height="1.5" rx="0.75" fill="white" fillOpacity="0.4"/>
+      <rect x="10" y="28" width="20" height="3" rx="1.5" fill="white" fillOpacity="0.2"/>
     </svg>
   ),
   Trust: (
     <svg viewBox="0 0 40 40" className="w-9 h-9" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <circle cx="20" cy="20" r="20" fill="#0500FF"/>
+      <circle cx="20" cy="20" r="20" fill="#3375BB"/>
       <path d="M20 9l-9 4v7c0 5.5 3.8 10.6 9 12 5.2-1.4 9-6.5 9-12v-7l-9-4z" fill="white" fillOpacity="0.15" stroke="white" strokeWidth="1.5"/>
-      <path d="M16 20l3 3 5-5" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+      <path d="M16 20l3 3 5-5" stroke="white" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"/>
     </svg>
   ),
-  Rainbow: (
+  OneInch: (
     <svg viewBox="0 0 40 40" className="w-9 h-9" fill="none" xmlns="http://www.w3.org/2000/svg">
       <defs>
-        <linearGradient id="rb" x1="0" y1="0" x2="40" y2="40" gradientUnits="userSpaceOnUse">
-          <stop offset="0%" stopColor="#FF6B6B"/>
-          <stop offset="30%" stopColor="#FFE66D"/>
-          <stop offset="60%" stopColor="#4ECDC4"/>
-          <stop offset="100%" stopColor="#A855F7"/>
+        <linearGradient id="oneinch" x1="0" y1="0" x2="40" y2="40" gradientUnits="userSpaceOnUse">
+          <stop offset="0%" stopColor="#d82122"/>
+          <stop offset="100%" stopColor="#f5323b"/>
         </linearGradient>
       </defs>
-      <circle cx="20" cy="20" r="20" fill="url(#rb)"/>
-      <path d="M10 24c0-5.5 4.5-10 10-10s10 4.5 10 10" stroke="white" strokeWidth="3" strokeLinecap="round" fill="none"/>
-      <path d="M13 24c0-3.9 3.1-7 7-7s7 3.1 7 7" stroke="white" strokeWidth="2.5" strokeLinecap="round" fill="none" strokeOpacity="0.7"/>
-      <path d="M16 24c0-2.2 1.8-4 4-4s4 1.8 4 4" stroke="white" strokeWidth="2" strokeLinecap="round" fill="none" strokeOpacity="0.5"/>
-    </svg>
-  ),
-  Phantom: (
-    <svg viewBox="0 0 40 40" className="w-9 h-9" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <circle cx="20" cy="20" r="20" fill="#AB9FF2"/>
-      <path d="M29.5 20.5c0 5.2-4.3 9.5-9.5 9.5-5.2 0-9.5-4.3-9.5-9.5S14.8 11 20 11c5.2 0 9.5 4.3 9.5 9.5z" fill="#551BF9"/>
-      <path d="M23 18h1.5a.5.5 0 0 1 .5.5v3a4 4 0 0 1-4 4h-3a4 4 0 0 1-4-4v-3a.5.5 0 0 1 .5-.5H16" stroke="white" strokeWidth="1.5" strokeLinecap="round"/>
-      <path d="M17.5 16a2.5 2.5 0 0 1 5 0v2h-5v-2z" fill="white"/>
+      <circle cx="20" cy="20" r="20" fill="url(#oneinch)"/>
+      <text x="20" y="26" textAnchor="middle" fontSize="18" fontWeight="bold" fill="white" fontFamily="Arial">1</text>
+      <path d="M14 28 Q20 8 26 28" stroke="white" strokeWidth="1.5" fill="none" strokeOpacity="0.4"/>
     </svg>
   ),
 }
 
+
 const WALLETS = [
-  { id: "MetaMask", name: "MetaMask", desc: "Popular Ethereum wallet" },
-  { id: "WalletConnect", name: "WalletConnect", desc: "Connect any mobile wallet" },
-  { id: "Coinbase", name: "Coinbase Wallet", desc: "Easy & secure wallet" },
-  { id: "Trust", name: "Trust Wallet", desc: "Multi-chain mobile wallet" },
-  { id: "Rainbow", name: "Rainbow", desc: "Fun & beautiful wallet" },
-  { id: "Phantom", name: "Phantom", desc: "Solana & Ethereum" },
+  { id: "MetaMask",     name: "MetaMask",      desc: "Popular Ethereum wallet" },
+  { id: "TokenPocket",  name: "TokenPocket",   desc: "Multi-chain DeFi wallet" },
+  { id: "Trust",        name: "Trust Wallet",  desc: "Multi-chain mobile wallet" },
+  { id: "OneInch",      name: "1inch Wallet",  desc: "Best swap rates & DeFi" },
 ]
 
 interface WalletModalProps {

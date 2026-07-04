@@ -125,10 +125,9 @@ export function useWallet() {
       // No provider found — open wallet's install page
       const installUrls: Record<string, string> = {
         MetaMask: "https://metamask.io/download/",
-        "Coinbase Wallet": "https://www.coinbase.com/wallet/downloads",
+        "TokenPocket": "https://www.tokenpocket.pro/en/download/app",
         "Trust Wallet": "https://trustwallet.com/download",
-        WalletConnect: "https://walletconnect.com/",
-        Rainbow: "https://rainbow.me/",
+        "1inch Wallet": "https://1inch.io/wallet/",
       }
 
       if (installUrls[walletType]) {
