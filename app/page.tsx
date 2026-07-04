@@ -269,7 +269,7 @@ function StatCard({ icon: Icon, label, value, unit, color, delay }: {
       transition={{ duration: 0.5, delay, ease: [0.22, 1, 0.36, 1] }}
       viewport={{ once: true }}
       className="group relative flex flex-col gap-4 p-6 cursor-pointer transition-all duration-300"
-      style={{ borderRight: "1px solid rgba(255,255,255,0.07)", borderBottom: "1px solid rgba(255,255,255,0.07)" }}
+      style={{ borderRight: "1px solid var(--border)", borderBottom: "1px solid var(--border)" }}
       onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.background = `${color}0d`; }}
       onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.background = "transparent"; }}
     >
@@ -294,11 +294,11 @@ function StatCard({ icon: Icon, label, value, unit, color, delay }: {
         <span className="text-4xl font-black tabular-nums leading-none" style={{ color }}>
           {displayed}
         </span>
-        <span className="text-sm text-white/30 mb-1 font-medium">{unit}</span>
+        <span className="text-sm text-foreground/45 mb-1 font-medium">{unit}</span>
       </div>
 
       {/* Label */}
-      <p className="text-xs text-white/40 font-semibold uppercase tracking-[0.15em]">{label}</p>
+      <p className="text-xs text-foreground/50 font-semibold uppercase tracking-[0.15em]">{label}</p>
 
       {/* Accent bottom bar */}
       <div className="absolute bottom-0 left-6 right-6 h-px rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"
@@ -510,13 +510,22 @@ export default function FocusTimerPage() {
               </div>
 
               {/* ── Coming Soon Text ── */}
-              <div
+              <motion.div
                 className="mt-8 flex items-center justify-center gap-3 font-black uppercase tracking-[0.25em]"
                 style={{ fontSize: "clamp(1.5rem, 4vw, 3rem)" }}
+                animate={{
+                  opacity: [0.6, 1, 0.6],
+                  scale: [0.98, 1, 0.98]
+                }}
+                transition={{
+                  duration: 2.5,
+                  ease: "easeInOut",
+                  repeat: Infinity,
+                }}
               >
-                <span className="text-white">COMING</span>
-                <span style={{ color: "#FF8A00" }}>SOON</span>
-              </div>
+                <span className="text-foreground">COMING</span>
+                <span style={{ color: "#FF8A00", textShadow: "0 0 20px rgba(255,138,0,0.3)" }}>SOON</span>
+              </motion.div>
             </motion.div>
 
             {/* Flip text subtitle - removed */}
@@ -585,7 +594,7 @@ export default function FocusTimerPage() {
               />
               <div
                 className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3"
-                style={{ borderTop: "1px solid rgba(255,255,255,0.07)", borderLeft: "1px solid rgba(255,255,255,0.07)" }}
+                style={{ borderTop: "1px solid var(--border)", borderLeft: "1px solid var(--border)" }}
                 onMouseEnter={(e) => {
                   const wrap = e.currentTarget.parentElement;
                   if (wrap) {
@@ -690,7 +699,7 @@ export default function FocusTimerPage() {
                   target="_blank"
                   rel="noopener noreferrer"
                   className="group relative flex flex-col items-center justify-center gap-4 py-12 px-6 transition-all duration-300"
-                  style={{ borderRight: "1px solid rgba(255,255,255,0.07)", borderTop: "1px solid rgba(255,255,255,0.07)", borderBottom: "1px solid rgba(255,255,255,0.07)", borderLeft: "1px solid rgba(255,255,255,0.07)" }}
+                  style={{ borderRight: "1px solid var(--border)", borderTop: "1px solid var(--border)", borderBottom: "1px solid var(--border)", borderLeft: "1px solid var(--border)" }}
                   onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.background = "rgba(34,158,217,0.08)"; }}
                   onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.background = "transparent"; }}
                 >
@@ -704,8 +713,8 @@ export default function FocusTimerPage() {
                     </svg>
                   </div>
                   <div className="text-center">
-                    <p className="text-white font-bold text-sm">Telegram</p>
-                    <p className="text-white/30 text-xs mt-0.5 group-hover:text-[#229ED9] transition-colors">@EliteForce ↗</p>
+                    <p className="text-foreground font-bold text-sm">Telegram</p>
+                    <p className="text-foreground/50 text-xs mt-0.5 group-hover:text-[#229ED9] transition-colors">@EliteForce ↗</p>
                   </div>
                 </a>
 
@@ -715,7 +724,7 @@ export default function FocusTimerPage() {
                   target="_blank"
                   rel="noopener noreferrer"
                   className="group relative flex flex-col items-center justify-center gap-4 py-12 px-6 transition-all duration-300"
-                  style={{ borderRight: "1px solid rgba(255,255,255,0.07)", borderTop: "1px solid rgba(255,255,255,0.07)", borderBottom: "1px solid rgba(255,255,255,0.07)" }}
+                  style={{ borderRight: "1px solid var(--border)", borderTop: "1px solid var(--border)", borderBottom: "1px solid var(--border)" }}
                   onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.background = "rgba(37,211,102,0.08)"; }}
                   onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.background = "transparent"; }}
                 >
@@ -740,7 +749,7 @@ export default function FocusTimerPage() {
                   target="_blank"
                   rel="noopener noreferrer"
                   className="group relative flex flex-col items-center justify-center gap-4 py-12 px-6 transition-all duration-300"
-                  style={{ borderRight: "1px solid rgba(255,255,255,0.07)", borderTop: "1px solid rgba(255,255,255,0.07)", borderBottom: "1px solid rgba(255,255,255,0.07)" }}
+                  style={{ borderRight: "1px solid var(--border)", borderTop: "1px solid var(--border)", borderBottom: "1px solid var(--border)" }}
                   onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.background = "rgba(255,0,0,0.07)"; }}
                   onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.background = "transparent"; }}
                 >
@@ -754,8 +763,8 @@ export default function FocusTimerPage() {
                     </svg>
                   </div>
                   <div className="text-center">
-                    <p className="text-white font-bold text-sm">YouTube</p>
-                    <p className="text-white/30 text-xs mt-0.5 group-hover:text-[#FF0000] transition-colors">Subscribe ↗</p>
+                    <p className="text-foreground font-bold text-sm">YouTube</p>
+                    <p className="text-foreground/50 text-xs mt-0.5 group-hover:text-[#FF0000] transition-colors">Subscribe ↗</p>
                   </div>
                 </a>
 
@@ -765,7 +774,7 @@ export default function FocusTimerPage() {
                   target="_blank"
                   rel="noopener noreferrer"
                   className="group relative flex flex-col items-center justify-center gap-4 py-12 px-6 transition-all duration-300"
-                  style={{ borderRight: "1px solid rgba(255,255,255,0.07)", borderTop: "1px solid rgba(255,255,255,0.07)", borderBottom: "1px solid rgba(255,255,255,0.07)" }}
+                  style={{ borderRight: "1px solid var(--border)", borderTop: "1px solid var(--border)", borderBottom: "1px solid var(--border)" }}
                   onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.background = "rgba(255,255,255,0.05)"; }}
                   onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.background = "transparent"; }}
                 >
@@ -780,8 +789,8 @@ export default function FocusTimerPage() {
                     </svg>
                   </div>
                   <div className="text-center">
-                    <p className="text-white font-bold text-sm">Twitter</p>
-                    <p className="text-white/30 text-xs mt-0.5 group-hover:text-white transition-colors">Follow us ↗</p>
+                    <p className="text-foreground font-bold text-sm">Twitter</p>
+                    <p className="text-foreground/50 text-xs mt-0.5 group-hover:text-foreground dark:group-hover:text-white transition-colors">Follow us ↗</p>
                   </div>
                 </a>
               </div>
@@ -790,7 +799,7 @@ export default function FocusTimerPage() {
 
 
           {/* ══════ FOOTER ══════ */}
-          <footer className="py-10 border-t border-white/4 mt-8">
+          <footer className="py-10 border-t border-border mt-8">
             <div className="flex flex-col md:flex-row items-center justify-between gap-6">
               <div className="flex items-center gap-2">
                 <div className="w-6 h-6 rounded-full flex items-center justify-center border border-orange-500/20"
@@ -798,14 +807,14 @@ export default function FocusTimerPage() {
                   <Timer className="w-3 h-3 text-orange-400" />
                 </div>
                 <span className="text-foreground font-bold text-sm">Elite Force</span>
-                <span className="text-foreground/15 text-sm">— 6 months. Stay locked in.</span>
+                <span className="text-foreground/25 text-sm">— 6 months. Stay locked in.</span>
               </div>
-              <div className="flex gap-6 text-xs text-white/20 tracking-wider uppercase">
+              <div className="flex gap-6 text-xs text-foreground/45 tracking-wider uppercase">
                 {["Privacy", "Terms", "GitHub", "Docs"].map((l) => (
-                  <a key={l} href="#" className="hover:text-white/50 transition-colors">{l}</a>
+                  <a key={l} href="#" className="hover:text-foreground/75 transition-colors">{l}</a>
                 ))}
               </div>
-              <p className="text-xs text-white/15">Deadline: Jan 3, 2027 · 12:00 AM</p>
+              <p className="text-xs text-foreground/30">Deadline: Jan 3, 2027 · 12:00 AM</p>
             </div>
           </footer>
         </div>
