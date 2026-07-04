@@ -861,22 +861,6 @@ export default function FocusTimerPage() {
 
 
 
-          {/* ══════ BODY NAV LINKS ══════ */}
-          <div className="flex flex-wrap justify-center gap-8 py-10 border-t border-border mt-8">
-            <a href="#supported-wallets" className="text-xs text-foreground/45 tracking-wider uppercase hover:text-foreground/75 transition-colors">
-              Supported Wallets
-            </a>
-            <a href="#about-us" className="text-xs text-foreground/45 tracking-wider uppercase hover:text-foreground/75 transition-colors">
-              About Us
-            </a>
-            <a href="#privacy" className="text-xs text-foreground/45 tracking-wider uppercase hover:text-foreground/75 transition-colors">
-              Privacy
-            </a>
-            <a href="#terms" className="text-xs text-foreground/45 tracking-wider uppercase hover:text-foreground/75 transition-colors">
-              Terms
-            </a>
-          </div>
-
           {/* ══════ SUPPORTED WALLETS SECTION ══════ */}
           <section id="supported-wallets" className="py-20 border-t border-border">
             <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.7 }} viewport={{ once: true }} className="text-center mb-12">
