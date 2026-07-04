@@ -536,7 +536,6 @@ export default function FocusTimerPage() {
             transition={{ duration: 0.5 }}
           >
             <Atom color="#32cd32" size="medium" text="" textColor="" />
-            <p className="text-foreground/45 text-xs tracking-[0.4em] uppercase">Initializing Elite Force</p>
           </motion.div>
         )}
       </AnimatePresence>
