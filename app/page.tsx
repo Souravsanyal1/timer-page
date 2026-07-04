@@ -557,7 +557,7 @@ export default function FocusTimerPage() {
         <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
 
           {/* ══════ HERO ══════ */}
-          <section id="timer" className="pt-32 pb-16 flex flex-col items-center text-center">
+          <section id="home" className="pt-32 pb-16 flex flex-col items-center text-center">
 
             {/* ── Giant Typography ── */}
             <motion.div
@@ -599,7 +599,7 @@ export default function FocusTimerPage() {
           </section>
 
           {/* ══════ PRESETS ══════ */}
-          <section id="presets" className="py-16">
+          <section id="about" className="py-16">
             <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.7 }} viewport={{ once: true }} className="text-center mb-10">
               <p className="text-[10px] font-semibold text-foreground/40 uppercase tracking-[0.35em] mb-3">Schedule</p>
               <h2 className="text-3xl md:text-5xl font-black text-foreground" style={{ letterSpacing: "-0.03em" }}>
@@ -615,7 +615,7 @@ export default function FocusTimerPage() {
           </section>
 
           {/* ══════ STATS ══════ */}
-          <section id="stats" className="py-16">
+          <section id="sponsors" className="py-16">
             <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.7 }} viewport={{ once: true }} className="text-center mb-10">
               <p className="text-[10px] font-semibold text-foreground/40 uppercase tracking-[0.35em] mb-3">Partnerships</p>
               <h2 className="text-3xl md:text-5xl font-black text-foreground" style={{ letterSpacing: "-0.03em" }}>
@@ -676,7 +676,7 @@ export default function FocusTimerPage() {
 
 
           {/* ══════ CONTACT US ══════ */}
-          <section className="py-20 flex flex-col items-center gap-12">
+          <section id="community" className="py-20 flex flex-col items-center gap-12">
             <motion.div
               initial={{ opacity: 0, y: 24 }}
               whileInView={{ opacity: 1, y: 0 }}
