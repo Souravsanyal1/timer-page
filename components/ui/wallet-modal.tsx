@@ -158,10 +158,63 @@ export function WalletModal({ open, onClose }: WalletModalProps) {
                     <div className="flex-1 min-w-0">
                       <p className="text-white text-sm font-medium font-mono">{wallet.shortAddress}</p>
                       <p className="text-white/40 text-xs mt-0.5">
-                        {wallet.chainId === 1 ? "Ethereum Mainnet" :
-                         wallet.chainId === 137 ? "Polygon" :
-                         wallet.chainId === 56 ? "BNB Chain" :
-                         `Chain ID: ${wallet.chainId}`}
+                        {(() => {
+                          const chains: Record<number, string> = {
+                            // Ethereum
+                            1: "🔷 Ethereum Mainnet",
+                            11155111: "🔷 Sepolia Testnet",
+                            5: "🔷 Goerli Testnet",
+                            // BNB Ecosystem
+                            56: "🟡 BNB Smart Chain",
+                            97: "🟡 BNB Testnet",
+                            204: "🟡 opBNB Mainnet",
+                            5611: "🟡 opBNB Testnet",
+                            // Polygon
+                            137: "🟣 Polygon Mainnet",
+                            80001: "🟣 Mumbai Testnet",
+                            1101: "🟣 Polygon zkEVM",
+                            // Arbitrum
+                            42161: "🔵 Arbitrum One",
+                            421614: "🔵 Arbitrum Sepolia",
+                            42170: "🔵 Arbitrum Nova",
+                            // Optimism
+                            10: "🔴 Optimism",
+                            11155420: "🔴 Optimism Sepolia",
+                            // Base
+                            8453: "🔵 Base Mainnet",
+                            84532: "🔵 Base Sepolia",
+                            // Avalanche
+                            43114: "🔺 Avalanche C-Chain",
+                            43113: "🔺 Fuji Testnet",
+                            // Fantom
+                            250: "👻 Fantom Opera",
+                            4002: "👻 Fantom Testnet",
+                            // zkSync
+                            324: "⚡ zkSync Era",
+                            280: "⚡ zkSync Testnet",
+                            // Linea
+                            59144: "🟢 Linea Mainnet",
+                            59140: "🟢 Linea Testnet",
+                            // Scroll
+                            534352: "📜 Scroll Mainnet",
+                            534351: "📜 Scroll Sepolia",
+                            // Mantle
+                            5000: "🔷 Mantle Mainnet",
+                            5001: "🔷 Mantle Testnet",
+                            // Cronos
+                            25: "⚡ Cronos Mainnet",
+                            // Gnosis
+                            100: "🦉 Gnosis Chain",
+                            // Moonbeam / Moonriver
+                            1284: "🌙 Moonbeam",
+                            1285: "🌙 Moonriver",
+                            // Celo
+                            42220: "🌿 Celo Mainnet",
+                            // Aurora
+                            1313161554: "🟢 Aurora Mainnet",
+                          }
+                          return chains[wallet.chainId!] ?? `🔗 Chain ID: ${wallet.chainId}`
+                        })()}
                       </p>
                     </div>
                     <div className="flex items-center gap-1.5">
