@@ -384,38 +384,8 @@ function AnimatedComingSoon() {
   const coming = "COMING".split("");
   const soon = "SOON".split("");
 
-  const containerVariants = {
-    animate: {
-      transition: {
-        staggerChildren: 0.08,
-      }
-    }
-  } as const;
-
-  const letterVariants = {
-    initial: {
-      rotateX: 90,
-      y: 20,
-      opacity: 0,
-      filter: "blur(8px)",
-    },
-    animate: {
-      rotateX: 0,
-      y: 0,
-      opacity: 1,
-      filter: "blur(0px)",
-      transition: {
-        duration: 0.6,
-        ease: [0.2, 0.65, 0.3, 0.9] as const,
-      }
-    }
-  } as const;
-
   return (
-    <motion.div
-      variants={containerVariants}
-      initial="initial"
-      animate="animate"
+    <div
       className="mt-8 flex items-center justify-center gap-3 font-black uppercase tracking-[0.25em]"
       style={{ fontSize: "clamp(1.5rem, 4vw, 3rem)", perspective: "1000px" }}
     >
@@ -424,23 +394,19 @@ function AnimatedComingSoon() {
         {coming.map((char, i) => (
           <motion.span
             key={`c-${i}`}
-            variants={letterVariants}
-            animate={{
-              rotateX: 0,
-              y: [0, -6, 0],
-              opacity: 1,
-              filter: "blur(0px)",
-            }}
+            initial={{ rotateX: 90, y: 15, opacity: 0, filter: "blur(4px)" }}
+            animate={{ rotateX: 0, y: [0, -6, 0], opacity: 1, filter: "blur(0px)" }}
             transition={{
+              rotateX: { duration: 0.6, ease: [0.2, 0.65, 0.3, 0.9], delay: i * 0.05 },
+              opacity: { duration: 0.4, delay: i * 0.05 },
+              filter: { duration: 0.4, delay: i * 0.05 },
               y: {
-                duration: 2.5,
+                duration: 2.2,
                 repeat: Infinity,
+                repeatType: "reverse",
                 ease: "easeInOut",
-                delay: i * 0.1 + 0.6,
-              },
-              rotateX: { duration: 0.6, ease: [0.2, 0.65, 0.3, 0.9], delay: i * 0.06 },
-              opacity: { duration: 0.4, delay: i * 0.06 },
-              filter: { duration: 0.4, delay: i * 0.06 },
+                delay: i * 0.12 + 0.6,
+              }
             }}
             className="inline-block text-foreground"
             style={{ transformStyle: "preserve-3d" }}
@@ -452,39 +418,38 @@ function AnimatedComingSoon() {
 
       {/* SOON */}
       <div className="flex gap-[0.1em]" style={{ transformStyle: "preserve-3d" }}>
-        {soon.map((char, i) => (
-          <motion.span
-            key={`s-${i}`}
-            variants={letterVariants}
-            animate={{
-              rotateX: 0,
-              y: [0, -6, 0],
-              opacity: 1,
-              filter: "blur(0px)",
-            }}
-            transition={{
-              y: {
-                duration: 2.5,
-                repeat: Infinity,
-                ease: "easeInOut",
-                delay: (coming.length + i) * 0.1 + 0.6,
-              },
-              rotateX: { duration: 0.6, ease: [0.2, 0.65, 0.3, 0.9], delay: (coming.length + i) * 0.06 },
-              opacity: { duration: 0.4, delay: (coming.length + i) * 0.06 },
-              filter: { duration: 0.4, delay: (coming.length + i) * 0.06 },
-            }}
-            className="inline-block"
-            style={{
-              transformStyle: "preserve-3d",
-              color: "#FF8A00",
-              textShadow: "0 0 25px rgba(255,138,0,0.35)",
-            }}
-          >
-            {char}
-          </motion.span>
-        ))}
+        {soon.map((char, i) => {
+          const index = coming.length + i;
+          return (
+            <motion.span
+              key={`s-${i}`}
+              initial={{ rotateX: 90, y: 15, opacity: 0, filter: "blur(4px)" }}
+              animate={{ rotateX: 0, y: [0, -6, 0], opacity: 1, filter: "blur(0px)" }}
+              transition={{
+                rotateX: { duration: 0.6, ease: [0.2, 0.65, 0.3, 0.9], delay: index * 0.05 },
+                opacity: { duration: 0.4, delay: index * 0.05 },
+                filter: { duration: 0.4, delay: index * 0.05 },
+                y: {
+                  duration: 2.2,
+                  repeat: Infinity,
+                  repeatType: "reverse",
+                  ease: "easeInOut",
+                  delay: index * 0.12 + 0.6,
+                }
+              }}
+              className="inline-block"
+              style={{
+                transformStyle: "preserve-3d",
+                color: "#FF8A00",
+                textShadow: "0 0 25px rgba(255,138,0,0.35)",
+              }}
+            >
+              {char}
+            </motion.span>
+          );
+        })}
       </div>
-    </motion.div>
+    </div>
   );
 }
 
