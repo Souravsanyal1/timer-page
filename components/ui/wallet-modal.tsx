@@ -124,17 +124,38 @@ export function WalletModal({ open, onClose }: WalletModalProps) {
   // Detect installed wallets from window.ethereum provider flags
   useEffect(() => {
     if (typeof window === "undefined") return
-    const eth = (window as unknown as { ethereum?: Record<string, boolean> }).ethereum
-    if (!eth) return
+    const anyWindow = window as any
+    const eth = anyWindow.ethereum
 
     const found = new Set<string>()
-    // MetaMask: isMetaMask true but NOT TokenPocket/Trust/1inch
-    if (eth.isMetaMask && !eth.isTokenPocket && !eth.isTrust && !eth.isOneInch) found.add("MetaMask")
-    if (eth.isTokenPocket) found.add("TokenPocket")
-    if (eth.isTrust || eth.isTrustWallet) found.add("Trust")
-    if (eth.isOneInch) found.add("OneInch")
-    // Fallback: if ethereum exists and nothing specific detected, assume MetaMask
-    if (found.size === 0 && eth) found.add("MetaMask")
+
+    if (eth) {
+      if (eth.providers && Array.isArray(eth.providers)) {
+        if (eth.providers.some((p: any) => p.isMetaMask && !p.isTokenPocket && !p.isTrust && !p.isOneInch)) found.add("MetaMask")
+        if (eth.providers.some((p: any) => p.isTokenPocket)) found.add("TokenPocket")
+        if (eth.providers.some((p: any) => p.isTrust || p.isTrustWallet)) found.add("Trust")
+        if (eth.providers.some((p: any) => p.isOneInch)) found.add("OneInch")
+      } else {
+        if (eth.isTokenPocket) found.add("TokenPocket")
+        if (eth.isTrust || eth.isTrustWallet) found.add("Trust")
+        if (eth.isOneInch) found.add("OneInch")
+        
+        // MetaMask is true if flag is present and not overridden by others
+        if (eth.isMetaMask && !eth.isTokenPocket && !eth.isTrust && !eth.isOneInch) {
+          found.add("MetaMask")
+        }
+      }
+    }
+
+    // Direct window objects
+    if (anyWindow.tokenpocket) found.add("TokenPocket")
+    if (anyWindow.trustWallet) found.add("Trust")
+    if (anyWindow.ethereum?.isOneInch) found.add("OneInch")
+
+    // Fallback: If ethereum exists and nothing else is found, assume MetaMask is present
+    if (found.size === 0 && eth) {
+      found.add("MetaMask")
+    }
 
     setDetected(found)
   }, [open])
@@ -158,6 +179,45 @@ export function WalletModal({ open, onClose }: WalletModalProps) {
     disconnect()
     onClose()
   }
+
+  async function handleSwitchNetwork() {
+    const eth = (window as any).ethereum
+    if (eth) {
+      try {
+        await eth.request({
+          method: "wallet_switchEthereumChain",
+          params: [{ chainId: "0x38" }], // Hex for 56
+        })
+        window.location.reload()
+      } catch (switchError: any) {
+        if (switchError.code === 4902) {
+          try {
+            await eth.request({
+              method: "wallet_addEthereumChain",
+              params: [
+                {
+                  chainId: "0x38",
+                  chainName: "BNB Smart Chain",
+                  rpcUrls: ["https://bsc-dataseed.binance.org/"],
+                  nativeCurrency: {
+                    name: "BNB",
+                    symbol: "BNB",
+                    decimals: 18,
+                  },
+                  blockExplorerUrls: ["https://bscscan.com"],
+                },
+              ],
+            })
+            window.location.reload()
+          } catch (addError) {
+            console.error("Failed to add BNB chain", addError)
+          }
+        }
+      }
+    }
+  }
+
+  const isWrongNetwork = wallet.isConnected && wallet.chainId !== 56
 
   return (
     <AnimatePresence>
@@ -207,12 +267,19 @@ export function WalletModal({ open, onClose }: WalletModalProps) {
               {wallet.isConnected && wallet.address ? (
                 <div className="p-5 flex flex-col gap-4">
                   <div
-                    className="flex items-center gap-3 p-4 rounded-xl border"
-                    style={{ borderColor: "#FF8A00", background: "rgba(255,138,0,0.08)" }}
+                    className="flex items-center gap-3 p-4 rounded-xl border animate-fade-in"
+                    style={{
+                      borderColor: isWrongNetwork ? "#ef4444" : "#FF8A00",
+                      background: isWrongNetwork ? "rgba(239,68,68,0.08)" : "rgba(255,138,0,0.08)"
+                    }}
                   >
                     <div
-                      className="w-10 h-10 rounded-full flex items-center justify-center text-white font-bold text-sm"
-                      style={{ background: "linear-gradient(135deg,#FF8A00,#e67600)" }}
+                      className="w-10 h-10 rounded-full flex items-center justify-center text-white font-bold text-sm shrink-0"
+                      style={{
+                        background: isWrongNetwork
+                          ? "linear-gradient(135deg,#ef4444,#b91c1c)"
+                          : "linear-gradient(135deg,#FF8A00,#e67600)"
+                      }}
                     >
                       {wallet.address.slice(2, 4).toUpperCase()}
                     </div>
@@ -278,11 +345,23 @@ export function WalletModal({ open, onClose }: WalletModalProps) {
                         })()}
                       </p>
                     </div>
-                    <div className="flex items-center gap-1.5">
-                      <div className="w-2 h-2 rounded-full bg-green-400 animate-pulse" />
-                      <span className="text-green-400 text-xs font-medium">Connected</span>
+                    <div className="flex items-center gap-1.5 shrink-0">
+                      <div className={`w-2 h-2 rounded-full animate-pulse ${isWrongNetwork ? "bg-red-500" : "bg-green-400"}`} />
+                      <span className={`text-xs font-medium ${isWrongNetwork ? "text-red-500" : "text-green-400"}`}>
+                        {isWrongNetwork ? "Wrong Network" : "Connected"}
+                      </span>
                     </div>
                   </div>
+
+                  {isWrongNetwork && (
+                    <button
+                      onClick={handleSwitchNetwork}
+                      className="w-full py-2.5 rounded-xl text-white text-sm font-semibold transition-all active:scale-[0.98] shadow-lg"
+                      style={{ background: "linear-gradient(135deg, #FF8A00, #e67600)" }}
+                    >
+                      Switch to BNB Chain
+                    </button>
+                  )}
 
                   <button
                     onClick={handleDisconnect}

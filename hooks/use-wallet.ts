@@ -42,7 +42,7 @@ function getSpecificProvider(walletName: string): any {
       if (eth && eth.providers && Array.isArray(eth.providers)) {
         return eth.providers.find((p: any) => p.isMetaMask && !p.isTokenPocket && !p.isTrust && !p.isOneInch) || eth
       }
-      return eth && eth.isMetaMask ? eth : eth
+      return eth && eth.isMetaMask && !eth.isTokenPocket && !eth.isTrust && !eth.isOneInch ? eth : eth
     case "TokenPocket":
       return findProvider("isTokenPocket") || anyWindow.tokenpocket || eth
     case "Trust Wallet":
@@ -69,17 +69,13 @@ export function useWallet() {
           eth.request({ method: "eth_chainId" })
             .then((chainIdHex: string) => {
               const chainId = parseInt(chainIdHex, 16)
-              if (chainId === 56) {
-                setWallet(prev => ({
-                  ...prev,
-                  address: addr,
-                  shortAddress: shortenAddress(addr),
-                  chainId,
-                  isConnected: true,
-                }))
-              } else {
-                sessionStorage.removeItem("connected_wallet")
-              }
+              setWallet(prev => ({
+                ...prev,
+                address: addr,
+                shortAddress: shortenAddress(addr),
+                chainId,
+                isConnected: true,
+              }))
             })
             .catch(() => {
               sessionStorage.removeItem("connected_wallet")
@@ -130,21 +126,23 @@ export function useWallet() {
           request: (args: { method: string; params?: unknown[] }) => Promise<unknown>
         }
 
-        // 1. Check current Chain ID first
+        // 1. Request accounts first to ensure wallet is connected
+        const accounts = await eth.request({ method: "eth_requestAccounts" }) as string[]
+        const address = accounts[0]
+
+        // 2. Get current Chain ID
         const currentChainHex = await eth.request({ method: "eth_chainId" }) as string
-        const currentChainId = parseInt(currentChainHex, 16)
+        let chainId = parseInt(currentChainHex, 16)
 
-        // 2. Only switch if not already on BNB Chain (56)
-        if (currentChainId !== 56) {
+        // 3. Attempt to switch to BNB Chain (56) if not already on it
+        if (chainId !== 56) {
           const bnbChainIdHex = "0x38"
-          let chainSwitched = false
-
           try {
             await eth.request({
               method: "wallet_switchEthereumChain",
               params: [{ chainId: bnbChainIdHex }],
             })
-            chainSwitched = true
+            chainId = 56 // Successfully switched
           } catch (switchError: any) {
             // 4902 indicates that the chain is not added
             if (switchError.code === 4902) {
@@ -165,29 +163,21 @@ export function useWallet() {
                     },
                   ],
                 })
-                chainSwitched = true
+                chainId = 56 // Successfully added and switched
               } catch (addError) {
-                throw new Error("Failed to add BNB Smart Chain to wallet.")
+                console.warn("Failed to add BNB Smart Chain")
               }
             } else {
-              throw new Error("Please switch to BNB Smart Chain to connect.")
+              console.warn("Failed to switch to BNB Smart Chain")
             }
           }
-
-          if (!chainSwitched) {
-            throw new Error("Connection cancelled: BNB Smart Chain required.")
-          }
         }
-
-        // 3. Request accounts
-        const accounts = await eth.request({ method: "eth_requestAccounts" }) as string[]
-        const address = accounts[0]
 
         sessionStorage.setItem("connected_wallet", address)
         setWallet({
           address,
           shortAddress: shortenAddress(address),
-          chainId: 56,
+          chainId,
           isConnected: true,
           isConnecting: false,
           error: null,
