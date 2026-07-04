@@ -15,6 +15,7 @@ import { FlipFadeText } from "@/components/ui/flip-fade-text";
 import { PopButton } from "@/components/ui/pop-button";
 import ExpandableBentoGrid from "@/components/ui/expandable-bento-grid";
 import { KineticTextLoader } from "@/components/ui/kinetic-text-loader";
+import { Atom } from "react-loading-indicators";
 import { StackedLogos } from "@/components/ui/stacked-logos";
 import SocialFlipButton from "@/components/ui/social-flip-button";
 import { NotchNavbar } from "@/components/ui/notch-navbar";
@@ -534,7 +535,7 @@ export default function FocusTimerPage() {
             exit={{ opacity: 0 }}
             transition={{ duration: 0.5 }}
           >
-            <KineticTextLoader text="Loading" />
+            <Atom color="#32cd32" size="medium" text="" textColor="" />
             <p className="text-foreground/45 text-xs tracking-[0.4em] uppercase">Initializing Elite Force</p>
           </motion.div>
         )}
