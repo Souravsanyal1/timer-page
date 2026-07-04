@@ -22,6 +22,7 @@ import { NotchNavbar } from "@/components/ui/notch-navbar";
 import { GlowBorderCard } from "@/components/ui/glow-border-card";
 import { useTimer, formatTime } from "@/hooks/use-timer";
 import { WalletModal, WalletIcons } from "@/components/ui/wallet-modal";
+import { FaqAccordion } from "@/components/ui/faq-accordion";
 
 /* ─────────────── 6-Month Countdown (ends Jan 3, 2027 12:00 AM) ─────────────── */
 // Target: January 3, 2027 at 00:00:00 local time
@@ -1091,20 +1092,16 @@ export default function FocusTimerPage() {
                 </span>
               </h2>
             </motion.div>
-            <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.15 }} viewport={{ once: true }}
-              className="max-w-3xl mx-auto grid md:grid-cols-2 gap-6">
-              {[
-                { title: "Our Mission", desc: "Elite Force is a 6-month accountability challenge built to transform habits, boost productivity, and create a community of driven individuals who refuse to settle." },
-                { title: "Who We Build For", desc: "Builders, students, athletes, and dreamers — anyone who wants to lock in, track their progress, and grow alongside a community that holds each other accountable." },
-                { title: "Web3 Native", desc: "By integrating blockchain wallets, we ensure transparency, ownership, and verifiable progress milestones that no centralized platform can replicate." },
-                { title: "The 6-Month Window", desc: "Starting now and ending January 3, 2027 — 6 months of focused execution. Every session tracked. Every streak counted. Every milestone celebrated." },
-              ].map((item, i) => (
-                <motion.div key={item.title} initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: i * 0.1 }} viewport={{ once: true }}
-                  className="p-6 rounded-2xl border border-border" style={{ background: "var(--card, rgba(255,255,255,0.03))" }}>
-                  <h3 className="text-foreground font-bold text-base mb-2">{item.title}</h3>
-                  <p className="text-foreground/50 text-sm leading-relaxed">{item.desc}</p>
-                </motion.div>
-              ))}
+            <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.15 }} viewport={{ once: true }}>
+              <FaqAccordion
+                title=""
+                items={[
+                  { question: "Our Mission", answer: "Elite Force is a 6-month accountability challenge built to transform habits, boost productivity, and create a community of driven individuals who refuse to settle." },
+                  { question: "Who We Build For", answer: "Builders, students, athletes, and dreamers — anyone who wants to lock in, track their progress, and grow alongside a community that holds each other accountable." },
+                  { question: "Web3 Native", answer: "By integrating blockchain wallets, we ensure transparency, ownership, and verifiable progress milestones that no centralized platform can replicate." },
+                  { question: "The 6-Month Window", answer: "Starting now and ending January 3, 2027 — 6 months of focused execution. Every session tracked. Every streak counted. Every milestone celebrated." },
+                ]}
+              />
             </motion.div>
           </section>
 
