@@ -617,11 +617,11 @@ export default function FocusTimerPage() {
           {/* ══════ STATS ══════ */}
           <section id="stats" className="py-16">
             <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.7 }} viewport={{ once: true }} className="text-center mb-10">
-              <p className="text-[10px] font-semibold text-foreground/40 uppercase tracking-[0.35em] mb-3">Analytics</p>
+              <p className="text-[10px] font-semibold text-foreground/40 uppercase tracking-[0.35em] mb-3">Partnerships</p>
               <h2 className="text-3xl md:text-5xl font-black text-foreground" style={{ letterSpacing: "-0.03em" }}>
-                Your{" "}
+                Partnership{" "}
                 <span style={{ background: "linear-gradient(135deg,#FFB000,#FF8A00)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>
-                  Progress
+                  Sector
                 </span>
               </h2>
             </motion.div>
