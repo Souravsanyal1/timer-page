@@ -23,7 +23,6 @@ import { GlowBorderCard } from "@/components/ui/glow-border-card";
 import { useTimer, formatTime } from "@/hooks/use-timer";
 import { WalletModal, WalletIcons } from "@/components/ui/wallet-modal";
 import { FaqAccordion } from "@/components/ui/faq-accordion";
-import { StaggeredGrid } from "@/components/ui/staggered-grid";
 
 /* ─────────────── 6-Month Countdown (ends Jan 3, 2027 12:00 AM) ─────────────── */
 // Target: January 3, 2027 at 00:00:00 local time
@@ -416,6 +415,31 @@ function AnimatedComingSoon() {
   );
 }
 
+/* ─────────────── Contact Section Animation Variants ─────────────── */
+const contactGridVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.08,
+    }
+  }
+};
+
+const contactItemVariants = {
+  hidden: { opacity: 0, y: 24, scale: 0.95 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    scale: 1,
+    transition: {
+      type: "spring",
+      stiffness: 120,
+      damping: 16
+    }
+  }
+} as const;
+
 /* ═══════════════════════════════════════════════ MAIN PAGE ═══════════════════════════════════════════════ */
 export default function FocusTimerPage() {
   const [isLoading, setIsLoading] = useState(true);
@@ -597,48 +621,9 @@ export default function FocusTimerPage() {
                 </span>
               </h2>
             </motion.div>
-          </section>
-
-          {/* ══════ SCROLLING ANIMATION SECTION ══════ */}
-          <section className="py-20 border-t border-border overflow-hidden">
-            <StaggeredGrid
-              images={[
-                "https://images.unsplash.com/photo-1639762681485-074b7f938ba0?q=80&w=600&auto=format&fit=cover",
-                "https://images.unsplash.com/photo-1642104704074-907c0698cbd9?q=80&w=600&auto=format&fit=cover",
-                "https://images.unsplash.com/photo-1620641788421-7a1c342ea42e?q=80&w=600&auto=format&fit=cover",
-                "https://images.unsplash.com/photo-1634973357973-f2ed255753e1?q=80&w=600&auto=format&fit=cover",
-                "https://images.unsplash.com/photo-1644024227282-3532454f76cc?q=80&w=600&auto=format&fit=cover",
-                "https://images.unsplash.com/photo-1639762681057-408e52192e55?q=80&w=600&auto=format&fit=cover"
-              ]}
-              bentoItems={[
-                {
-                  id: 1,
-                  title: "EFC Staking",
-                  subtitle: "Lock to Commit",
-                  description: "Stake EFC to reinforce your daily goals and earn yields.",
-                  icon: <Brain className="w-5 h-5 text-orange-500" />,
-                  image: "https://images.unsplash.com/photo-1639762681485-074b7f938ba0?q=80&w=600&auto=format&fit=cover"
-                },
-                {
-                  id: 2,
-                  title: "On-Chain Milestones",
-                  subtitle: "Verifiable Streaks",
-                  description: "Your session history is permanently backed on the blockchain.",
-                  icon: <Target className="w-5 h-5 text-orange-500" />,
-                  image: "https://images.unsplash.com/photo-1642104704074-907c0698cbd9?q=80&w=600&auto=format&fit=cover"
-                },
-                {
-                  id: 3,
-                  title: "Governance",
-                  subtitle: "Holders Decide",
-                  description: "Use EFC voting power to shape focus epochs and reward structures.",
-                  icon: <Flame className="w-5 h-5 text-orange-500" />,
-                  image: "https://images.unsplash.com/photo-1620641788421-7a1c342ea42e?q=80&w=600&auto=format&fit=cover"
-                }
-              ]}
-              centerText="ELITE FORCE"
-              showFooter={false}
-            />
+            <div>
+              <ExpandableBentoGrid items={presets.slice(0, 3).map((p) => ({ ...p, icon: p.icon }))} />
+            </div>
           </section>
 
           {/* ══════ STATS ══════ */}
@@ -761,10 +746,10 @@ export default function FocusTimerPage() {
             {/* ── StackedLogos-style grid ── */}
             {/* Desktop & Tablet: StackedLogos-style grid */}
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.15 }}
-              viewport={{ once: true }}
+              variants={contactGridVariants}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, margin: "-100px" }}
               className="hidden sm:block relative w-full max-w-2xl mx-auto"
               onMouseMove={(e) => {
                 const rect = e.currentTarget.getBoundingClientRect();
@@ -804,7 +789,8 @@ export default function FocusTimerPage() {
                 }}
               >
                 {/* Telegram */}
-                <a
+                <motion.a
+                  variants={contactItemVariants}
                   href="https://t.me/YourTelegramUsername"
                   target="_blank"
                   rel="noopener noreferrer"
@@ -826,10 +812,11 @@ export default function FocusTimerPage() {
                     <p className="text-foreground font-bold text-sm">Telegram</p>
                     <p className="text-foreground/50 text-xs mt-0.5 group-hover:text-[#229ED9] transition-colors">@EliteForce ↗</p>
                   </div>
-                </a>
+                </motion.a>
 
                 {/* WhatsApp */}
-                <a
+                <motion.a
+                  variants={contactItemVariants}
                   href="https://wa.me/YourPhoneNumber"
                   target="_blank"
                   rel="noopener noreferrer"
@@ -851,10 +838,11 @@ export default function FocusTimerPage() {
                     <p className="text-foreground font-bold text-sm">WhatsApp</p>
                     <p className="text-foreground/50 text-xs mt-0.5 group-hover:text-[#25D366] transition-colors">Message us ↗</p>
                   </div>
-                </a>
+                </motion.a>
 
                 {/* YouTube */}
-                <a
+                <motion.a
+                  variants={contactItemVariants}
                   href="https://youtube.com/@YourYouTubeChannel"
                   target="_blank"
                   rel="noopener noreferrer"
@@ -876,10 +864,11 @@ export default function FocusTimerPage() {
                     <p className="text-foreground font-bold text-sm">YouTube</p>
                     <p className="text-foreground/50 text-xs mt-0.5 group-hover:text-[#FF0000] transition-colors">Subscribe ↗</p>
                   </div>
-                </a>
+                </motion.a>
 
                 {/* Twitter / X */}
-                <a
+                <motion.a
+                  variants={contactItemVariants}
                   href="https://twitter.com/EliteForce"
                   target="_blank"
                   rel="noopener noreferrer"
@@ -902,12 +891,18 @@ export default function FocusTimerPage() {
                     <p className="text-foreground font-bold text-sm">Twitter</p>
                     <p className="text-foreground/50 text-xs mt-0.5 group-hover:text-foreground dark:group-hover:text-white transition-colors">Follow us ↗</p>
                   </div>
-                </a>
+                </motion.a>
               </div>
             </motion.div>
 
             {/* Mobile/Phone: 2 by 2 Grid */}
-            <div className="block sm:hidden w-full max-w-md mx-auto grid grid-cols-2 gap-3 px-4 mt-6">
+            <motion.div
+              variants={contactGridVariants}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, margin: "-50px" }}
+              className="block sm:hidden w-full max-w-md mx-auto grid grid-cols-2 gap-3 px-4 mt-6"
+            >
               {[
                 {
                   name: "Telegram",
@@ -966,8 +961,9 @@ export default function FocusTimerPage() {
                   )
                 }
               ].map((w, idx) => (
-                <a
+                <motion.a
                   key={idx}
+                  variants={contactItemVariants}
                   href={w.href}
                   target="_blank"
                   rel="noopener noreferrer"
@@ -983,9 +979,9 @@ export default function FocusTimerPage() {
                     <p className="text-white font-bold text-xs leading-none truncate">{w.name}</p>
                     <p className="text-[10px] mt-1.5 leading-none transition-colors truncate" style={{ color: w.color }}>{w.label}</p>
                   </div>
-                </a>
+                </motion.a>
               ))}
-            </div>
+            </motion.div>
           </section>
 
 
