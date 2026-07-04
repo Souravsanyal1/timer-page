@@ -501,6 +501,7 @@ export default function FocusTimerPage() {
                   duration={2.5}
                   loop={true}
                   separator=" "
+                  style={{ fontSize: "clamp(3rem, 10vw, 7.5rem)" }}
                 >
                   COMING SOON
                 </FlipText>
