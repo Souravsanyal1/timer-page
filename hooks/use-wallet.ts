@@ -1,5 +1,5 @@
 "use client"
-import { useState, useEffect, useCallback } from "react"
+import React, { useState, useEffect, useCallback, createContext, useContext } from "react"
 
 export type WalletState = {
   address: string | null
@@ -54,7 +54,27 @@ function getSpecificProvider(walletName: string): any {
   }
 }
 
+// Shared Context for Wallet State
+const WalletContext = createContext<{
+  wallet: WalletState
+  connect: (walletType: string) => Promise<{ success: boolean; address?: string }>
+  disconnect: () => void
+} | null>(null)
+
+export function WalletProvider({ children }: { children: React.ReactNode }) {
+  const walletValue = useWalletState()
+  return React.createElement(WalletContext.Provider, { value: walletValue }, children)
+}
+
 export function useWallet() {
+  const context = useContext(WalletContext)
+  if (!context) {
+    throw new Error("useWallet must be used within a WalletProvider")
+  }
+  return context
+}
+
+function useWalletState() {
   const [wallet, setWallet] = useState<WalletState>(initialState)
 
   // Restore from sessionStorage
