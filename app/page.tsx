@@ -1193,7 +1193,7 @@ export default function FocusTimerPage() {
               <img
                 src="/ef-logo.png"
                 alt="Elite Force Logo"
-                className="w-16 h-16 object-contain"
+                className="w-20 h-20 object-contain"
               />
               <span className="text-foreground font-black text-base tracking-wide">Elite Force</span>
               <p className="text-foreground/30 text-xs">© 2026 Elite Force. All rights reserved.</p>
