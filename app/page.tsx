@@ -238,8 +238,8 @@ function HeroTimer({ remaining, total, status }: { remaining: number; total: num
 }
 
 /* ─────────────── Stat Card (StackedLogos-style) ─────────────── */
-function StatCard({ icon: Icon, label, value, unit, color, delay }: {
-  icon: React.ElementType; label: string; value: number; unit: string; color: string; delay: number;
+function StatCard({ logo, label, value, unit, color, delay }: {
+  logo: React.ReactNode; label: string; value: number; unit: string; color: string; delay: number;
 }) {
   const [displayed, setDisplayed] = useState(0);
   const ref = useRef<HTMLDivElement>(null);
@@ -275,13 +275,15 @@ function StatCard({ icon: Icon, label, value, unit, color, delay }: {
       onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.background = `${color}0d`; }}
       onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.background = "transparent"; }}
     >
-      {/* Top row: icon + live badge */}
+      {/* Top row: logo + live badge */}
       <div className="flex items-center justify-between">
         <div
-          className="w-10 h-10 rounded-2xl flex items-center justify-center transition-transform duration-300 group-hover:scale-110 group-hover:-translate-y-0.5"
+          className="w-10 h-10 rounded-2xl flex items-center justify-center transition-transform duration-300 group-hover:scale-110 group-hover:-translate-y-0.5 p-2 shrink-0"
           style={{ background: `${color}15`, border: `1px solid ${color}25` }}
         >
-          <Icon className="w-5 h-5" style={{ color }} />
+          <div className="w-5 h-5 flex items-center justify-center shrink-0 [&>svg]:h-full [&>svg]:w-auto [&>img]:h-full [&>img]:w-auto [&>img]:object-contain">
+            {logo}
+          </div>
         </div>
         <span
           className="text-[9px] font-bold uppercase tracking-[0.25em] px-2 py-0.5 rounded-full"
@@ -501,12 +503,54 @@ export default function FocusTimerPage() {
   ];
 
   const stats = [
-    { icon: Clock, label: "Today's Focus Time", value: todayFocusMinutes || 127, unit: "min", color: "#FFB000", delay: 0 },
-    { icon: Target, label: "Completed Sessions", value: sessionsCompleted + 8, unit: "sessions", color: "#FF8A00", delay: 0.1 },
-    { icon: Flame, label: "Current Streak", value: currentStreak + 12, unit: "days", color: "#FF6B00", delay: 0.2 },
-    { icon: BarChart3, label: "Weekly Progress", value: 84, unit: "%", color: "#ffffff", delay: 0.3 },
-    { icon: TrendingUp, label: "Average Session", value: 28, unit: "min", color: "#a0a0a0", delay: 0.4 },
-    { icon: Award, label: "Productivity Score", value: 92, unit: "pts", color: "#FFB000", delay: 0.5 },
+    {
+      logo: <img src="https://cdn.simpleicons.org/uniswap/ffffff" alt="Uniswap" />,
+      label: "Uniswap (UNI) TVL",
+      value: 4,
+      unit: "B+",
+      color: "#FF007A",
+      delay: 0
+    },
+    {
+      logo: <img src="https://cdn.simpleicons.org/chainlink/ffffff" alt="Chainlink" />,
+      label: "Chainlink (LINK) TVS",
+      value: 15,
+      unit: "B+",
+      color: "#375BD2",
+      delay: 0.1
+    },
+    {
+      logo: <img src="https://cdn.simpleicons.org/solana/ffffff" alt="Solana" />,
+      label: "Solana (SOL) Accounts",
+      value: 24,
+      unit: "M+",
+      color: "#14F195",
+      delay: 0.2
+    },
+    {
+      logo: <img src="https://cdn.simpleicons.org/aave/ffffff" alt="Aave" />,
+      label: "Aave (AAVE) Liquidity",
+      value: 11,
+      unit: "B+",
+      color: "#B6509E",
+      delay: 0.3
+    },
+    {
+      logo: <img src="https://cdn.simpleicons.org/maker/ffffff" alt="Maker" />,
+      label: "MakerDAO (MKR) Supply",
+      value: 5,
+      unit: "B+",
+      color: "#1AAB9B",
+      delay: 0.4
+    },
+    {
+      logo: <img src="https://cdn.simpleicons.org/thegraph/ffffff" alt="The Graph" />,
+      label: "The Graph (GRT) Queries",
+      value: 92,
+      unit: "B+",
+      color: "#6742F1",
+      delay: 0.5
+    },
   ];
 
   const flipItems = [
@@ -620,11 +664,11 @@ export default function FocusTimerPage() {
           {/* ══════ STATS ══════ */}
           <section id="partnerships" className="py-16">
             <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.7 }} viewport={{ once: true }} className="text-center mb-10">
-              <p className="text-[10px] font-semibold text-foreground/40 uppercase tracking-[0.35em] mb-3">Partnerships</p>
+              <p className="text-[10px] font-semibold text-foreground/40 uppercase tracking-[0.35em] mb-3">Ecosystem</p>
               <h2 className="text-3xl md:text-5xl font-black text-foreground" style={{ letterSpacing: "-0.03em" }}>
-                Partnership{" "}
+                Token{" "}
                 <span style={{ background: "linear-gradient(135deg,#FFB000,#FF8A00)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>
-                  Sector
+                  Ecosystem
                 </span>
               </h2>
             </motion.div>
