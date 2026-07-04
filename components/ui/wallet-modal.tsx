@@ -7,7 +7,7 @@ import { useWallet } from "@/hooks/use-wallet"
 const WalletIcons: Record<string, React.ReactNode> = {
   MetaMask: (
     // Official MetaMask Fox SVG downloaded from wikimedia
-    <img src="/wallets/metamask.svg" alt="MetaMask" className="w-9 h-9 object-contain" />
+    <img src="/wallets/metamask.svg" alt="" aria-hidden="true" className="w-9 h-9 object-contain" />
   ),
   TokenPocket: (
     // TokenPocket exact brand: blue gradient bg, wallet+arrow icon
