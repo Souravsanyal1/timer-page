@@ -1096,10 +1096,10 @@ export default function FocusTimerPage() {
               <FaqAccordion
                 title=""
                 items={[
-                  { question: "Our Mission", answer: "Elite Force is a 6-month accountability challenge built to transform habits, boost productivity, and create a community of driven individuals who refuse to settle." },
-                  { question: "Who We Build For", answer: "Builders, students, athletes, and dreamers — anyone who wants to lock in, track their progress, and grow alongside a community that holds each other accountable." },
-                  { question: "Web3 Native", answer: "By integrating blockchain wallets, we ensure transparency, ownership, and verifiable progress milestones that no centralized platform can replicate." },
-                  { question: "The 6-Month Window", answer: "Starting now and ending January 3, 2027 — 6 months of focused execution. Every session tracked. Every streak counted. Every milestone celebrated." },
+                  { question: "Our Mission", answer: "To establish the EFC token as the premier utility asset for decentralized accountability. By staking and backing your focus sessions with EFC, you turn personal discipline into verifiable on-chain value." },
+                  { question: "Who We Build For", answer: "Web3 builders, token holders, stakers, and dreamers — anyone who wants to lock in, back their progress with EFC token staking, and grow alongside a community of focused execution." },
+                  { question: "Web3 Native", answer: "Decentralized to the core. By integrating smart contracts and EFC tokens, we ensure transparency, proof of commitment, and yield-backed milestones that no centralized system can offer." },
+                  { question: "The 6-Month Window", answer: "Starting now and ending January 3, 2027 — a 6-month staking epoch of focused execution. Secure your EFC pools, track your focus streaks, and earn token distribution rewards." },
                 ]}
               />
             </motion.div>
