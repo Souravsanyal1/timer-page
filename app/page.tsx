@@ -873,47 +873,123 @@ export default function FocusTimerPage() {
               </h2>
               <p className="text-foreground/40 text-sm mt-3 max-w-sm mx-auto">Connect your preferred Web3 wallet to unlock all Elite Force features.</p>
             </motion.div>
-            <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.15 }} viewport={{ once: true }}
-              className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-3xl mx-auto">
-              {[
-                {
-                  id: "MetaMask",
-                  name: "MetaMask",
-                  color: "#F6851B",
-                  desc: "Browser extension",
-                },
-                {
-                  id: "Trust",
-                  name: "Trust Wallet",
-                  color: "#3375BB",
-                  desc: "Mobile wallet",
-                },
-                {
-                  id: "TokenPocket",
-                  name: "TokenPocket",
-                  color: "#2A8AF6",
-                  desc: "Multi-chain DeFi",
-                },
-                {
-                  id: "OneInch",
-                  name: "1inch Wallet",
-                  color: "#F5525B",
-                  desc: "Best swap rates",
-                }
-              ].map((w) => (
-                <button key={w.name} onClick={() => setWalletModalOpen(true)}
-                  className="group flex flex-col items-center gap-3 p-5 rounded-2xl border border-border hover:border-orange-500/40 transition-all duration-300 hover:scale-[1.03] cursor-pointer"
-                  style={{ background: "var(--card, rgba(255,255,255,0.03))" }}>
-                  <div className="w-12 h-12 rounded-2xl flex items-center justify-center p-1.5 shrink-0"
-                    style={{ background: w.color }}>
-                    {WalletIcons[w.id]}
-                  </div>
-                  <div className="text-center">
-                    <p className="text-foreground font-semibold text-sm">{w.name}</p>
-                    <p className="text-foreground/40 text-xs mt-0.5">{w.desc}</p>
-                  </div>
-                </button>
-              ))}
+            {/* ── StackedLogos-style grid ── */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.15 }}
+              viewport={{ once: true }}
+              className="relative w-full max-w-3xl mx-auto"
+              onMouseMove={(e) => {
+                const rect = e.currentTarget.getBoundingClientRect();
+                e.currentTarget.style.setProperty("--wx", `${e.clientX - rect.left}px`);
+                e.currentTarget.style.setProperty("--wy", `${e.clientY - rect.top}px`);
+              }}
+            >
+              {/* Mouse-following amber glow */}
+              <div
+                className="wallets-mouse-glow pointer-events-none absolute inset-0 z-10 opacity-0 transition-opacity duration-300"
+                style={{
+                  background: "radial-gradient(500px circle at var(--wx,50%) var(--wy,50%), rgba(255,138,0,0.08), transparent 70%)",
+                }}
+              />
+              {/* Border glow overlay */}
+              <div
+                className="wallets-border-glow pointer-events-none absolute inset-0 z-20"
+                style={{
+                  background: "radial-gradient(600px circle at var(--wx,50%) var(--wy,50%), rgba(255,138,0,0.9), transparent 40%)",
+                  maskImage: "repeating-linear-gradient(to right, transparent, transparent calc(25% - 1px), black calc(25% - 1px), black 25%), linear-gradient(to bottom, black 0, black 1px, transparent 1px, transparent calc(100% - 1px), black calc(100% - 1px), black 100%)",
+                  WebkitMaskImage: "repeating-linear-gradient(to right, transparent, transparent calc(25% - 1px), black calc(25% - 1px), black 25%), linear-gradient(to bottom, black 0, black 1px, transparent 1px, transparent calc(100% - 1px), black calc(100% - 1px), black 100%)",
+                  maskComposite: "add",
+                  WebkitMaskComposite: "source-over",
+                  opacity: 0,
+                  transition: "opacity 0.3s",
+                }}
+              />
+
+              <div className="grid grid-cols-2 lg:grid-cols-4 w-full relative z-30"
+                style={{ borderTop: "1px solid var(--border)", borderLeft: "1px solid var(--border)" }}
+                onMouseEnter={(e) => {
+                  const parent = e.currentTarget.parentElement;
+                  if (parent) {
+                    const glow1 = parent.querySelector(".wallets-mouse-glow") as HTMLElement;
+                    const glow2 = parent.querySelector(".wallets-border-glow") as HTMLElement;
+                    if (glow1) glow1.style.opacity = "1";
+                    if (glow2) glow2.style.opacity = "1";
+                  }
+                }}
+                onMouseLeave={(e) => {
+                  const parent = e.currentTarget.parentElement;
+                  if (parent) {
+                    const glow1 = parent.querySelector(".wallets-mouse-glow") as HTMLElement;
+                    const glow2 = parent.querySelector(".wallets-border-glow") as HTMLElement;
+                    if (glow1) glow1.style.opacity = "0";
+                    if (glow2) glow2.style.opacity = "0";
+                  }
+                }}
+              >
+                {[
+                  {
+                    id: "MetaMask",
+                    name: "MetaMask",
+                    color: "#F6851B",
+                    desc: "Browser extension",
+                  },
+                  {
+                    id: "Trust",
+                    name: "Trust Wallet",
+                    color: "#3375BB",
+                    desc: "Mobile wallet",
+                  },
+                  {
+                    id: "TokenPocket",
+                    name: "TokenPocket",
+                    color: "#2A8AF6",
+                    desc: "Multi-chain DeFi",
+                  },
+                  {
+                    id: "OneInch",
+                    name: "1inch Wallet",
+                    color: "#F5525B",
+                    desc: "Best swap rates",
+                  }
+                ].map((w) => (
+                  <button
+                    key={w.name}
+                    onClick={() => setWalletModalOpen(true)}
+                    className="group relative flex flex-col items-center justify-center gap-4 py-12 px-6 transition-all duration-300 cursor-pointer"
+                    style={{
+                      borderRight: "1px solid var(--border)",
+                      borderBottom: "1px solid var(--border)",
+                    }}
+                    onMouseEnter={(e) => {
+                      (e.currentTarget as HTMLElement).style.background = "rgba(255,138,0,0.04)";
+                    }}
+                    onMouseLeave={(e) => {
+                      (e.currentTarget as HTMLElement).style.background = "transparent";
+                    }}
+                  >
+                    {/* Wallet Logo */}
+                    <div className="w-14 h-14 rounded-2xl flex items-center justify-center p-2.5 transition-all duration-300 group-hover:scale-110 group-hover:-translate-y-1 shadow-lg shadow-black/10"
+                      style={{ background: w.color }}>
+                      <div className="w-9 h-9 flex items-center justify-center shrink-0 [&>svg]:h-full [&>svg]:w-auto [&>img]:h-full [&>img]:w-auto [&>img]:object-contain text-white">
+                        {WalletIcons[w.id]}
+                      </div>
+                    </div>
+                    {/* Name + Description */}
+                    <div className="text-center">
+                      <p className="text-foreground font-bold text-sm tracking-wide transition-colors group-hover:text-white">{w.name}</p>
+                      <p className="text-foreground/40 text-xs mt-1 transition-colors group-hover:text-foreground/60">{w.desc}</p>
+                    </div>
+
+                    {/* Accent bottom bar */}
+                    <div
+                      className="absolute bottom-0 left-6 right-6 h-px rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                      style={{ background: `linear-gradient(90deg, transparent, ${w.color}, transparent)` }}
+                    />
+                  </button>
+                ))}
+              </div>
             </motion.div>
           </section>
 
