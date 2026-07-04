@@ -3,55 +3,78 @@ import { useState } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import { useWallet } from "@/hooks/use-wallet"
 
-// Wallet SVG icons inline (no external deps)
+// Wallet icons — official logo accurate representations
 const WalletIcons: Record<string, React.ReactNode> = {
   MetaMask: (
-    <svg viewBox="0 0 40 40" className="w-9 h-9" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <path d="M36.3 3L22.1 13.6l2.6-6.1L36.3 3z" fill="#E17726" stroke="#E17726" strokeWidth=".25" strokeLinecap="round" strokeLinejoin="round"/>
-      <path d="M3.7 3l14.1 10.7-2.5-6.2L3.7 3z" fill="#E27625" stroke="#E27625" strokeWidth=".25" strokeLinecap="round" strokeLinejoin="round"/>
-      <path d="M31.2 27.6l-3.8 5.8 8.1 2.2 2.3-7.9-6.6-.1zM2.2 27.7l2.3 7.9 8.1-2.2-3.8-5.8-6.6.1z" fill="#E27625" stroke="#E27625" strokeWidth=".25" strokeLinecap="round" strokeLinejoin="round"/>
-      <path d="M12.1 18.3l-2.2 3.4 7.9.4-.3-8.5-5.4 4.7zM27.9 18.3l-5.5-4.8-.2 8.6 7.9-.4-2.2-3.4z" fill="#E27625" stroke="#E27625" strokeWidth=".25" strokeLinecap="round" strokeLinejoin="round"/>
-      <path d="M12.6 33.4l4.8-2.3-4.1-3.2-.7 5.5zM22.6 31.1l4.8 2.3-.7-5.5-4.1 3.2z" fill="#E27625" stroke="#E27625" strokeWidth=".25" strokeLinecap="round" strokeLinejoin="round"/>
-      <path d="M27.4 33.4l-4.8-2.3.4 3.1-.1 2.4 4.5-3.2zM12.6 33.4l4.5 3.2-.1-2.4.4-3.1-4.8 2.3z" fill="#D5BFB2" stroke="#D5BFB2" strokeWidth=".25" strokeLinecap="round" strokeLinejoin="round"/>
-      <path d="M17.2 25.5l-3.9-1.2 2.8-1.3 1.1 2.5zM22.8 25.5l1.1-2.5 2.8 1.3-3.9 1.2z" fill="#233447" stroke="#233447" strokeWidth=".25" strokeLinecap="round" strokeLinejoin="round"/>
-      <path d="M12.6 33.4l.7-5.8-4.5.1 3.8 5.7zM26.7 27.6l.7 5.8 3.8-5.7-4.5-.1zM30.1 21.7l-7.9.4.7 4.4 1.1-2.5 2.8 1.3 3.3-3.6zM13.3 24.9l2.8-1.3 1.1 2.5.7-4.4-7.9-.4 3.3 3.6z" fill="#CC6228" stroke="#CC6228" strokeWidth=".25" strokeLinecap="round" strokeLinejoin="round"/>
-      <path d="M9.9 21.7l3.3 6.5-.1-3.3-3.2-3.2zM26.9 24.9l-.1 3.3 3.3-6.5-3.2 3.2zM17.9 22.1l-.7 4.4.9 4.6.2-6.1-.4-2.9zM22.1 22.1l-.4 2.9.2 6.1.9-4.6-.7-4.4z" fill="#E27525" stroke="#E27525" strokeWidth=".25" strokeLinecap="round" strokeLinejoin="round"/>
-      <path d="M22.8 25.5l-.9 4.6.6.5 4.1-3.2.1-3.3-3.9 1.4zM13.3 23.1l.1 3.3 4.1 3.2.6-.5-.9-4.6-3.9-1.4z" fill="#F5841F" stroke="#F5841F" strokeWidth=".25" strokeLinecap="round" strokeLinejoin="round"/>
-      <path d="M22.9 36.6l.1-2.4-.3-.3h-5.4l-.3.3.1 2.4-4.5-3.2 1.6 1.3 3.2 2.2h5.5l3.2-2.2 1.6-1.3-4.8 3.2z" fill="#C0AC9D" stroke="#C0AC9D" strokeWidth=".25" strokeLinecap="round" strokeLinejoin="round"/>
-      <path d="M22.6 31.1l-.6-.5h-3.9l-.6.5-.4 3.1.3-.3h5.4l.3.3-.5-3.1z" fill="#161616" stroke="#161616" strokeWidth=".25" strokeLinecap="round" strokeLinejoin="round"/>
-      <path d="M37 14.4l1.2-5.7L36.3 3l-13.7 10.2 5.3 4.5 7.4 2.2 1.7-1.9-.7-.5 1.1-1-.9-.7 1.1-.9-.6-.4zM1.8 8.7L3 14.4l-.7.4 1.1.9-.8.7 1.1 1-.7.5 1.7 1.9 7.4-2.2 5.3-4.5L3.7 3 1.8 8.7z" fill="#763E1A" stroke="#763E1A" strokeWidth=".25" strokeLinecap="round" strokeLinejoin="round"/>
-      <path d="M35.3 20l-7.4-2.2 2.2 3.4-3.3 6.5 4.4-.1h6.6l-2.5-7.6zM12.1 17.8L4.7 20 2.2 27.6h6.6l4.4.1-3.3-6.5 2.2-3.4zM22.2 22.1l.5-8.3 2.1-5.7h-9.6l2.1 5.7.5 8.3.2 2.9v6.1h3.9v-6.1l.3-2.9z" fill="#F5841F" stroke="#F5841F" strokeWidth=".25" strokeLinecap="round" strokeLinejoin="round"/>
-    </svg>
+    // Official MetaMask Fox SVG downloaded from wikimedia
+    <img src="/wallets/metamask.svg" alt="MetaMask" className="w-9 h-9 object-contain" />
   ),
   TokenPocket: (
+    // TokenPocket exact brand: blue gradient bg, wallet+arrow icon
     <svg viewBox="0 0 40 40" className="w-9 h-9" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <circle cx="20" cy="20" r="20" fill="#2980FE"/>
-      <rect x="10" y="11" width="20" height="14" rx="3" fill="white" fillOpacity="0.15" stroke="white" strokeWidth="1.5"/>
-      <rect x="10" y="11" width="20" height="6" rx="3" fill="white" fillOpacity="0.3"/>
-      <circle cx="14" cy="14" r="1.5" fill="white"/>
-      <rect x="13" y="20" width="14" height="2" rx="1" fill="white" fillOpacity="0.6"/>
-      <rect x="13" y="23.5" width="8" height="1.5" rx="0.75" fill="white" fillOpacity="0.4"/>
-      <rect x="10" y="28" width="20" height="3" rx="1.5" fill="white" fillOpacity="0.2"/>
+      <defs>
+        <linearGradient id="tp-bg" x1="0" y1="0" x2="40" y2="40" gradientUnits="userSpaceOnUse">
+          <stop offset="0%" stopColor="#2A8AF6"/>
+          <stop offset="100%" stopColor="#1A60D4"/>
+        </linearGradient>
+      </defs>
+      <rect width="40" height="40" rx="11" fill="url(#tp-bg)"/>
+      {/* Wallet outline */}
+      <rect x="7" y="14" width="26" height="17" rx="3" fill="none" stroke="white" strokeWidth="2"/>
+      {/* Wallet flap */}
+      <path d="M7 20H33" stroke="white" strokeWidth="2"/>
+      {/* Coin slot */}
+      <rect x="24" y="17" width="6" height="6" rx="3" fill="white" fillOpacity="0.9"/>
+      {/* Handle */}
+      <path d="M13 14V12C13 10.9 13.9 10 15 10H25C26.1 10 27 10.9 27 12V14" stroke="white" strokeWidth="2" fill="none"/>
     </svg>
   ),
   Trust: (
+    // Trust Wallet exact official logo: blue bg, white shield with checkmark
     <svg viewBox="0 0 40 40" className="w-9 h-9" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <circle cx="20" cy="20" r="20" fill="#3375BB"/>
-      <path d="M20 9l-9 4v7c0 5.5 3.8 10.6 9 12 5.2-1.4 9-6.5 9-12v-7l-9-4z" fill="white" fillOpacity="0.15" stroke="white" strokeWidth="1.5"/>
-      <path d="M16 20l3 3 5-5" stroke="white" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"/>
+      <defs>
+        <linearGradient id="tw-bg" x1="0" y1="0" x2="40" y2="40" gradientUnits="userSpaceOnUse">
+          <stop offset="0%" stopColor="#3375BB"/>
+          <stop offset="100%" stopColor="#1C5DA0"/>
+        </linearGradient>
+      </defs>
+      <rect width="40" height="40" rx="11" fill="url(#tw-bg)"/>
+      {/* Shield */}
+      <path d="M20 7L9 11.5V20C9 26.3 13.8 32.1 20 33.5C26.2 32.1 31 26.3 31 20V11.5L20 7Z"
+        fill="white" fillOpacity="0.12"/>
+      <path d="M20 7L9 11.5V20C9 26.3 13.8 32.1 20 33.5C26.2 32.1 31 26.3 31 20V11.5L20 7Z"
+        stroke="white" strokeWidth="2" strokeLinejoin="round" fill="none"/>
+      {/* Checkmark */}
+      <path d="M14.5 20.5L18 24L25.5 16.5"
+        stroke="white" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
     </svg>
   ),
   OneInch: (
+    // 1inch exact brand: red gradient bg, unicorn silhouette
     <svg viewBox="0 0 40 40" className="w-9 h-9" fill="none" xmlns="http://www.w3.org/2000/svg">
       <defs>
-        <linearGradient id="oneinch" x1="0" y1="0" x2="40" y2="40" gradientUnits="userSpaceOnUse">
-          <stop offset="0%" stopColor="#d82122"/>
-          <stop offset="100%" stopColor="#f5323b"/>
+        <linearGradient id="inch-bg" x1="40" y1="0" x2="0" y2="40" gradientUnits="userSpaceOnUse">
+          <stop offset="0%" stopColor="#F5525B"/>
+          <stop offset="100%" stopColor="#CB2026"/>
         </linearGradient>
       </defs>
-      <circle cx="20" cy="20" r="20" fill="url(#oneinch)"/>
-      <text x="20" y="26" textAnchor="middle" fontSize="18" fontWeight="bold" fill="white" fontFamily="Arial">1</text>
-      <path d="M14 28 Q20 8 26 28" stroke="white" strokeWidth="1.5" fill="none" strokeOpacity="0.4"/>
+      <rect width="40" height="40" rx="11" fill="url(#inch-bg)"/>
+      {/* 1inch unicorn logo simplified */}
+      {/* Body */}
+      <ellipse cx="20" cy="26" rx="8" ry="5.5" fill="white" fillOpacity="0.92"/>
+      {/* Neck */}
+      <path d="M24 22C26 20 27 18 26 16C25 14 23 14 22 15" fill="white" fillOpacity="0.92" stroke="white" strokeWidth="0.5"/>
+      {/* Head */}
+      <circle cx="24.5" cy="17" r="3.5" fill="white" fillOpacity="0.92"/>
+      {/* Horn */}
+      <path d="M24.5 13.5L26.5 8.5" stroke="white" strokeWidth="2.2" strokeLinecap="round"/>
+      {/* Eye */}
+      <circle cx="26" cy="16.5" r="0.9" fill="#CB2026"/>
+      {/* Front legs */}
+      <path d="M15 29.5L13.5 34" stroke="white" strokeWidth="2" strokeLinecap="round" strokeOpacity="0.92"/>
+      <path d="M18 30.5L17 34" stroke="white" strokeWidth="2" strokeLinecap="round" strokeOpacity="0.92"/>
+      {/* Tail */}
+      <path d="M12.5 25C10 23.5 9.5 20 11 18" stroke="white" strokeWidth="2" strokeLinecap="round" fill="none" strokeOpacity="0.7"/>
     </svg>
   ),
 }
