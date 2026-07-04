@@ -55,7 +55,7 @@ export function NotchNavbar({ className, ...props }: React.HTMLAttributes<HTMLEl
     ],
     right: [
       { label: "Contact Us", href: "#contact" },
-      { label: "About", href: "#about" }
+      { label: "About", href: "#about-us" }
     ]
   }
 
