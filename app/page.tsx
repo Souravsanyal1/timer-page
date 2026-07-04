@@ -1190,7 +1190,11 @@ export default function FocusTimerPage() {
           {/* ══════ FOOTER ══════ */}
           <footer className="py-8 border-t border-border">
             <div className="flex flex-col items-center justify-center gap-3">
-              <LogoIcon size={48} />
+              <img
+                src="/ef-logo.png"
+                alt="Elite Force Logo"
+                className="w-16 h-16 object-contain"
+              />
               <span className="text-foreground font-black text-base tracking-wide">Elite Force</span>
               <p className="text-foreground/30 text-xs">© 2026 Elite Force. All rights reserved.</p>
             </div>
