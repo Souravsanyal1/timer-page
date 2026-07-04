@@ -238,71 +238,28 @@ function HeroTimer({ remaining, total, status }: { remaining: number; total: num
 }
 
 /* ─────────────── Stat Card (StackedLogos-style) ─────────────── */
-function StatCard({ logo, label, value, unit, color, delay }: {
-  logo: React.ReactNode; label: string; value: number; unit: string; color: string; delay: number;
+function StatCard({ logo, color, delay }: {
+  logo: React.ReactNode; color: string; delay: number;
 }) {
-  const [displayed, setDisplayed] = useState(0);
-  const ref = useRef<HTMLDivElement>(null);
-  const [visible, setVisible] = useState(false);
-
-  useEffect(() => {
-    const obs = new IntersectionObserver(([e]) => { if (e.isIntersecting) setVisible(true); }, { threshold: 0.3 });
-    if (ref.current) obs.observe(ref.current);
-    return () => obs.disconnect();
-  }, []);
-
-  useEffect(() => {
-    if (!visible) return;
-    let start = 0;
-    const step = value / 60;
-    const timer = setInterval(() => {
-      start += step;
-      if (start >= value) { setDisplayed(value); clearInterval(timer); }
-      else setDisplayed(Math.round(start));
-    }, 16);
-    return () => clearInterval(timer);
-  }, [visible, value]);
-
   return (
     <motion.div
-      ref={ref}
       initial={{ opacity: 0, y: 30 }}
       whileInView={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5, delay, ease: [0.22, 1, 0.36, 1] }}
       viewport={{ once: true }}
-      className="group relative flex flex-col gap-4 p-6 cursor-pointer transition-all duration-300"
+      className="group relative flex items-center justify-center p-12 cursor-pointer transition-all duration-300"
       style={{ borderRight: "1px solid var(--border)", borderBottom: "1px solid var(--border)" }}
       onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.background = `${color}0d`; }}
       onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.background = "transparent"; }}
     >
-      {/* Top row: logo + live badge */}
-      <div className="flex items-center justify-between">
-        <div
-          className="w-10 h-10 rounded-2xl flex items-center justify-center transition-transform duration-300 group-hover:scale-110 group-hover:-translate-y-0.5 p-2 shrink-0"
-          style={{ background: `${color}15`, border: `1px solid ${color}25` }}
-        >
-          <div className="w-5 h-5 flex items-center justify-center shrink-0 [&>svg]:h-full [&>svg]:w-auto [&>img]:h-full [&>img]:w-auto [&>img]:object-contain">
-            {logo}
-          </div>
+      <div
+        className="w-16 h-16 rounded-2xl flex items-center justify-center transition-all duration-300 group-hover:scale-110 group-hover:-translate-y-1 p-3.5 shrink-0 shadow-lg shadow-black/5"
+        style={{ background: `${color}15`, border: `1px solid ${color}25` }}
+      >
+        <div className="w-9 h-9 flex items-center justify-center shrink-0 [&>svg]:h-full [&>svg]:w-auto [&>img]:h-full [&>img]:w-auto [&>img]:object-contain">
+          {logo}
         </div>
-        <span
-          className="text-[9px] font-bold uppercase tracking-[0.25em] px-2 py-0.5 rounded-full"
-          style={{ background: `${color}18`, color, border: `1px solid ${color}30` }}
-        >
-          Live
-        </span>
       </div>
-
-      {/* Number + unit */}
-      <div className="flex items-end gap-1.5">
-        <span className="text-4xl font-black tabular-nums leading-none" style={{ color }}>
-          {displayed}
-        </span>
-        <span className="text-sm text-foreground/45 mb-1 font-medium">{unit}</span>
-      </div>
-
-      {/* Label */}
-      <p className="text-xs text-foreground/50 font-semibold uppercase tracking-[0.15em]">{label}</p>
 
       {/* Accent bottom bar */}
       <div className="absolute bottom-0 left-6 right-6 h-px rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"
@@ -505,49 +462,31 @@ export default function FocusTimerPage() {
   const stats = [
     {
       logo: <img src="https://cdn.simpleicons.org/uniswap/ffffff" alt="Uniswap" />,
-      label: "Uniswap (UNI) TVL",
-      value: 4,
-      unit: "B+",
       color: "#FF007A",
       delay: 0
     },
     {
       logo: <img src="https://cdn.simpleicons.org/chainlink/ffffff" alt="Chainlink" />,
-      label: "Chainlink (LINK) TVS",
-      value: 15,
-      unit: "B+",
       color: "#375BD2",
       delay: 0.1
     },
     {
       logo: <img src="https://cdn.simpleicons.org/solana/ffffff" alt="Solana" />,
-      label: "Solana (SOL) Accounts",
-      value: 24,
-      unit: "M+",
       color: "#14F195",
       delay: 0.2
     },
     {
       logo: <img src="https://cdn.simpleicons.org/aave/ffffff" alt="Aave" />,
-      label: "Aave (AAVE) Liquidity",
-      value: 11,
-      unit: "B+",
       color: "#B6509E",
       delay: 0.3
     },
     {
       logo: <img src="https://cdn.simpleicons.org/maker/ffffff" alt="Maker" />,
-      label: "MakerDAO (MKR) Supply",
-      value: 5,
-      unit: "B+",
       color: "#1AAB9B",
       delay: 0.4
     },
     {
       logo: <img src="https://cdn.simpleicons.org/thegraph/ffffff" alt="The Graph" />,
-      label: "The Graph (GRT) Queries",
-      value: 92,
-      unit: "B+",
       color: "#6742F1",
       delay: 0.5
     },
@@ -716,7 +655,9 @@ export default function FocusTimerPage() {
                   }
                 }}
               >
-                {stats.map((stat) => <StatCard key={stat.label} {...stat} />)}
+                {stats.map((stat, idx) => (
+                  <StatCard key={idx} {...stat} />
+                ))}
               </div>
             </div>
           </section>
