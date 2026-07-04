@@ -1137,18 +1137,15 @@ export default function FocusTimerPage() {
                   Service
                 </span>
               </h2>
-              {[
-                { title: "Acceptance", body: "By using Elite Force, you agree to these terms. The platform is provided as-is for accountability and productivity tracking purposes only." },
-                { title: "Wallet Responsibility", body: "You are solely responsible for your wallet and private keys. Elite Force never has access to your funds. Always verify contract addresses before any on-chain actions." },
-                { title: "Community Standards", body: "Users are expected to engage respectfully across all community channels (Telegram, WhatsApp, Discord). Harassment, spam, or abuse will result in removal." },
-                { title: "Limitation of Liability", body: "Elite Force is not liable for any losses, missed goals, or technical issues. Session data is stored locally and may be reset. Always keep personal records." },
-              ].map((item, i) => (
-                <motion.div key={item.title} initial={{ opacity: 0, x: 16 }} whileInView={{ opacity: 1, x: 0 }} transition={{ duration: 0.5, delay: i * 0.08 }} viewport={{ once: true }}
-                  className="mb-6 p-5 rounded-xl border border-border" style={{ background: "var(--card, rgba(255,255,255,0.03))" }}>
-                  <h3 className="text-foreground font-semibold text-sm mb-1.5">{item.title}</h3>
-                  <p className="text-foreground/45 text-sm leading-relaxed">{item.body}</p>
-                </motion.div>
-              ))}
+              <FaqAccordion
+                title=""
+                items={[
+                  { question: "Acceptance", answer: "By using Elite Force, you agree to these terms. The platform is provided as-is for accountability and productivity tracking purposes only." },
+                  { question: "Wallet Responsibility", answer: "You are solely responsible for your wallet and private keys. Elite Force never has access to your funds. Always verify contract addresses before any on-chain actions." },
+                  { question: "Community Standards", answer: "Users are expected to engage respectfully across all community channels (Telegram, WhatsApp, Discord). Harassment, spam, or abuse will result in removal." },
+                  { question: "Limitation of Liability", answer: "Elite Force is not liable for any losses, missed goals, or technical issues. Session data is stored locally and may be reset. Always keep personal records." },
+                ]}
+              />
             </motion.div>
           </section>
 
