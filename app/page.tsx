@@ -565,19 +565,6 @@ export default function FocusTimerPage() {
             </div>
           </section>
 
-          {/* ══════ SOCIAL ══════ */}
-          <section className="py-16 flex flex-col items-center gap-6">
-            <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }} viewport={{ once: true }} className="text-center">
-              <p className="text-[10px] font-semibold text-foreground/40 uppercase tracking-[0.35em] mb-2">Share & Toggle</p>
-              <h3 className="text-xl font-bold text-foreground/50">Hover to reveal actions</h3>
-            </motion.div>
-            <motion.div initial={{ opacity: 0, scale: 0.9 }} whileInView={{ opacity: 1, scale: 1 }} transition={{ duration: 0.6 }} viewport={{ once: true }}>
-              <SocialFlipButton items={flipItems}
-                frontClassName="bg-card text-foreground border border-border"
-                backClassName="bg-[#FF8A00] text-black" />
-            </motion.div>
-          </section>
-
           {/* ══════ INTEGRATIONS ══════ */}
           <section className="py-16">
             <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.7 }} viewport={{ once: true }} className="text-center mb-10">
