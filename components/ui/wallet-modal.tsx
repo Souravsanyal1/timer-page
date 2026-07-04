@@ -130,32 +130,26 @@ export function WalletModal({ open, onClose }: WalletModalProps) {
     const found = new Set<string>()
 
     if (eth) {
+      // If window.ethereum exists, MetaMask or compatible browser wallet is present
+      found.add("MetaMask")
+
+      if (eth.isTokenPocket) found.add("TokenPocket")
+      if (eth.isTrust || eth.isTrustWallet) found.add("Trust")
+      if (eth.isOneInch) found.add("OneInch")
+      
+      // Check providers array if multiple wallets are active
       if (eth.providers && Array.isArray(eth.providers)) {
-        if (eth.providers.some((p: any) => p.isMetaMask && !p.isTokenPocket && !p.isTrust && !p.isOneInch)) found.add("MetaMask")
+        if (eth.providers.some((p: any) => p.isMetaMask)) found.add("MetaMask")
         if (eth.providers.some((p: any) => p.isTokenPocket)) found.add("TokenPocket")
         if (eth.providers.some((p: any) => p.isTrust || p.isTrustWallet)) found.add("Trust")
         if (eth.providers.some((p: any) => p.isOneInch)) found.add("OneInch")
-      } else {
-        if (eth.isTokenPocket) found.add("TokenPocket")
-        if (eth.isTrust || eth.isTrustWallet) found.add("Trust")
-        if (eth.isOneInch) found.add("OneInch")
-        
-        // MetaMask is true if flag is present and not overridden by others
-        if (eth.isMetaMask && !eth.isTokenPocket && !eth.isTrust && !eth.isOneInch) {
-          found.add("MetaMask")
-        }
       }
     }
 
-    // Direct window objects
+    // Direct window objects injected by wallets
     if (anyWindow.tokenpocket) found.add("TokenPocket")
     if (anyWindow.trustWallet) found.add("Trust")
     if (anyWindow.ethereum?.isOneInch) found.add("OneInch")
-
-    // Fallback: If ethereum exists and nothing else is found, assume MetaMask is present
-    if (found.size === 0 && eth) {
-      found.add("MetaMask")
-    }
 
     setDetected(found)
   }, [open])
