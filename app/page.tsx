@@ -565,21 +565,6 @@ export default function FocusTimerPage() {
             </div>
           </section>
 
-          {/* ══════ INTEGRATIONS ══════ */}
-          <section className="py-16">
-            <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.7 }} viewport={{ once: true }} className="text-center mb-10">
-              <p className="text-[10px] font-semibold text-foreground/40 uppercase tracking-[0.35em] mb-3">Integrations</p>
-              <h2 className="text-3xl md:text-5xl font-black text-foreground" style={{ letterSpacing: "-0.03em" }}>
-                Works With{" "}
-                <span style={{ background: "linear-gradient(135deg,#FFB000,#FF8A00)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>
-                  Your Stack
-                </span>
-              </h2>
-            </motion.div>
-            <div className="flex justify-center">
-              <StackedLogos logoGroups={integrationLogos} duration={20} logoWidth="130px" className="dark" />
-            </div>
-          </section>
 
           {/* ══════ CONTACT US ══════ */}
           <section className="py-20 flex flex-col items-center gap-10">
