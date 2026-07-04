@@ -860,26 +860,34 @@ export default function FocusTimerPage() {
           </section>
 
 
+
+          {/* ══════ BODY LINKS ══════ */}
+          <div className="flex flex-wrap justify-center gap-8 py-10 border-t border-border mt-8">
+            <button
+              onClick={() => setWalletModalOpen(true)}
+              className="text-xs text-foreground/45 tracking-wider uppercase hover:text-foreground/75 transition-colors cursor-pointer"
+            >
+              Supported Wallets
+            </button>
+            <a href="#about" className="text-xs text-foreground/45 tracking-wider uppercase hover:text-foreground/75 transition-colors">
+              About Us
+            </a>
+            <a href="#" className="text-xs text-foreground/45 tracking-wider uppercase hover:text-foreground/75 transition-colors">
+              Privacy
+            </a>
+            <a href="#" className="text-xs text-foreground/45 tracking-wider uppercase hover:text-foreground/75 transition-colors">
+              Terms
+            </a>
+          </div>
+
           {/* ══════ FOOTER ══════ */}
-          <footer className="py-10 border-t border-border mt-8">
-            <div className="flex flex-col md:flex-row items-center justify-between gap-6">
-              <div className="flex items-center gap-2">
-                <div className="w-6 h-6 rounded-full flex items-center justify-center border border-orange-500/20"
-                  style={{ background: "rgba(255,138,0,0.08)" }}>
-                  <Timer className="w-3 h-3 text-orange-400" />
-                </div>
-                <span className="text-foreground font-bold text-sm">Elite Force</span>
-                <span className="text-foreground/25 text-sm">— 6 months. Stay locked in.</span>
+          <footer className="py-6 border-t border-border">
+            <div className="flex items-center justify-center gap-2">
+              <div className="w-6 h-6 rounded-full flex items-center justify-center border border-orange-500/20"
+                style={{ background: "rgba(255,138,0,0.08)" }}>
+                <Timer className="w-3 h-3 text-orange-400" />
               </div>
-              <div className="flex gap-6 text-xs text-foreground/45 tracking-wider uppercase items-center">
-                <a href="#about" className="hover:text-foreground/75 transition-colors">About Us</a>
-                <button onClick={() => setWalletModalOpen(true)} className="hover:text-foreground/75 transition-colors cursor-pointer uppercase text-xs tracking-wider">
-                  Supported Wallets
-                </button>
-                <a href="#" className="hover:text-foreground/75 transition-colors">Privacy</a>
-                <a href="#" className="hover:text-foreground/75 transition-colors">Terms</a>
-              </div>
-              <p className="text-xs text-foreground/30">Deadline: Jan 3, 2027 · 12:00 AM</p>
+              <span className="text-foreground font-bold text-sm">Elite Force</span>
             </div>
           </footer>
         </div>
