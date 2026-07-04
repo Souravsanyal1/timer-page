@@ -23,20 +23,35 @@ function shortenAddress(addr: string) {
   return addr.slice(0, 6) + "..." + addr.slice(-4)
 }
 
-// Check which provider is available
-function detectProvider(): { provider: unknown; name: string } | null {
+// Helper to get specific provider based on wallet clicked
+function getSpecificProvider(walletName: string): any {
   if (typeof window === "undefined") return null
-  const eth = (window as unknown as { ethereum?: Record<string, unknown> }).ethereum
-  if (!eth) return null
+  const anyWindow = window as any
+  const eth = anyWindow.ethereum
+  
+  const findProvider = (flag: string) => {
+    if (eth && eth.providers && Array.isArray(eth.providers)) {
+      return eth.providers.find((p: any) => p[flag])
+    }
+    if (eth && eth[flag]) return eth
+    return null
+  }
 
-  // Coinbase Wallet
-  if (eth.isCoinbaseWallet) return { provider: eth, name: "Coinbase Wallet" }
-  // MetaMask
-  if (eth.isMetaMask) return { provider: eth, name: "MetaMask" }
-  // Trust Wallet
-  if (eth.isTrust) return { provider: eth, name: "Trust Wallet" }
-  // Generic EIP-1193
-  return { provider: eth, name: "Browser Wallet" }
+  switch (walletName) {
+    case "MetaMask":
+      if (eth && eth.providers && Array.isArray(eth.providers)) {
+        return eth.providers.find((p: any) => p.isMetaMask && !p.isTokenPocket && !p.isTrust && !p.isOneInch) || eth
+      }
+      return eth && eth.isMetaMask ? eth : eth
+    case "TokenPocket":
+      return findProvider("isTokenPocket") || anyWindow.tokenpocket || eth
+    case "Trust Wallet":
+      return findProvider("isTrust") || findProvider("isTrustWallet") || anyWindow.trustWallet || eth
+    case "1inch Wallet":
+      return findProvider("isOneInch") || eth
+    default:
+      return eth
+  }
 }
 
 export function useWallet() {
@@ -47,44 +62,44 @@ export function useWallet() {
     const saved = sessionStorage.getItem("connected_wallet")
     if (saved) {
       const addr = saved
-      // Detect chain to ensure it's still BNB Chain
-      const eth = (window as unknown as { ethereum?: { request: (args: { method: string }) => Promise<string> } }).ethereum
+      const eth = (window as any).ethereum
       if (eth) {
-        eth.request({ method: "eth_chainId" })
-          .then((chainIdHex) => {
-            const chainId = parseInt(chainIdHex, 16)
-            if (chainId === 56) {
-              setWallet(prev => ({
-                ...prev,
-                address: addr,
-                shortAddress: shortenAddress(addr),
-                chainId,
-                isConnected: true,
-              }))
-            } else {
-              // Switch required, but don't force reload loop. Just keep disconnected until they switch
+        const requestMethod = eth.request || (eth.providers && eth.providers[0]?.request)
+        if (requestMethod) {
+          eth.request({ method: "eth_chainId" })
+            .then((chainIdHex: string) => {
+              const chainId = parseInt(chainIdHex, 16)
+              if (chainId === 56) {
+                setWallet(prev => ({
+                  ...prev,
+                  address: addr,
+                  shortAddress: shortenAddress(addr),
+                  chainId,
+                  isConnected: true,
+                }))
+              } else {
+                sessionStorage.removeItem("connected_wallet")
+              }
+            })
+            .catch(() => {
               sessionStorage.removeItem("connected_wallet")
-            }
-          })
-          .catch(() => {
-            sessionStorage.removeItem("connected_wallet")
-          })
+            })
+        }
       }
     }
   }, [])
 
   // Listen to account/chain changes
   useEffect(() => {
-    const eth = (window as unknown as { ethereum?: Record<string, unknown> }).ethereum
+    const eth = (window as any).ethereum
     if (!eth) return
 
-    const handleAccountsChanged = (accounts: unknown) => {
+    const handleAccountsChanged = (accounts: any) => {
       const accs = accounts as string[]
       if (accs.length === 0) {
         setWallet(initialState)
         sessionStorage.removeItem("connected_wallet")
       } else {
-        // Just reload to re-run the restore/check flow safely
         window.location.reload()
       }
     }
@@ -92,14 +107,14 @@ export function useWallet() {
     const handleChainChanged = () => window.location.reload()
 
     if (eth.on) {
-      ;(eth as unknown as { on: (event: string, cb: unknown) => void }).on("accountsChanged", handleAccountsChanged)
-      ;(eth as unknown as { on: (event: string, cb: unknown) => void }).on("chainChanged", handleChainChanged)
+      eth.on("accountsChanged", handleAccountsChanged)
+      eth.on("chainChanged", handleChainChanged)
     }
 
     return () => {
       if (eth.removeListener) {
-        ;(eth as unknown as { removeListener: (event: string, cb: unknown) => void }).removeListener("accountsChanged", handleAccountsChanged)
-        ;(eth as unknown as { removeListener: (event: string, cb: unknown) => void }).removeListener("chainChanged", handleChainChanged)
+        eth.removeListener("accountsChanged", handleAccountsChanged)
+        eth.removeListener("chainChanged", handleChainChanged)
       }
     }
   }, [])
@@ -108,58 +123,63 @@ export function useWallet() {
     setWallet(prev => ({ ...prev, isConnecting: true, error: null }))
 
     try {
-      const detected = detectProvider()
+      const provider = getSpecificProvider(walletType)
 
-      // If MetaMask/browser extension available
-      if (detected && detected.provider) {
-        const eth = detected.provider as {
+      if (provider) {
+        const eth = provider as {
           request: (args: { method: string; params?: unknown[] }) => Promise<unknown>
         }
 
-        // 1. Switch/Add BNB Chain (Chain ID: 56, Hex: 0x38)
-        const bnbChainIdHex = "0x38"
-        let chainSwitched = false
+        // 1. Check current Chain ID first
+        const currentChainHex = await eth.request({ method: "eth_chainId" }) as string
+        const currentChainId = parseInt(currentChainHex, 16)
 
-        try {
-          await eth.request({
-            method: "wallet_switchEthereumChain",
-            params: [{ chainId: bnbChainIdHex }],
-          })
-          chainSwitched = true
-        } catch (switchError: any) {
-          // 4902 indicates the chain has not been added to the wallet
-          if (switchError.code === 4902) {
-            try {
-              await eth.request({
-                method: "wallet_addEthereumChain",
-                params: [
-                  {
-                    chainId: bnbChainIdHex,
-                    chainName: "BNB Smart Chain",
-                    rpcUrls: ["https://bsc-dataseed.binance.org/"],
-                    nativeCurrency: {
-                      name: "BNB",
-                      symbol: "BNB",
-                      decimals: 18,
+        // 2. Only switch if not already on BNB Chain (56)
+        if (currentChainId !== 56) {
+          const bnbChainIdHex = "0x38"
+          let chainSwitched = false
+
+          try {
+            await eth.request({
+              method: "wallet_switchEthereumChain",
+              params: [{ chainId: bnbChainIdHex }],
+            })
+            chainSwitched = true
+          } catch (switchError: any) {
+            // 4902 indicates that the chain is not added
+            if (switchError.code === 4902) {
+              try {
+                await eth.request({
+                  method: "wallet_addEthereumChain",
+                  params: [
+                    {
+                      chainId: bnbChainIdHex,
+                      chainName: "BNB Smart Chain",
+                      rpcUrls: ["https://bsc-dataseed.binance.org/"],
+                      nativeCurrency: {
+                        name: "BNB",
+                        symbol: "BNB",
+                        decimals: 18,
+                      },
+                      blockExplorerUrls: ["https://bscscan.com"],
                     },
-                    blockExplorerUrls: ["https://bscscan.com"],
-                  },
-                ],
-              })
-              chainSwitched = true
-            } catch (addError) {
-              throw new Error("Failed to add BNB Smart Chain to wallet.")
+                  ],
+                })
+                chainSwitched = true
+              } catch (addError) {
+                throw new Error("Failed to add BNB Smart Chain to wallet.")
+              }
+            } else {
+              throw new Error("Please switch to BNB Smart Chain to connect.")
             }
-          } else {
-            throw new Error("Please switch to BNB Smart Chain to connect.")
+          }
+
+          if (!chainSwitched) {
+            throw new Error("Connection cancelled: BNB Smart Chain required.")
           }
         }
 
-        if (!chainSwitched) {
-          throw new Error("Connection cancelled: BNB Smart Chain required.")
-        }
-
-        // 2. Request accounts after ensuring BNB chain
+        // 3. Request accounts
         const accounts = await eth.request({ method: "eth_requestAccounts" }) as string[]
         const address = accounts[0]
 
