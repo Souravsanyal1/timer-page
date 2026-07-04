@@ -11,7 +11,7 @@ import { FaSpotify, FaDiscord, FaTelegram } from "react-icons/fa";
 import { SiGooglecalendar, SiNotion } from "react-icons/si";
 
 import { AnimatedNumber } from "@/components/ui/animated-number";
-import { FlipText } from "@/components/ui/flip-text";
+import { FlipFadeText } from "@/components/ui/flip-fade-text";
 import { PopButton } from "@/components/ui/pop-button";
 import ExpandableBentoGrid from "@/components/ui/expandable-bento-grid";
 import { KineticTextLoader } from "@/components/ui/kinetic-text-loader";
@@ -495,16 +495,19 @@ export default function FocusTimerPage() {
               </div>
 
               {/* ── Coming Soon Text in place of Timer ── */}
-              <div className="my-10 py-2 flex flex-col items-center">
-                <FlipText 
-                  className="font-black uppercase tracking-[0.25em] select-none"
-                  duration={2.5}
-                  loop={true}
-                  separator=" "
-                  style={{ fontSize: "clamp(3rem, 10vw, 7.5rem)" }}
-                >
-                  COMING SOON
-                </FlipText>
+              <div
+                className="my-6 py-2 flex flex-col items-center"
+                style={{ fontSize: "clamp(2.8rem, 9vw, 7rem)" }}
+              >
+                <FlipFadeText
+                  words={["COMING SOON"]}
+                  interval={3000}
+                  letterDuration={0.55}
+                  staggerDelay={0.07}
+                  exitStaggerDelay={0.04}
+                  className="py-2"
+                  textClassName="text-white"
+                />
               </div>
 
               <div className="block font-black mt-1"
