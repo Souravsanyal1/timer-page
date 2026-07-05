@@ -934,7 +934,7 @@ export default function FocusTimerPage() {
                 {/* YouTube */}
                 <motion.a
                   variants={contactItemVariants}
-                  href="https://youtube.com/@EliteForceOfficial"
+                  href="https://youtube.com/"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="group relative flex flex-col items-center justify-center gap-4 py-12 px-6 transition-all duration-300"
@@ -998,7 +998,7 @@ export default function FocusTimerPage() {
                 },
                 {
                   name: "YouTube",
-                  href: "https://youtube.com/@EliteForceOfficial",
+                  href: "https://youtube.com/",
                   label: "Subscribe ↗",
                   color: "#FF0000",
                   bg: "rgba(255,0,0,0.05)",
