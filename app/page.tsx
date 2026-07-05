@@ -6,6 +6,7 @@ import {
   Play, Pause, RotateCcw, SkipForward, Volume2, VolumeX,
   Timer, Target, Flame, BarChart3, TrendingUp, Award, Clock,
   Brain, Dumbbell, BookOpen, Coffee, Moon, Leaf, Settings, X,
+  Home, Mail
 } from "lucide-react";
 import { FaSpotify, FaDiscord, FaTelegram } from "react-icons/fa";
 import { SiGooglecalendar, SiNotion } from "react-icons/si";
@@ -24,6 +25,7 @@ import { useTimer, formatTime } from "@/hooks/use-timer";
 import { WalletModal, WalletIcons } from "@/components/ui/wallet-modal";
 import { FaqAccordion } from "@/components/ui/faq-accordion";
 import LogoIcon from "@/assets/logo/logo-icon";
+import GlassDock from "@/components/ui/glass-dock";
 
 /* ─────────────── 6-Month Countdown (ends Jan 3, 2027 12:00 AM) ─────────────── */
 // Target: January 3, 2027 at 00:00:00 local time
@@ -447,6 +449,63 @@ export default function FocusTimerPage() {
   const [settingsOpen, setSettingsOpen] = useState(false);
   const [walletModalOpen, setWalletModalOpen] = useState(false);
   const [isMuted, setIsMuted] = useState(false);
+  const [activeSection, setActiveSection] = useState("home");
+
+  useEffect(() => {
+    const sections = ["home", "partnerships", "contact", "about-us"];
+    const handleScrollActive = () => {
+      const scrollPos = window.scrollY + 300; // offset
+      for (const section of sections) {
+        const element = document.getElementById(section);
+        if (element) {
+          const top = element.offsetTop;
+          const height = element.offsetHeight;
+          if (scrollPos >= top && scrollPos < top + height) {
+            setActiveSection(section);
+            break;
+          }
+        }
+      }
+    };
+    window.addEventListener("scroll", handleScrollActive);
+    handleScrollActive(); // run once on mount
+    return () => window.removeEventListener("scroll", handleScrollActive);
+  }, []);
+
+  const dockItems = [
+    {
+      title: "Home",
+      icon: Home,
+      isActive: activeSection === "home",
+      onClick: () => {
+        document.getElementById("home")?.scrollIntoView({ behavior: "smooth" });
+      }
+    },
+    {
+      title: "Partnerships",
+      icon: Target,
+      isActive: activeSection === "partnerships",
+      onClick: () => {
+        document.getElementById("partnerships")?.scrollIntoView({ behavior: "smooth" });
+      }
+    },
+    {
+      title: "Contact",
+      icon: Mail,
+      isActive: activeSection === "contact",
+      onClick: () => {
+        document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" });
+      }
+    },
+    {
+      title: "About",
+      icon: Brain,
+      isActive: activeSection === "about-us",
+      onClick: () => {
+        document.getElementById("about-us")?.scrollIntoView({ behavior: "smooth" });
+      }
+    }
+  ];
 
   const [timerState, timerControls] = useTimer(25 * 60);
   const { remainingSeconds, totalSeconds, status, sessionsCompleted, todayFocusMinutes, currentStreak } = timerState;
@@ -552,6 +611,11 @@ export default function FocusTimerPage() {
 
       <SettingsDrawer open={settingsOpen} onClose={() => setSettingsOpen(false)} />
       <WalletModal open={walletModalOpen} onClose={() => setWalletModalOpen(false)} />
+
+      {/* Floating Glass Dock at Bottom Center */}
+      <div className="fixed bottom-6 left-1/2 -translate-x-1/2 z-50 scale-90 sm:scale-100 pointer-events-auto">
+        <GlassDock items={dockItems} />
+      </div>
 
       {/* ── ASH COLOR BACKGROUND ── */}
       <main className="relative min-h-screen overflow-x-hidden bg-background text-foreground" style={{ fontFamily: "'Inter',sans-serif" }}>
