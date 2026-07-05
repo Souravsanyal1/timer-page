@@ -1278,7 +1278,7 @@ export default function FocusTimerPage() {
 
 
           {/* ══════ FOOTER ══════ */}
-          <footer className="py-8 border-t border-border">
+          <footer className="pt-8 pb-36 border-t border-border">
             <div className="flex flex-col items-center justify-center gap-3">
               <img
                 src="/ef-logo.png"
