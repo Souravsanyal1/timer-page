@@ -6,8 +6,10 @@ import {
   Play, Pause, RotateCcw, SkipForward, Volume2, VolumeX,
   Timer, Target, Flame, BarChart3, TrendingUp, Award, Clock,
   Brain, Dumbbell, BookOpen, Coffee, Moon, Leaf, Settings, X,
-  Home, Mail
+  Home, Mail, Sun, Wallet
 } from "lucide-react";
+import { useTheme } from "next-themes";
+import { useWallet } from "@/hooks/use-wallet";
 import { FaSpotify, FaDiscord, FaTelegram } from "react-icons/fa";
 import { SiGooglecalendar, SiNotion } from "react-icons/si";
 
@@ -19,7 +21,6 @@ import { KineticTextLoader } from "@/components/ui/kinetic-text-loader";
 import { Atom } from "react-loading-indicators";
 import { StackedLogos } from "@/components/ui/stacked-logos";
 import SocialFlipButton from "@/components/ui/social-flip-button";
-import { NotchNavbar } from "@/components/ui/notch-navbar";
 import { GlowBorderCard } from "@/components/ui/glow-border-card";
 import { useTimer, formatTime } from "@/hooks/use-timer";
 import { WalletModal, WalletIcons } from "@/components/ui/wallet-modal";
@@ -450,6 +451,15 @@ export default function FocusTimerPage() {
   const [walletModalOpen, setWalletModalOpen] = useState(false);
   const [isMuted, setIsMuted] = useState(false);
   const [activeSection, setActiveSection] = useState("home");
+  const { theme, setTheme, resolvedTheme } = useTheme();
+  const [mounted, setMounted] = useState(false);
+  const { wallet } = useWallet();
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  const isDark = theme === "dark" || resolvedTheme === "dark";
 
   useEffect(() => {
     const sections = ["home", "partnerships", "contact", "about-us"];
@@ -504,6 +514,23 @@ export default function FocusTimerPage() {
       onClick: () => {
         document.getElementById("about-us")?.scrollIntoView({ behavior: "smooth" });
       }
+    },
+    {
+      title: !mounted ? "Theme" : (isDark ? "Light Mode" : "Dark Mode"),
+      icon: !mounted ? Sun : (isDark ? Sun : Moon),
+      onClick: () => setTheme(isDark ? "light" : "dark")
+    },
+    {
+      title: !mounted ? "Wallet" : (wallet.isConnected ? (wallet.shortAddress || "Connected") : "Connect Wallet"),
+      icon: ({ className }: { className?: string }) => (
+        <div className="relative">
+          <Wallet className={className} />
+          {mounted && wallet.isConnected && (
+            <div className="absolute -top-0.5 -right-0.5 w-2 h-2 rounded-full bg-green-400 border border-background animate-pulse" />
+          )}
+        </div>
+      ),
+      onClick: () => setWalletModalOpen(true)
     }
   ];
 
@@ -628,8 +655,7 @@ export default function FocusTimerPage() {
           }}
         />
 
-        {/* ── Navbar ── */}
-        <NotchNavbar />
+
 
         <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
 
