@@ -1,6 +1,6 @@
 "use client"
 import { useState, useEffect } from "react"
-import Link from "next/link"
+
 import { Menu, X, Sun, Moon } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { ThemeToggle } from "@/components/theme-toggle"
@@ -11,13 +11,14 @@ import { useWallet } from "@/hooks/use-wallet"
 import { WalletModal } from "@/components/ui/wallet-modal"
 
 // Helper component for navigation links (removed icons)
-const NavLink = ({ href, label }: { href: string; label: string }) => (
-  <Link 
+const NavLink = ({ href, label, onClick }: { href: string; label: string; onClick?: (e: React.MouseEvent) => void }) => (
+  <a 
     href={href} 
-    className="group flex items-center gap-1.5 text-sm font-medium text-foreground/70 hover:text-foreground transition-colors whitespace-nowrap"
+    onClick={onClick}
+    className="group flex items-center gap-1.5 text-sm font-medium text-foreground/70 hover:text-foreground transition-colors whitespace-nowrap cursor-pointer"
   >
     <span>{label}</span>
-  </Link>
+  </a>
 )
 
 // Simple Theme Toggle for Mobile
@@ -57,6 +58,15 @@ export function NotchNavbar({ className, ...props }: React.HTMLAttributes<HTMLEl
       { label: "Contact Us", href: "#contact" },
       { label: "About", href: "#about-us" }
     ]
+  }
+
+  const handleScroll = (e: React.MouseEvent, href: string) => {
+    e.preventDefault()
+    const targetId = href.replace("#", "")
+    const element = document.getElementById(targetId)
+    if (element) {
+      element.scrollIntoView({ behavior: "smooth" })
+    }
   }
 
   return (
@@ -100,10 +110,15 @@ export function NotchNavbar({ className, ...props }: React.HTMLAttributes<HTMLEl
                
                {/* Desktop Left Nav */}
                <nav className="hidden md:flex gap-8 mb-1 shrink-0">
-                {items.left.map(item => (
-                  <NavLink key={item.label} {...item} />
-                ))}
-              </nav>
+                 {items.left.map(item => (
+                   <NavLink 
+                     key={item.label} 
+                     href={item.href} 
+                     label={item.label}
+                     onClick={(e) => handleScroll(e, item.href)}
+                   />
+                 ))}
+               </nav>
 
               {/* Mobile Menu Button (Left) */}
               <button 
@@ -122,7 +137,12 @@ export function NotchNavbar({ className, ...props }: React.HTMLAttributes<HTMLEl
               {/* Desktop Right Nav */}
               <nav className="hidden md:flex gap-6 items-center shrink-0">
                 {items.right.map(item => (
-                  <NavLink key={item.label} {...item} />
+                  <NavLink 
+                    key={item.label} 
+                    href={item.href} 
+                    label={item.label}
+                    onClick={(e) => handleScroll(e, item.href)}
+                  />
                 ))}
                 
                 <div className="flex gap-4 pl-4 border-l border-foreground/10 shrink-0 items-center">
@@ -197,14 +217,17 @@ export function NotchNavbar({ className, ...props }: React.HTMLAttributes<HTMLEl
              <nav className="flex flex-col gap-2">
                {/* Combine all items (no icons) */}
                {[...items.left, ...items.right].map(item => (
-                 <Link 
+                 <a 
                    key={item.label} 
                    href={item.href}
-                   className="flex items-center gap-3 p-3 rounded-lg hover:bg-foreground/5 transition-colors"
-                   onClick={() => setIsMobileMenuOpen(false)}
+                   className="flex items-center gap-3 p-3 rounded-lg hover:bg-foreground/5 transition-colors cursor-pointer"
+                   onClick={(e) => {
+                     handleScroll(e, item.href)
+                     setIsMobileMenuOpen(false)
+                   }}
                  >
                    <span className="font-medium text-foreground/90">{item.label}</span>
-                 </Link>
+                 </a>
                ))}
                <div className="h-px bg-foreground/10 my-2" />
                <div className="flex flex-col gap-2">
