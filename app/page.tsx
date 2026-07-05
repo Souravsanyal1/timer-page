@@ -574,42 +574,42 @@ export default function FocusTimerPage() {
 
   const stats = [
     {
-      logo: <img src="https://i.postimg.cc/X7tX8nhY/unnamed-(2).webp" alt="Uniswap" />,
+      logo: <img src="https://cdn.simpleicons.org/uniswap" alt="Uniswap" className="opacity-90 hover:opacity-100 transition-opacity" />,
       color: "#FF007A",
       delay: 0
     },
     {
-      logo: <img src="https://i.postimg.cc/xjK1HqNP/Chainlink-Logo.png" alt="Chainlink" />,
+      logo: <img src="https://cdn.simpleicons.org/chainlink" alt="Chainlink" className="opacity-90 hover:opacity-100 transition-opacity" />,
       color: "#375BD2",
       delay: 0.1
     },
     {
-      logo: <img src="https://cdn.simpleicons.org/solana/ffffff" alt="Solana" />,
+      logo: <img src="https://cdn.simpleicons.org/solana/14F195" alt="Solana" className="opacity-90 hover:opacity-100 transition-opacity" />,
       color: "#14F195",
       delay: 0.2
     },
     {
-      logo: <img src="https://i.postimg.cc/7ZJcGJf6/1758974929-1740700991-78b3ef2e096b-aave-logo.avif" alt="Aave" />,
+      logo: <img src="https://cdn.simpleicons.org/aave" alt="Aave" className="opacity-90 hover:opacity-100 transition-opacity" />,
       color: "#B6509E",
       delay: 0.3
     },
     {
-      logo: <img src="https://i.postimg.cc/Gp0fk3DC/7186.png" alt="PancakeSwap" />,
+      logo: <img src="https://cdn.simpleicons.org/pancakeswap" alt="PancakeSwap" className="opacity-90 hover:opacity-100 transition-opacity" />,
       color: "#D1884F",
       delay: 0.4
     },
     {
-      logo: <img src="https://i.postimg.cc/mryNnTPx/image.png" alt="Maker" />,
+      logo: <img src="https://cdn.simpleicons.org/maker" alt="Maker" className="opacity-90 hover:opacity-100 transition-opacity" />,
       color: "#1AAB9B",
       delay: 0.5
     },
     {
-      logo: <img src="https://i.postimg.cc/x8GtJP1m/images-(1).png" alt="Alchemy" />,
+      logo: <img src="https://cdn.jsdelivr.net/npm/@thesvg/icons/icons/alchemy.svg" alt="Alchemy" className="opacity-90 hover:opacity-100 transition-opacity dark:invert" />,
       color: "#3F85F4",
       delay: 0.6
     },
     {
-      logo: <img src="https://i.postimg.cc/cHBnfkwj/images-(2).png" alt="Infura" />,
+      logo: <img src="https://cdn.simpleicons.org/infura" alt="Infura" className="opacity-90 hover:opacity-100 transition-opacity" />,
       color: "#FF5C35",
       delay: 0.7
     },
