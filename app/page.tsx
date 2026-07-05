@@ -603,6 +603,16 @@ export default function FocusTimerPage() {
       color: "#1AAB9B",
       delay: 0.5
     },
+    {
+      logo: <img src="https://i.postimg.cc/x8GtJP1m/images-(1).png" alt="Alchemy" />,
+      color: "#3F85F4",
+      delay: 0.6
+    },
+    {
+      logo: <img src="https://i.postimg.cc/cHBnfkwj/images-(2).png" alt="Infura" />,
+      color: "#FF5C35",
+      delay: 0.7
+    },
   ];
 
   const flipItems = [
@@ -722,7 +732,7 @@ export default function FocusTimerPage() {
             <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.7 }} viewport={{ once: true }} className="text-center mb-10">
               <p className="text-[10px] font-semibold text-foreground/40 uppercase tracking-[0.35em] mb-3">Ecosystem</p>
               <h2 className="text-3xl md:text-5xl font-black text-foreground" style={{ letterSpacing: "-0.03em" }}>
-                Token{" "}
+                Web3{" "}
                 <span style={{ background: "linear-gradient(135deg,#FFB000,#FF8A00)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>
                   Ecosystem
                 </span>
@@ -748,14 +758,14 @@ export default function FocusTimerPage() {
                 className="stats-border-glow pointer-events-none absolute inset-0 z-10 opacity-0 transition-opacity duration-300"
                 style={{
                   background: "radial-gradient(500px circle at var(--sx,50%) var(--sy,50%), rgba(255,180,0,0.7), transparent 40%)",
-                  maskImage: "repeating-linear-gradient(to right, transparent, transparent calc(33.333% - 1px), black calc(33.333% - 1px), black 33.333%), repeating-linear-gradient(to bottom, transparent, transparent calc(50% - 1px), black calc(50% - 1px), black 50%)",
-                  WebkitMaskImage: "repeating-linear-gradient(to right, transparent, transparent calc(33.333% - 1px), black calc(33.333% - 1px), black 33.333%), repeating-linear-gradient(to bottom, transparent, transparent calc(50% - 1px), black calc(50% - 1px), black 50%)",
+                  maskImage: "repeating-linear-gradient(to right, transparent, transparent calc(25% - 1px), black calc(25% - 1px), black 25%), repeating-linear-gradient(to bottom, transparent, transparent calc(50% - 1px), black calc(50% - 1px), black 50%)",
+                  WebkitMaskImage: "repeating-linear-gradient(to right, transparent, transparent calc(25% - 1px), black calc(25% - 1px), black 25%), repeating-linear-gradient(to bottom, transparent, transparent calc(50% - 1px), black calc(50% - 1px), black 50%)",
                   maskComposite: "add",
                   WebkitMaskComposite: "source-over",
                 }}
               />
               <div
-                className="grid grid-cols-2 lg:grid-cols-3"
+                className="grid grid-cols-2 lg:grid-cols-4"
                 style={{ borderTop: "1px solid var(--border)", borderLeft: "1px solid var(--border)" }}
                 onMouseEnter={(e) => {
                   const wrap = e.currentTarget.parentElement;
