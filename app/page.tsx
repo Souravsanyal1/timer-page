@@ -609,7 +609,7 @@ export default function FocusTimerPage() {
     { letter: "S", icon: <FaSpotify />, label: "Spotify", href: "#" },
     { letter: "M", icon: isMuted ? <VolumeX /> : <Volume2 />, label: isMuted ? "Unmute" : "Mute", onClick: () => setIsMuted((v) => !v) },
     { letter: "D", icon: <FaDiscord />, label: "Discord", href: "#" },
-    { letter: "T", icon: <FaTelegram />, label: "Telegram", href: "#" },
+    { letter: "T", icon: <FaTelegram />, label: "Telegram", href: "https://t.me/Elite_Force_Official" },
   ];
 
   const integrationLogos = [
@@ -841,7 +841,7 @@ export default function FocusTimerPage() {
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true, margin: "-100px" }}
-              className="hidden sm:block relative w-full max-w-2xl mx-auto"
+              className="hidden sm:block relative w-full max-w-3xl mx-auto"
               onMouseMove={(e) => {
                 const rect = e.currentTarget.getBoundingClientRect();
                 e.currentTarget.style.setProperty("--mx", `${e.clientX - rect.left}px`);
@@ -860,8 +860,8 @@ export default function FocusTimerPage() {
                 className="contact-border-glow pointer-events-none absolute inset-0 z-20"
                 style={{
                   background: "radial-gradient(600px circle at var(--mx,50%) var(--my,50%), rgba(255,138,0,0.9), transparent 40%)",
-                  maskImage: "repeating-linear-gradient(to right, transparent, transparent calc(25% - 1px), black calc(25% - 1px), black 25%), linear-gradient(to bottom, black 0, black 1px, transparent 1px, transparent calc(100% - 1px), black calc(100% - 1px), black 100%)",
-                  WebkitMaskImage: "repeating-linear-gradient(to right, transparent, transparent calc(25% - 1px), black calc(25% - 1px), black 25%), linear-gradient(to bottom, black 0, black 1px, transparent 1px, transparent calc(100% - 1px), black calc(100% - 1px), black 100%)",
+                  maskImage: "repeating-linear-gradient(to right, transparent, transparent calc(33.333% - 1px), black calc(33.333% - 1px), black 33.333%), linear-gradient(to bottom, black 0, black 1px, transparent 1px, transparent calc(100% - 1px), black calc(100% - 1px), black 100%)",
+                  WebkitMaskImage: "repeating-linear-gradient(to right, transparent, transparent calc(33.333% - 1px), black calc(33.333% - 1px), black 33.333%), linear-gradient(to bottom, black 0, black 1px, transparent 1px, transparent calc(100% - 1px), black calc(100% - 1px), black 100%)",
                   maskComposite: "add",
                   WebkitMaskComposite: "source-over",
                   opacity: 0,
@@ -869,7 +869,7 @@ export default function FocusTimerPage() {
                 }}
               />
 
-              <div className="grid grid-cols-2 lg:grid-cols-4 w-full"
+              <div className="grid grid-cols-1 md:grid-cols-3 w-full"
                 onMouseEnter={(e) => {
                   const glow = e.currentTarget.parentElement?.querySelector(".contact-border-glow") as HTMLElement;
                   if (glow) glow.style.opacity = "1";
@@ -882,7 +882,7 @@ export default function FocusTimerPage() {
                 {/* Telegram */}
                 <motion.a
                   variants={contactItemVariants}
-                  href="https://t.me/YourTelegramUsername"
+                  href="https://t.me/Elite_Force_Official"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="group relative flex flex-col items-center justify-center gap-4 py-12 px-6 transition-all duration-300"
@@ -901,14 +901,14 @@ export default function FocusTimerPage() {
                   </div>
                   <div className="text-center">
                     <p className="text-foreground font-bold text-sm">Telegram</p>
-                    <p className="text-foreground/50 text-xs mt-0.5 group-hover:text-[#229ED9] transition-colors">@EliteForce ↗</p>
+                    <p className="text-foreground/50 text-xs mt-0.5 group-hover:text-[#229ED9] transition-colors">@Elite_Force_Official ↗</p>
                   </div>
                 </motion.a>
 
                 {/* WhatsApp */}
                 <motion.a
                   variants={contactItemVariants}
-                  href="https://wa.me/YourPhoneNumber"
+                  href="https://whatsapp.com/channel/0029VbDfUaIFMqrRUQQLoA3P"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="group relative flex flex-col items-center justify-center gap-4 py-12 px-6 transition-all duration-300"
@@ -934,7 +934,7 @@ export default function FocusTimerPage() {
                 {/* YouTube */}
                 <motion.a
                   variants={contactItemVariants}
-                  href="https://youtube.com/@YourYouTubeChannel"
+                  href="https://youtube.com/@EliteForceOfficial"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="group relative flex flex-col items-center justify-center gap-4 py-12 px-6 transition-all duration-300"
@@ -956,49 +956,22 @@ export default function FocusTimerPage() {
                     <p className="text-foreground/50 text-xs mt-0.5 group-hover:text-[#FF0000] transition-colors">Subscribe ↗</p>
                   </div>
                 </motion.a>
-
-                {/* Twitter / X */}
-                <motion.a
-                  variants={contactItemVariants}
-                  href="https://twitter.com/EliteForce"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="group relative flex flex-col items-center justify-center gap-4 py-12 px-6 transition-all duration-300"
-                  style={{ borderRight: "1px solid var(--border)", borderTop: "1px solid var(--border)", borderBottom: "1px solid var(--border)" }}
-                  onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.background = "rgba(255,255,255,0.05)"; }}
-                  onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.background = "transparent"; }}
-                >
-                  <div className="w-14 h-14 rounded-2xl flex items-center justify-center transition-transform duration-300 group-hover:scale-110 group-hover:-translate-y-1"
-                    style={{ background: "linear-gradient(135deg,#1a1a1a,#000000)", border: "1px solid rgba(255,255,255,0.12)", boxShadow: "0 8px 32px rgba(0,0,0,0)" }}
-                    onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.boxShadow = "0 8px 32px rgba(255,255,255,0.2)"; }}
-                    onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.boxShadow = "0 8px 32px rgba(0,0,0,0)"; }}
-                  >
-                    {/* X (Twitter) logo */}
-                    <svg width="22" height="22" viewBox="0 0 24 24" fill="white">
-                      <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.744l7.737-8.835L1.254 2.25H8.08l4.253 5.622L18.244 2.25Zm-1.161 17.52h1.833L7.084 4.126H5.117L17.083 19.77Z" />
-                    </svg>
-                  </div>
-                  <div className="text-center">
-                    <p className="text-foreground font-bold text-sm">Twitter</p>
-                    <p className="text-foreground/50 text-xs mt-0.5 group-hover:text-foreground dark:group-hover:text-white transition-colors">Follow us ↗</p>
-                  </div>
-                </motion.a>
               </div>
             </motion.div>
 
-            {/* Mobile/Phone: 2 by 2 Grid */}
+            {/* Mobile/Phone: Vertical List of 3 items */}
             <motion.div
               variants={contactGridVariants}
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true, margin: "-50px" }}
-              className="block sm:hidden w-full max-w-md mx-auto grid grid-cols-2 gap-3 px-4 mt-6"
+              className="block sm:hidden w-full max-w-xs mx-auto flex flex-col gap-3 px-4 mt-6"
             >
               {[
                 {
                   name: "Telegram",
-                  href: "https://t.me/YourTelegramUsername",
-                  label: "@EliteForce ↗",
+                  href: "https://t.me/Elite_Force_Official",
+                  label: "@Elite_Force_Official ↗",
                   color: "#229ED9",
                   bg: "rgba(34,158,217,0.06)",
                   border: "rgba(34,158,217,0.2)",
@@ -1011,7 +984,7 @@ export default function FocusTimerPage() {
                 },
                 {
                   name: "WhatsApp",
-                  href: "https://wa.me/YourPhoneNumber",
+                  href: "https://whatsapp.com/channel/0029VbDfUaIFMqrRUQQLoA3P",
                   label: "Message us ↗",
                   color: "#25D366",
                   bg: "rgba(37,211,102,0.06)",
@@ -1025,7 +998,7 @@ export default function FocusTimerPage() {
                 },
                 {
                   name: "YouTube",
-                  href: "https://youtube.com/@YourYouTubeChannel",
+                  href: "https://youtube.com/@EliteForceOfficial",
                   label: "Subscribe ↗",
                   color: "#FF0000",
                   bg: "rgba(255,0,0,0.05)",
@@ -1034,20 +1007,6 @@ export default function FocusTimerPage() {
                   icon: (
                     <svg width="18" height="18" viewBox="0 0 24 24" fill="white">
                       <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" />
-                    </svg>
-                  )
-                },
-                {
-                  name: "Twitter",
-                  href: "https://twitter.com/EliteForce",
-                  label: "Follow us ↗",
-                  color: "#ffffff",
-                  bg: "rgba(255,255,255,0.05)",
-                  border: "rgba(255,255,255,0.12)",
-                  iconBg: "linear-gradient(135deg,#1a1a1a,#000000)",
-                  icon: (
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="white">
-                      <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.744l7.737-8.835L1.254 2.25H8.08l4.253 5.622L18.244 2.25Zm-1.161 17.52h1.833L7.084 4.126H5.117L17.083 19.77Z" />
                     </svg>
                   )
                 }
