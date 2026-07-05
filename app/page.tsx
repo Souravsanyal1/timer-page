@@ -488,12 +488,12 @@ export default function FocusTimerPage() {
 
   const stats = [
     {
-      logo: <img src="https://cdn.simpleicons.org/uniswap/ffffff" alt="Uniswap" />,
+      logo: <img src="https://i.postimg.cc/X7tX8nhY/unnamed-(2).webp" alt="Uniswap" />,
       color: "#FF007A",
       delay: 0
     },
     {
-      logo: <img src="https://cdn.simpleicons.org/chainlink/ffffff" alt="Chainlink" />,
+      logo: <img src="https://i.postimg.cc/xjK1HqNP/Chainlink-Logo.png" alt="Chainlink" />,
       color: "#375BD2",
       delay: 0.1
     },
@@ -503,18 +503,18 @@ export default function FocusTimerPage() {
       delay: 0.2
     },
     {
-      logo: <img src="https://cdn.simpleicons.org/aave/ffffff" alt="Aave" />,
+      logo: <img src="https://i.postimg.cc/7ZJcGJf6/1758974929-1740700991-78b3ef2e096b-aave-logo.avif" alt="Aave" />,
       color: "#B6509E",
       delay: 0.3
     },
     {
-      logo: <img src="https://cdn.simpleicons.org/maker/ffffff" alt="Maker" />,
-      color: "#1AAB9B",
+      logo: <img src="https://i.postimg.cc/Gp0fk3DC/7186.png" alt="PancakeSwap" />,
+      color: "#D1884F",
       delay: 0.4
     },
     {
-      logo: <img src="https://cdn.simpleicons.org/thegraph/ffffff" alt="The Graph" />,
-      color: "#6742F1",
+      logo: <img src="https://cdn.simpleicons.org/maker/ffffff" alt="Maker" />,
+      color: "#1AAB9B",
       delay: 0.5
     },
   ];
