@@ -973,6 +973,7 @@ export default function FocusTimerPage() {
                   href: "https://t.me/Elite_Force_Official",
                   label: "@Elite_Force_Official ↗",
                   color: "#229ED9",
+                  textColor: "text-[#1d82b3] dark:text-[#229ED9]",
                   bg: "rgba(34,158,217,0.06)",
                   border: "rgba(34,158,217,0.2)",
                   iconBg: "linear-gradient(135deg,#229ED9,#1a8bbf)",
@@ -987,6 +988,7 @@ export default function FocusTimerPage() {
                   href: "https://whatsapp.com/channel/0029VbDfUaIFMqrRUQQLoA3P",
                   label: "Message us ↗",
                   color: "#25D366",
+                  textColor: "text-[#1b8c43] dark:text-[#25D366]",
                   bg: "rgba(37,211,102,0.06)",
                   border: "rgba(37,211,102,0.2)",
                   iconBg: "linear-gradient(135deg,#25D366,#1ebe58)",
@@ -1001,6 +1003,7 @@ export default function FocusTimerPage() {
                   href: "https://youtube.com/",
                   label: "Subscribe ↗",
                   color: "#FF0000",
+                  textColor: "text-[#cc0000] dark:text-[#FF0000]",
                   bg: "rgba(255,0,0,0.05)",
                   border: "rgba(255,0,0,0.18)",
                   iconBg: "linear-gradient(135deg,#FF0000,#cc0000)",
@@ -1026,8 +1029,8 @@ export default function FocusTimerPage() {
                     {w.icon}
                   </div>
                   <div className="text-left min-w-0">
-                    <p className="text-white font-bold text-xs leading-none truncate">{w.name}</p>
-                    <p className="text-[10px] mt-1.5 leading-none transition-colors truncate" style={{ color: w.color }}>{w.label}</p>
+                    <p className="text-foreground font-bold text-xs leading-none truncate">{w.name}</p>
+                    <p className={`text-[10px] mt-1.5 leading-none transition-colors truncate ${w.textColor}`}>{w.label}</p>
                   </div>
                 </motion.a>
               ))}
