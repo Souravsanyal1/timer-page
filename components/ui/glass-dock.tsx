@@ -351,8 +351,16 @@ export const GlassDock = React.forwardRef<HTMLDivElement, GlassDockProps>(
     ) => {
         const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
         const [direction, setDirection] = useState(0);
-        // Default to not darker for dock itself, but buttons handle colors
-        // We removed isDark check as styles in globals.css handle it via .dark selector
+        const [isLargeScreen, setIsLargeScreen] = useState(false);
+
+        useEffect(() => {
+            const checkScreen = () => {
+                setIsLargeScreen(window.innerWidth >= 640);
+            };
+            checkScreen();
+            window.addEventListener('resize', checkScreen);
+            return () => window.removeEventListener('resize', checkScreen);
+        }, []);
 
         const handleMouseEnter = (index: number) => {
             if (hoveredIndex !== null && index !== hoveredIndex) {
@@ -361,7 +369,13 @@ export const GlassDock = React.forwardRef<HTMLDivElement, GlassDockProps>(
             setHoveredIndex(index);
         };
 
-        const getTooltipPosition = (index: number) => index * 52 + 12;
+        const getTooltipPosition = (index: number) => {
+            if (isLargeScreen) {
+                return 2 + index * 72;
+            } else {
+                return -2 + index * 64;
+            }
+        };
 
         return (
             <div
@@ -388,9 +402,15 @@ export const GlassDock = React.forwardRef<HTMLDivElement, GlassDockProps>(
                         color: #FF8A00;
                     }
                     .glass-dock-btn svg {
-                        width: 22px;
-                        height: 22px;
+                        width: 26px;
+                        height: 26px;
                         fill: currentColor;
+                    }
+                    @media (min-width: 640px) {
+                        .glass-dock-btn svg {
+                            width: 32px;
+                            height: 32px;
+                        }
                     }
                     .glass-dock-btn.home {
                         transform: scale(var(--tab-bar-home-scale, 1));
@@ -423,7 +443,7 @@ export const GlassDock = React.forwardRef<HTMLDivElement, GlassDockProps>(
                 ` }} />
                 <div
                     className={cn(
-                        "glass-dock relative flex gap-4 items-center px-6 py-4 rounded-2xl",
+                        "glass-dock relative flex gap-4 items-center px-6 py-4 sm:px-8 sm:py-5 rounded-2xl sm:rounded-3xl",
                         "glass-border bg-white/80 dark:bg-black/80",
                         "backdrop-blur-xl shadow-2xl justify-center",
                         dockClassName
@@ -441,7 +461,7 @@ export const GlassDock = React.forwardRef<HTMLDivElement, GlassDockProps>(
                                 animate={{
                                     opacity: 1,
                                     scale: 1,
-                                    y: -60,
+                                    y: isLargeScreen ? -66 : -58,
                                     x: getTooltipPosition(hoveredIndex),
                                 }}
                                 exit={{ opacity: 0, scale: 0.92, y: 12 }}
@@ -526,7 +546,7 @@ export const GlassDock = React.forwardRef<HTMLDivElement, GlassDockProps>(
                                 key={el.title}
                                 onMouseEnter={() => handleMouseEnter(index)}
                                 onClick={handleClick}
-                                className="relative w-10 h-10 flex items-center justify-center cursor-pointer"
+                                className="relative w-12 h-12 sm:w-14 sm:h-14 flex items-center justify-center cursor-pointer"
                                 role="button"
                                 tabIndex={0}
                                 onKeyDown={(e) => {
@@ -556,7 +576,7 @@ export const GlassDock = React.forwardRef<HTMLDivElement, GlassDockProps>(
                                     ) : (
                                         <Icon
                                             className={cn(
-                                                'h-[22px] w-[22px] transition-colors duration-200',
+                                                'h-[26px] w-[26px] sm:h-[32px] sm:w-[32px] transition-colors duration-200',
                                                 isHovered
                                                     ? 'text-neutral-900 dark:text-white'
                                                     : 'text-neutral-500 dark:text-neutral-400'
