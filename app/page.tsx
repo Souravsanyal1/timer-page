@@ -513,7 +513,7 @@ export default function FocusTimerPage() {
       delay: 0.4
     },
     {
-      logo: <img src="https://cdn.simpleicons.org/maker/ffffff" alt="Maker" />,
+      logo: <img src="https://i.postimg.cc/mryNnTPx/image.png" alt="Maker" />,
       color: "#1AAB9B",
       delay: 0.5
     },
