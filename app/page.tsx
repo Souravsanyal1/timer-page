@@ -641,7 +641,33 @@ export default function FocusTimerPage() {
             exit={{ opacity: 0 }}
             transition={{ duration: 0.5 }}
           >
-            <Atom color="#32cd32" size="large" text="" textColor="" />
+            <div className="relative flex flex-col items-center justify-center">
+              {/* Pulsing glow around the logo */}
+              <motion.div
+                animate={{ scale: [1, 1.25, 1], opacity: [0.15, 0.4, 0.15] }}
+                transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+                className="absolute w-24 h-24 rounded-full bg-[#FF8A00] blur-xl"
+              />
+              <motion.img
+                src="/ef-logo.png"
+                alt="Elite Force Logo"
+                initial={{ scale: 0.8, opacity: 0 }}
+                animate={{ scale: [0.95, 1.05, 0.95], opacity: 1 }}
+                transition={{
+                  scale: { duration: 2, repeat: Infinity, ease: "easeInOut" },
+                  opacity: { duration: 0.5 }
+                }}
+                className="w-20 h-20 object-contain relative z-10"
+              />
+            </div>
+            <div className="flex flex-col items-center gap-1">
+              <span className="text-foreground font-black text-xl tracking-[0.25em] uppercase select-none">
+                ELITE FORCE
+              </span>
+              <span className="text-foreground/30 text-[10px] font-bold tracking-[0.3em] uppercase select-none">
+                Build Your Focus
+              </span>
+            </div>
           </motion.div>
         )}
       </AnimatePresence>
