@@ -574,42 +574,92 @@ export default function FocusTimerPage() {
 
   const stats = [
     {
-      logo: <img src="https://raw.githubusercontent.com/spothq/cryptocurrency-icons/master/svg/color/uni.svg" alt="Uniswap" className="w-full h-full object-contain opacity-90 hover:opacity-100 transition-opacity" />,
+      logo: (
+        <svg viewBox="0 0 48 48" fill="none" className="w-full h-full">
+          <path d="M17.2 6.8c-1-.6-2.3-.5-3.2.2-3 2.4-5.2 5.7-6.2 9.4-.2.8.1 1.6.7 2.2l3 2.6c-.1.9-.2 1.8-.2 2.8s.1 1.9.2 2.8l-3 2.6c-.6.5-.9 1.4-.7 2.2 1 3.7 3.2 7 6.2 9.4.7.6 1.7.7 2.6.4.3-.1.5-.2.6-.3l3.4-2c1.5 1.1 3.1 2 4.9 2.5v3.6c0 .9.5 1.7 1.3 2.1 1.8.7 3.8 1.1 5.8 1.1s3.9-.4 5.8-1.1c.8-.3 1.3-1.1 1.3-2.1v-3.6c1.8-.6 3.4-1.4 4.9-2.5l3.4 2c.2.1.4.2.6.3.9.3 1.9.2 2.6-.4 3-2.4 5.2-5.7 6.2-9.4.2-.8-.1-1.6-.7-2.2l-3-2.6c.1-.9.2-1.8.2-2.8s-.1-1.9-.2-2.8l3-2.6c.6-.5.9-1.4.7-2.2-1-3.7-3.2-7-6.2-9.4-.9-.7-2.2-.8-3.2-.2l-3.4 2c-1.5-1.1-3.1-2-4.9-2.5V3.7c0-.9-.5-1.7-1.3-2.1C36.8.9 34.8.5 32.8.5s-3.9.4-5.8 1.1c-.8.3-1.3 1.1-1.3 2.1v3.6c-1.8.6-3.4 1.4-4.9 2.5l-3.6-2zM32.8 31c-4 0-7.2-3.2-7.2-7.2s3.2-7.2 7.2-7.2 7.2 3.2 7.2 7.2-3.2 7.2-7.2 7.2z" fill="#FF007A"/>
+        </svg>
+      ),
       color: "#FF007A",
       delay: 0
     },
     {
-      logo: <img src="https://raw.githubusercontent.com/spothq/cryptocurrency-icons/master/svg/color/link.svg" alt="Chainlink" className="w-full h-full object-contain opacity-90 hover:opacity-100 transition-opacity" />,
+      logo: (
+        <svg viewBox="0 0 37.8 43.6" fill="none" className="w-full h-full">
+          <path d="M18.9 0l-4 6.9L0 24.4h9.7l9.2-16 9.2 16h9.7L23 6.9 18.9 0z" fill="#375BD2"/>
+          <path d="M18.9 43.6l4-6.9 14.9-17.5h-9.7l-9.2 16-9.2-16H0l14.9 17.5 4 6.9z" fill="#375BD2"/>
+        </svg>
+      ),
       color: "#375BD2",
       delay: 0.1
     },
     {
-      logo: <img src="https://raw.githubusercontent.com/spothq/cryptocurrency-icons/master/svg/color/sol.svg" alt="Solana" className="w-full h-full object-contain opacity-90 hover:opacity-100 transition-opacity" />,
+      logo: (
+        <svg viewBox="0 0 397.7 311.7" className="w-full h-full">
+          <linearGradient id="solGrad1" x1="360.879" y1="351.455" x2="141.213" y2="-69.294" gradientUnits="userSpaceOnUse" gradientTransform="translate(0 -38)">
+            <stop offset="0" stopColor="#00FFA3"/><stop offset="1" stopColor="#DC1FFF"/>
+          </linearGradient>
+          <path d="M64.6 237.9c2.4-2.4 5.7-3.8 9.2-3.8h317.4c5.8 0 8.7 7 4.6 11.1l-62.7 62.7c-2.4 2.4-5.7 3.8-9.2 3.8H6.5c-5.8 0-8.7-7-4.6-11.1l62.7-62.7z" fill="url(#solGrad1)"/>
+          <linearGradient id="solGrad2" x1="264.829" y1="401.601" x2="45.163" y2="-19.148" gradientUnits="userSpaceOnUse" gradientTransform="translate(0 -38)">
+            <stop offset="0" stopColor="#00FFA3"/><stop offset="1" stopColor="#DC1FFF"/>
+          </linearGradient>
+          <path d="M64.6 3.8C67.1 1.4 70.4 0 73.8 0h317.4c5.8 0 8.7 7 4.6 11.1l-62.7 62.7c-2.4 2.4-5.7 3.8-9.2 3.8H6.5c-5.8 0-8.7-7-4.6-11.1L64.6 3.8z" fill="url(#solGrad2)"/>
+          <linearGradient id="solGrad3" x1="312.548" y1="376.688" x2="92.882" y2="-44.061" gradientUnits="userSpaceOnUse" gradientTransform="translate(0 -38)">
+            <stop offset="0" stopColor="#00FFA3"/><stop offset="1" stopColor="#DC1FFF"/>
+          </linearGradient>
+          <path d="M333.1 120.1c-2.4-2.4-5.7-3.8-9.2-3.8H6.5c-5.8 0-8.7 7-4.6 11.1l62.7 62.7c2.4 2.4 5.7 3.8 9.2 3.8h317.4c5.8 0 8.7-7 4.6-11.1l-62.7-62.7z" fill="url(#solGrad3)"/>
+        </svg>
+      ),
       color: "#14F195",
       delay: 0.2
     },
     {
-      logo: <img src="https://raw.githubusercontent.com/spothq/cryptocurrency-icons/master/svg/color/aave.svg" alt="Aave" className="w-full h-full object-contain opacity-90 hover:opacity-100 transition-opacity" />,
+      logo: (
+        <svg viewBox="0 0 256 280" className="w-full h-full">
+          <path d="M185.2 0L128 101.4 70.8 0H0l128 280L256 0h-70.8z" fill="#B6509E"/>
+        </svg>
+      ),
       color: "#B6509E",
       delay: 0.3
     },
     {
-      logo: <img src="https://raw.githubusercontent.com/trustwallet/assets/master/blockchains/smartchain/assets/0x0E09FaBB73Bd3Ade0a17ECC321fD13a19e81cE82/logo.png" alt="PancakeSwap" className="w-full h-full object-contain opacity-90 hover:opacity-100 transition-opacity" />,
+      logo: (
+        <svg viewBox="0 0 256 256" className="w-full h-full">
+          <circle cx="128" cy="128" r="128" fill="#D1884F"/>
+          <path d="M178.5 103.3c-3.1-3.5-7.6-5.5-12.2-5.5h-5.2c.7-2.1 1.1-4.3 1.1-6.6 0-12.5-10.7-22.6-24-22.6-9.5 0-17.9 5.3-22 13.2-4.1-7.9-12.5-13.2-22-13.2-13.3 0-24 10.1-24 22.6 0 2.3.4 4.5 1.1 6.6h-5.2c-4.6 0-9.1 2-12.2 5.5-3.1 3.5-4.5 8.1-3.8 12.7l8.8 59.3c1.2 8 8.1 13.9 16.2 13.9h80.2c8.1 0 15-5.9 16.2-13.9l8.8-59.3c.7-4.5-.7-9.2-3.8-12.7zM94.2 83.7c6.2 0 11.2 4.5 11.2 10.1s-5 10.1-11.2 10.1-11.2-4.5-11.2-10.1 5-10.1 11.2-10.1zm42 99.7h-16.4v16.4h-9.6v-16.4H93.8v-9.6h16.4v-16.4h9.6v16.4h16.4v9.6zm25.6-89.6c0 5.6-5 10.1-11.2 10.1s-11.2-4.5-11.2-10.1 5-10.1 11.2-10.1 11.2 4.5 11.2 10.1z" fill="#FFF"/>
+        </svg>
+      ),
       color: "#D1884F",
       delay: 0.4
     },
     {
-      logo: <img src="https://raw.githubusercontent.com/spothq/cryptocurrency-icons/master/svg/color/mkr.svg" alt="Maker" className="w-full h-full object-contain opacity-90 hover:opacity-100 transition-opacity" />,
+      logo: (
+        <svg viewBox="0 0 256 256" className="w-full h-full">
+          <path d="M128 0C57.3 0 0 57.3 0 128s57.3 128 128 128 128-57.3 128-128S198.7 0 128 0zm0 224c-53 0-96-43-96-96s43-96 96-96 96 43 96 96-43 96-96 96z" fill="#1AAB9B"/>
+          <path d="M178.2 96.8v14.3c0 1.1-.6 2.1-1.6 2.6L149 127.9c-.6.3-1.3.3-1.9 0l-19.1-10.5-19.1 10.5c-.6.3-1.3.3-1.9 0l-27.6-15.2c-1-.5-1.6-1.5-1.6-2.6V96.8c0-1.1.6-2.1 1.6-2.6l27.6-15.2c.6-.3 1.3-.3 1.9 0L128 89.5l19.1-10.5c.6-.3 1.3-.3 1.9 0l27.6 15.2c1 .5 1.6 1.5 1.6 2.6zm-3.2 30l-27.6 15.2c-.6.3-1.3.3-1.9 0L128 131.5l-17.5 10.5c-.6.3-1.3.3-1.9 0L81 126.8v14.3c0 1.1.6 2.1 1.6 2.6l43.5 24c.6.3 1.3.3 1.9 0l43.5-24c1-.5 1.6-1.5 1.6-2.6v-14.3z" fill="#1AAB9B"/>
+        </svg>
+      ),
       color: "#1AAB9B",
       delay: 0.5
     },
     {
-      logo: <img src="https://unpkg.com/simple-icons@16.25.0/icons/alchemy.svg" alt="Alchemy" className="w-full h-full object-contain opacity-90 hover:opacity-100 transition-opacity dark:invert" />,
+      logo: (
+        <svg viewBox="0 0 256 256" className="w-full h-full">
+          <rect width="256" height="256" rx="48" fill="#0C0F25"/>
+          <path d="M128 48L68 88v80l60 40 60-40V88l-60-40zm40 108l-40 26.7L88 156v-56l40-26.7L168 100v56z" fill="#3F85F4"/>
+          <circle cx="128" cy="128" r="16" fill="#3F85F4"/>
+        </svg>
+      ),
       color: "#3F85F4",
       delay: 0.6
     },
     {
-      logo: <img src="https://api.microlink.io?url=https://infura.io&embed=logo" alt="Infura" className="w-full h-full object-contain opacity-90 hover:opacity-100 transition-opacity" />,
+      logo: (
+        <svg viewBox="0 0 256 256" className="w-full h-full">
+          <rect width="256" height="256" rx="48" fill="#FF5C35"/>
+          <path d="M128 56c-39.8 0-72 32.2-72 72s32.2 72 72 72 72-32.2 72-72-32.2-72-72-72zm0 112c-22.1 0-40-17.9-40-40s17.9-40 40-40 40 17.9 40 40-17.9 40-40 40z" fill="#FFF"/>
+          <circle cx="128" cy="128" r="16" fill="#FFF"/>
+        </svg>
+      ),
       color: "#FF5C35",
       delay: 0.7
     },
