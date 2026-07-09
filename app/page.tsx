@@ -1191,7 +1191,7 @@ export default function FocusTimerPage() {
                 </span>
               </h2>
             </motion.div>
-            <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.15 }} viewport={{ once: true }}>
+            <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.15 }} viewport={{ once: true }} className="max-w-2xl mx-auto px-4">
               <FaqAccordion
                 title=""
                 items={[
@@ -1206,14 +1206,16 @@ export default function FocusTimerPage() {
 
           {/* ══════ PRIVACY SECTION ══════ */}
           <section id="privacy" className="py-20 border-t border-border">
-            <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.7 }} viewport={{ once: true }} className="max-w-2xl mx-auto">
-              <p className="text-[10px] font-semibold text-foreground/40 uppercase tracking-[0.35em] mb-3 text-center">Legal</p>
-              <h2 className="text-3xl md:text-4xl font-black text-foreground text-center mb-10" style={{ letterSpacing: "-0.03em" }}>
+            <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.7 }} viewport={{ once: true }} className="text-center mb-12">
+              <p className="text-[10px] font-semibold text-foreground/40 uppercase tracking-[0.35em] mb-3">Legal</p>
+              <h2 className="text-3xl md:text-5xl font-black text-foreground" style={{ letterSpacing: "-0.03em" }}>
                 Privacy{" "}
                 <span style={{ background: "linear-gradient(135deg,#FFB000,#FF8A00)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>
                   Policy
                 </span>
               </h2>
+            </motion.div>
+            <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.15 }} viewport={{ once: true }} className="max-w-2xl mx-auto px-4">
               <FaqAccordion
                 title=""
                 items={[
@@ -1228,14 +1230,16 @@ export default function FocusTimerPage() {
 
           {/* ══════ TERMS SECTION ══════ */}
           <section id="terms" className="py-20 border-t border-border">
-            <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.7 }} viewport={{ once: true }} className="max-w-2xl mx-auto">
-              <p className="text-[10px] font-semibold text-foreground/40 uppercase tracking-[0.35em] mb-3 text-center">Legal</p>
-              <h2 className="text-3xl md:text-4xl font-black text-foreground text-center mb-10" style={{ letterSpacing: "-0.03em" }}>
+            <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.7 }} viewport={{ once: true }} className="text-center mb-12">
+              <p className="text-[10px] font-semibold text-foreground/40 uppercase tracking-[0.35em] mb-3">Legal</p>
+              <h2 className="text-3xl md:text-5xl font-black text-foreground" style={{ letterSpacing: "-0.03em" }}>
                 Terms of{" "}
                 <span style={{ background: "linear-gradient(135deg,#FFB000,#FF8A00)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>
                   Service
                 </span>
               </h2>
+            </motion.div>
+            <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.15 }} viewport={{ once: true }} className="max-w-2xl mx-auto px-4">
               <FaqAccordion
                 title=""
                 items={[
