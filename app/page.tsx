@@ -700,7 +700,7 @@ export default function FocusTimerPage() {
                 className="absolute w-24 h-24 rounded-full bg-[#FF8A00] blur-xl"
               />
               <motion.img
-                src="/ef-logo.png"
+                src="/ef-logo.png?v=3"
                 alt="Elite Force Logo"
                 initial={{ scale: 0.8, opacity: 0 }}
                 animate={{ scale: [0.95, 1.05, 0.95], opacity: 1 }}
@@ -1334,7 +1334,7 @@ export default function FocusTimerPage() {
           <footer className="pt-8 pb-36 border-t border-border">
             <div className="flex flex-col items-center justify-center gap-3">
               <img
-                src="/ef-logo.png"
+                src="/ef-logo.png?v=3"
                 alt="Elite Force Logo"
                 className="w-32 h-32 object-contain"
               />

@@ -29,7 +29,7 @@ export default function RootLayout({
       <head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link rel="icon" href="/ef-logo.png" type="image/png" />
+        <link rel="icon" href="/ef-logo.png?v=3" type="image/png" />
       </head>
       <body className="min-h-screen antialiased" suppressHydrationWarning style={{ fontFamily: "var(--font-inter), Inter, system-ui, sans-serif" }}>
         <Providers>

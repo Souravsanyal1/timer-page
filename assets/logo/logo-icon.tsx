@@ -8,7 +8,7 @@ interface LogoIconProps {
 export default function LogoIcon({ className, size = 32 }: LogoIconProps) {
   return (
     <img
-      src="/ef-logo.png"
+      src="/ef-logo.png?v=3"
       alt="Elite Force Logo"
       width={size}
       height={size}
