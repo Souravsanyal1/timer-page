@@ -654,10 +654,11 @@ export default function FocusTimerPage() {
     },
     {
       logo: (
-        <svg viewBox="0 0 256 256" className="w-full h-full">
-          <rect width="256" height="256" rx="48" fill="#FF5C35"/>
-          <path d="M128 56c-39.8 0-72 32.2-72 72s32.2 72 72 72 72-32.2 72-72-32.2-72-72-72zm0 112c-22.1 0-40-17.9-40-40s17.9-40 40-40 40 17.9 40 40-17.9 40-40 40z" fill="#FFF"/>
-          <circle cx="128" cy="128" r="16" fill="#FFF"/>
+        <svg viewBox="0 0 48 48" className="w-full h-full" fill="none">
+          <path d="M14 8h20v4H14z" fill="#FF5C35"/>
+          <path d="M18 14h12v4H18z" fill="#FF5C35"/>
+          <path d="M10 20h28l-4 8H14l-4-8z" fill="#FF5C35"/>
+          <path d="M14 30h20l-6 12h-8l-6-12z" fill="#FF5C35"/>
         </svg>
       ),
       color: "#FF5C35",
