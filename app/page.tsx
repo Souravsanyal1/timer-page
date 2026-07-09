@@ -574,42 +574,42 @@ export default function FocusTimerPage() {
 
   const stats = [
     {
-      logo: <img src="https://cdn.simpleicons.org/uniswap" alt="Uniswap" className="w-full h-full object-contain opacity-90 hover:opacity-100 transition-opacity" />,
+      logo: <img src="https://raw.githubusercontent.com/spothq/cryptocurrency-icons/master/svg/color/uni.svg" alt="Uniswap" className="w-full h-full object-contain opacity-90 hover:opacity-100 transition-opacity" />,
       color: "#FF007A",
       delay: 0
     },
     {
-      logo: <img src="https://cdn.simpleicons.org/chainlink" alt="Chainlink" className="w-full h-full object-contain opacity-90 hover:opacity-100 transition-opacity" />,
+      logo: <img src="https://raw.githubusercontent.com/spothq/cryptocurrency-icons/master/svg/color/link.svg" alt="Chainlink" className="w-full h-full object-contain opacity-90 hover:opacity-100 transition-opacity" />,
       color: "#375BD2",
       delay: 0.1
     },
     {
-      logo: <img src="https://cdn.simpleicons.org/solana/14F195" alt="Solana" className="w-full h-full object-contain opacity-90 hover:opacity-100 transition-opacity" />,
+      logo: <img src="https://raw.githubusercontent.com/spothq/cryptocurrency-icons/master/svg/color/sol.svg" alt="Solana" className="w-full h-full object-contain opacity-90 hover:opacity-100 transition-opacity" />,
       color: "#14F195",
       delay: 0.2
     },
     {
-      logo: <img src="https://cdn.simpleicons.org/aave" alt="Aave" className="w-full h-full object-contain opacity-90 hover:opacity-100 transition-opacity" />,
+      logo: <img src="https://raw.githubusercontent.com/spothq/cryptocurrency-icons/master/svg/color/aave.svg" alt="Aave" className="w-full h-full object-contain opacity-90 hover:opacity-100 transition-opacity" />,
       color: "#B6509E",
       delay: 0.3
     },
     {
-      logo: <img src="https://cdn.simpleicons.org/pancakeswap" alt="PancakeSwap" className="w-full h-full object-contain opacity-90 hover:opacity-100 transition-opacity" />,
+      logo: <img src="https://raw.githubusercontent.com/trustwallet/assets/master/blockchains/smartchain/assets/0x0E09FaBB73Bd3Ade0a17ECC321fD13a19e81cE82/logo.png" alt="PancakeSwap" className="w-full h-full object-contain opacity-90 hover:opacity-100 transition-opacity" />,
       color: "#D1884F",
       delay: 0.4
     },
     {
-      logo: <img src="https://cdn.simpleicons.org/maker" alt="Maker" className="w-full h-full object-contain opacity-90 hover:opacity-100 transition-opacity" />,
+      logo: <img src="https://raw.githubusercontent.com/spothq/cryptocurrency-icons/master/svg/color/mkr.svg" alt="Maker" className="w-full h-full object-contain opacity-90 hover:opacity-100 transition-opacity" />,
       color: "#1AAB9B",
       delay: 0.5
     },
     {
-      logo: <img src="https://cdn.jsdelivr.net/npm/@thesvg/icons/icons/alchemy.svg" alt="Alchemy" className="w-full h-full object-contain opacity-90 hover:opacity-100 transition-opacity dark:invert" />,
+      logo: <img src="https://unpkg.com/simple-icons@16.25.0/icons/alchemy.svg" alt="Alchemy" className="w-full h-full object-contain opacity-90 hover:opacity-100 transition-opacity dark:invert" />,
       color: "#3F85F4",
       delay: 0.6
     },
     {
-      logo: <img src="https://cdn.simpleicons.org/infura" alt="Infura" className="w-full h-full object-contain opacity-90 hover:opacity-100 transition-opacity" />,
+      logo: <img src="https://api.microlink.io?url=https://infura.io&embed=logo" alt="Infura" className="w-full h-full object-contain opacity-90 hover:opacity-100 transition-opacity" />,
       color: "#FF5C35",
       delay: 0.7
     },
