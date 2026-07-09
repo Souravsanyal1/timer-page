@@ -261,7 +261,7 @@ function StatCard({ logo, color, delay }: {
         className="w-16 h-16 rounded-2xl flex items-center justify-center transition-all duration-300 group-hover:scale-110 group-hover:-translate-y-1 p-3.5 shrink-0 shadow-lg shadow-black/5"
         style={{ background: `${color}15`, border: `1px solid ${color}25` }}
       >
-        <div className="w-9 h-9 flex items-center justify-center shrink-0 [&>svg]:h-full [&>svg]:w-auto [&>img]:h-full [&>img]:w-auto [&>img]:object-contain">
+        <div className="w-9 h-9 flex items-center justify-center shrink-0 [&>svg]:w-full [&>svg]:h-full [&>img]:w-full [&>img]:h-full [&>img]:object-contain">
           {logo}
         </div>
       </div>
@@ -574,42 +574,42 @@ export default function FocusTimerPage() {
 
   const stats = [
     {
-      logo: <img src="https://cdn.simpleicons.org/uniswap" alt="Uniswap" className="opacity-90 hover:opacity-100 transition-opacity" />,
+      logo: <img src="https://cdn.simpleicons.org/uniswap" alt="Uniswap" className="w-full h-full object-contain opacity-90 hover:opacity-100 transition-opacity" />,
       color: "#FF007A",
       delay: 0
     },
     {
-      logo: <img src="https://cdn.simpleicons.org/chainlink" alt="Chainlink" className="opacity-90 hover:opacity-100 transition-opacity" />,
+      logo: <img src="https://cdn.simpleicons.org/chainlink" alt="Chainlink" className="w-full h-full object-contain opacity-90 hover:opacity-100 transition-opacity" />,
       color: "#375BD2",
       delay: 0.1
     },
     {
-      logo: <img src="https://cdn.simpleicons.org/solana/14F195" alt="Solana" className="opacity-90 hover:opacity-100 transition-opacity" />,
+      logo: <img src="https://cdn.simpleicons.org/solana/14F195" alt="Solana" className="w-full h-full object-contain opacity-90 hover:opacity-100 transition-opacity" />,
       color: "#14F195",
       delay: 0.2
     },
     {
-      logo: <img src="https://cdn.simpleicons.org/aave" alt="Aave" className="opacity-90 hover:opacity-100 transition-opacity" />,
+      logo: <img src="https://cdn.simpleicons.org/aave" alt="Aave" className="w-full h-full object-contain opacity-90 hover:opacity-100 transition-opacity" />,
       color: "#B6509E",
       delay: 0.3
     },
     {
-      logo: <img src="https://cdn.simpleicons.org/pancakeswap" alt="PancakeSwap" className="opacity-90 hover:opacity-100 transition-opacity" />,
+      logo: <img src="https://cdn.simpleicons.org/pancakeswap" alt="PancakeSwap" className="w-full h-full object-contain opacity-90 hover:opacity-100 transition-opacity" />,
       color: "#D1884F",
       delay: 0.4
     },
     {
-      logo: <img src="https://cdn.simpleicons.org/maker" alt="Maker" className="opacity-90 hover:opacity-100 transition-opacity" />,
+      logo: <img src="https://cdn.simpleicons.org/maker" alt="Maker" className="w-full h-full object-contain opacity-90 hover:opacity-100 transition-opacity" />,
       color: "#1AAB9B",
       delay: 0.5
     },
     {
-      logo: <img src="https://cdn.jsdelivr.net/npm/@thesvg/icons/icons/alchemy.svg" alt="Alchemy" className="opacity-90 hover:opacity-100 transition-opacity dark:invert" />,
+      logo: <img src="https://cdn.jsdelivr.net/npm/@thesvg/icons/icons/alchemy.svg" alt="Alchemy" className="w-full h-full object-contain opacity-90 hover:opacity-100 transition-opacity dark:invert" />,
       color: "#3F85F4",
       delay: 0.6
     },
     {
-      logo: <img src="https://cdn.simpleicons.org/infura" alt="Infura" className="opacity-90 hover:opacity-100 transition-opacity" />,
+      logo: <img src="https://cdn.simpleicons.org/infura" alt="Infura" className="w-full h-full object-contain opacity-90 hover:opacity-100 transition-opacity" />,
       color: "#FF5C35",
       delay: 0.7
     },
@@ -827,7 +827,7 @@ export default function FocusTimerPage() {
                     className="w-24 h-24 rounded-2xl flex items-center justify-center p-4.5 shrink-0 shadow-lg shadow-black/5"
                     style={{ background: `${stat.color}15`, border: `1px solid ${stat.color}25` }}
                   >
-                    <div className="w-10 h-10 flex items-center justify-center shrink-0 [&>img]:object-contain text-white">
+                    <div className="w-10 h-10 flex items-center justify-center shrink-0 [&>img]:w-full [&>img]:h-full [&>img]:object-contain text-white">
                       {stat.logo}
                     </div>
                   </div>
