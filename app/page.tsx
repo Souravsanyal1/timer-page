@@ -28,8 +28,7 @@ import { FaqAccordion } from "@/components/ui/faq-accordion";
 import LogoIcon from "@/assets/logo/logo-icon";
 import GlassDock from "@/components/ui/glass-dock";
 import { SpotlightNavbar } from "@/components/ui/spotlight-navbar";
-import dynamic from "next/dynamic";
-const Coin3D = dynamic(() => import("@/components/ui/coin-3d"), { ssr: false });
+import Coin3D from "@/components/ui/coin-3d";
 
 /* ─────────────── 6-Month Countdown (ends Jan 3, 2027 12:00 AM) ─────────────── */
 // Target: January 3, 2027 at 00:00:00 local time
@@ -120,9 +119,8 @@ function SixMonthCountdown() {
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: 30 }}
+      initial={{ opacity: 1, y: 0 }}
       animate={{ opacity: 1, y: 0 }}
-      transition={{ delay: 2.45, duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
       className="flex flex-col items-center gap-5 my-8 w-full"
     >
       {/* Label */}
@@ -251,10 +249,8 @@ function StatCard({ logo, color, delay }: {
 }) {
   return (
     <motion.div
-      initial={{ opacity: 0, y: 30 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5, delay, ease: [0.22, 1, 0.36, 1] }}
-      viewport={{ once: true }}
+      initial={{ opacity: 1, y: 0 }}
+      animate={{ opacity: 1, y: 0 }}
       className="group relative flex items-center justify-center p-12 cursor-pointer transition-all duration-300"
       style={{ borderRight: "1px solid var(--border)", borderBottom: "1px solid var(--border)" }}
       onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.background = `${color}0d`; }}
@@ -673,16 +669,15 @@ export default function FocusTimerPage() {
 
             {/* ── Giant Typography ── */}
             <motion.div
-              initial={{ opacity: 0, y: 60 }}
+              initial={{ opacity: 1, y: 0 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 2.2, duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
               className="select-none mb-6 flex flex-wrap items-center justify-center gap-x-[0.3em] font-black uppercase tracking-[0.05em] leading-none"
               style={{ fontSize: "clamp(3.5rem, 11vw, 8.5rem)", letterSpacing: "-0.04em" }}
             >
-              <FlipText className="text-foreground" duration={4.5} delay={0.1}>
+              <FlipText className="text-foreground" duration={2.5} delay={0}>
                 COMING
               </FlipText>
-              <FlipText className="text-[#FF8A00]" duration={4.5} delay={0.8}>
+              <FlipText className="text-[#FF8A00]" duration={2.5} delay={0}>
                 SOON
               </FlipText>
             </motion.div>
