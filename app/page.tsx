@@ -665,7 +665,7 @@ export default function FocusTimerPage() {
             src="/ef-logo.png"
             alt="Elite Force Coin Watermark"
             className="w-full h-full object-contain"
-            animate={{ rotate: 360 }}
+            animate={{ rotate: -360 }}
             transition={{ duration: 120, repeat: Infinity, ease: "linear" }}
           />
         </div>
