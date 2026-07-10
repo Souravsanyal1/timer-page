@@ -16,7 +16,6 @@ import { SiGooglecalendar, SiNotion } from "react-icons/si";
 import { AnimatedNumber } from "@/components/ui/animated-number";
 import { FlipFadeText } from "@/components/ui/flip-fade-text";
 import { PopButton } from "@/components/ui/pop-button";
-import ExpandableBentoGrid from "@/components/ui/expandable-bento-grid";
 import { KineticTextLoader } from "@/components/ui/kinetic-text-loader";
 import { Atom } from "react-loading-indicators";
 import { StackedLogos } from "@/components/ui/stacked-logos";
@@ -561,17 +560,6 @@ export default function FocusTimerPage() {
     completed: ["Session Complete", "Great Job!"],
   };
 
-  const presets = [
-    { id: 1, title: "Pomodoro", subtitle: "25 min focus", icon: <Timer className="w-6 h-6" />, description: "25-minute classic focus session.", content: <p>Start your 25-minute Pomodoro!</p>, seconds: 25 * 60 },
-    { id: 2, title: "Deep Focus", subtitle: "50 min block", icon: <Brain className="w-6 h-6" />, description: "Extended deep work block.", content: <p>50 minutes of maximum concentration.</p>, seconds: 50 * 60 },
-    { id: 3, title: "Short Break", subtitle: "5 min rest", icon: <Coffee className="w-6 h-6" />, description: "Quick mental reset.", content: <p>5 minutes to refresh your mind.</p>, seconds: 5 * 60 },
-    { id: 4, title: "Long Break", subtitle: "15 min rest", icon: <Moon className="w-6 h-6" />, description: "Full recharge after multiple sessions.", content: <p>15 minutes to fully recharge.</p>, seconds: 15 * 60 },
-    { id: 5, title: "Meditation", subtitle: "10 min calm", icon: <Leaf className="w-6 h-6" />, description: "10-minute mindfulness session.", content: <p>Clear your mind with meditation.</p>, seconds: 10 * 60 },
-    { id: 6, title: "Workout", subtitle: "45 min active", icon: <Dumbbell className="w-6 h-6" />, description: "45-minute active workout timer.", content: <p>Stay active with this workout timer.</p>, seconds: 45 * 60 },
-    { id: 7, title: "Study", subtitle: "90 min deep", icon: <BookOpen className="w-6 h-6" />, description: "90-minute intensive study session.", content: <p>90 minutes of deep study.</p>, seconds: 90 * 60 },
-    { id: 8, title: "Custom", subtitle: "Your time", icon: <Target className="w-6 h-6" />, description: "Set your own duration.", content: <p>Customize your perfect timer.</p>, seconds: 20 * 60 },
-  ];
-
   const stats = [
     {
       logo: (
@@ -786,22 +774,6 @@ export default function FocusTimerPage() {
             {/* ── Control Buttons - removed ── */}
 
             {/* Keyboard hints - removed */}
-          </section>
-
-          {/* ══════ PRESETS ══════ */}
-          <section id="milestones" className="py-16">
-            <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.7 }} viewport={{ once: true }} className="text-center mb-10">
-              <p className="text-[10px] font-semibold text-foreground/40 uppercase tracking-[0.35em] mb-3">Schedule</p>
-              <h2 className="text-3xl md:text-5xl font-black text-foreground" style={{ letterSpacing: "-0.03em" }}>
-                Goal{" "}
-                <span style={{ background: "linear-gradient(135deg,#FFB000,#FF8A00)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>
-                  Milestones
-                </span>
-              </h2>
-            </motion.div>
-            <div>
-              <ExpandableBentoGrid items={presets.slice(0, 3).map((p) => ({ ...p, icon: p.icon }))} />
-            </div>
           </section>
 
           {/* ══════ STATS ══════ */}
