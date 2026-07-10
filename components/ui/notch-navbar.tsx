@@ -7,6 +7,7 @@ import { useTheme } from "next-themes"
 import { useWallet } from "@/hooks/use-wallet"
 import { WalletModal } from "@/components/ui/wallet-modal"
 import LogoIcon from "@/assets/logo/logo-icon"
+import { PopButton } from "@/components/ui/pop-button"
 
 // Simple Theme Toggle for Mobile
 const MobileThemeToggle = () => {
@@ -85,27 +86,41 @@ export function NotchNavbar({ className, ...props }: React.HTMLAttributes<HTMLEl
                <div className="hidden md:flex gap-4 items-center shrink-0">
                   <ThemeToggle />
                   {wallet.isConnected ? (
-                    <button
+                    <PopButton
                       onClick={() => setWalletModalOpen(true)}
-                      className="flex items-center gap-2 px-3 py-1.5 text-sm font-semibold rounded-2xl border transition-all whitespace-nowrap hover:scale-[1.02] active:scale-95"
-                      style={{ borderColor: '#FF8A00', color: '#FF8A00', background: 'rgba(255,138,0,0.08)' }}
+                      className={cn(
+                        "flex items-center gap-2 px-4 py-2 text-sm font-bold normal-case rounded-xl whitespace-nowrap",
+                        "text-orange-500 bg-orange-500/10 border-2 border-orange-500/30 dark:bg-orange-500/5",
+                        "hover:bg-orange-500/20 hover:text-orange-600 dark:hover:text-orange-400",
+                        "shadow-[0_4px_0_0_rgba(255,138,0,0.2)]",
+                        "hover:shadow-[0_2px_0_0_rgba(255,138,0,0.2)]",
+                        "active:shadow-[0_0px_0_0_rgba(0,0,0,0)]",
+                        "hover:translate-y-[2px] active:translate-y-[4px]"
+                      )}
                     >
                       <div className="w-2 h-2 rounded-full bg-green-400 animate-pulse" />
                       {wallet.shortAddress}
-                    </button>
+                    </PopButton>
                   ) : (
-                    <button
+                    <PopButton
                       onClick={() => setWalletModalOpen(true)}
-                      className="flex items-center gap-2 px-4 py-1.5 text-sm font-semibold text-white rounded-2xl transition-all whitespace-nowrap shadow-md hover:shadow-lg hover:scale-[1.02] active:scale-95"
-                      style={{ background: 'linear-gradient(135deg, #FF8A00, #e67600)' }}
+                      className={cn(
+                        "flex items-center gap-2 px-4 py-2 text-sm font-bold normal-case rounded-xl whitespace-nowrap",
+                        "text-white bg-gradient-to-r from-orange-500 to-amber-500 border-2 border-orange-600",
+                        "hover:bg-gradient-to-r hover:from-orange-400 hover:to-amber-400",
+                        "shadow-[0_6px_0_0_#b25e00,0_10px_0_0_#fbd38d,0_14px_15px_-5px_rgba(0,0,0,0.3)]",
+                        "hover:shadow-[0_4px_0_0_#b25e00,0_8px_0_0_#fbd38d,0_10px_10px_-5px_rgba(0,0,0,0.2)]",
+                        "active:shadow-[0_0px_0_0_#b25e00,0_0px_0_0_#fbd38d,0_0px_0_0_rgba(0,0,0,0)]",
+                        "hover:translate-y-[2px] active:translate-y-[4px]"
+                      )}
                     >
-                      <svg xmlns="http://www.w3.org/2000/svg" className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                      <svg xmlns="http://www.w3.org/2000/svg" className="w-4 h-4 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                         <rect x="2" y="7" width="20" height="14" rx="2" ry="2"/>
                         <path d="M16 3H8a2 2 0 0 0-2 2v2h12V5a2 2 0 0 0-2-2z"/>
                         <circle cx="16" cy="14" r="1" fill="currentColor"/>
                       </svg>
                       Connect Wallet
-                    </button>
+                    </PopButton>
                   )}
                </div>
 
@@ -113,22 +128,36 @@ export function NotchNavbar({ className, ...props }: React.HTMLAttributes<HTMLEl
                <div className="md:hidden flex items-center gap-3 mb-1">
                  <MobileThemeToggle />
                  {wallet.isConnected ? (
-                   <button
+                   <PopButton
                      onClick={() => setWalletModalOpen(true)}
-                     className="flex items-center gap-1.5 px-2.5 py-1.5 text-xs font-semibold rounded-xl border transition-all whitespace-nowrap active:scale-95"
-                     style={{ borderColor: '#FF8A00', color: '#FF8A00', background: 'rgba(255,138,0,0.08)' }}
+                     className={cn(
+                       "flex items-center gap-1.5 px-3 py-2 text-xs font-bold normal-case rounded-xl whitespace-nowrap",
+                       "text-orange-500 bg-orange-500/10 border-2 border-orange-500/30",
+                       "hover:bg-orange-500/20",
+                       "shadow-[0_3px_0_0_rgba(255,138,0,0.2)]",
+                       "hover:shadow-[0_1.5px_0_0_rgba(255,138,0,0.2)]",
+                       "active:shadow-[0_0px_0_0_rgba(0,0,0,0)]",
+                       "hover:translate-y-[1.5px] active:translate-y-[3px]"
+                     )}
                    >
                      <div className="w-1.5 h-1.5 rounded-full bg-green-400 animate-pulse" />
                      {wallet.shortAddress}
-                   </button>
+                   </PopButton>
                  ) : (
-                   <button
+                   <PopButton
                      onClick={() => setWalletModalOpen(true)}
-                     className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-semibold text-white rounded-xl transition-all whitespace-nowrap shadow-sm active:scale-95"
-                     style={{ background: 'linear-gradient(135deg, #FF8A00, #e67600)' }}
+                     className={cn(
+                       "flex items-center gap-1.5 px-3 py-2 text-xs font-bold normal-case rounded-xl whitespace-nowrap",
+                       "text-white bg-gradient-to-r from-orange-500 to-amber-500 border-2 border-orange-600",
+                       "hover:bg-gradient-to-r hover:from-orange-400 hover:to-amber-400",
+                       "shadow-[0_4px_0_0_#b25e00,0_6px_0_0_#fbd38d,0_8px_10px_-5px_rgba(0,0,0,0.3)]",
+                       "hover:shadow-[0_2px_0_0_#b25e00,0_4px_0_0_#fbd38d,0_6px_6px_-5px_rgba(0,0,0,0.2)]",
+                       "active:shadow-[0_0px_0_0_#b25e00,0_0px_0_0_#fbd38d,0_0px_0_0_rgba(0,0,0,0)]",
+                       "hover:translate-y-[2px] active:translate-y-[4px]"
+                     )}
                    >
                      Connect
-                   </button>
+                   </PopButton>
                  )}
                </div>
 
