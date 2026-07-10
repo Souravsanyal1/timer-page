@@ -659,6 +659,17 @@ export default function FocusTimerPage() {
           }}
         />
 
+        {/* Rotating Watermark Logo in the background */}
+        <div className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[85vw] h-[85vw] max-w-[650px] max-h-[650px] pointer-events-none opacity-[0.04] dark:opacity-[0.02] z-0 flex items-center justify-center overflow-hidden">
+          <motion.img
+            src="/ef-logo.png"
+            alt="Elite Force Coin Watermark"
+            className="w-full h-full object-contain"
+            animate={{ rotate: 360 }}
+            transition={{ duration: 120, repeat: Infinity, ease: "linear" }}
+          />
+        </div>
+
 
 
         <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
