@@ -28,6 +28,8 @@ import { FaqAccordion } from "@/components/ui/faq-accordion";
 import LogoIcon from "@/assets/logo/logo-icon";
 import GlassDock from "@/components/ui/glass-dock";
 import { SpotlightNavbar } from "@/components/ui/spotlight-navbar";
+import dynamic from "next/dynamic";
+const Coin3D = dynamic(() => import("@/components/ui/coin-3d"), { ssr: false });
 
 /* ─────────────── 6-Month Countdown (ends Jan 3, 2027 12:00 AM) ─────────────── */
 // Target: January 3, 2027 at 00:00:00 local time
@@ -659,16 +661,8 @@ export default function FocusTimerPage() {
           }}
         />
 
-        {/* Rotating Watermark Logo in the background */}
-        <div className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[85vw] h-[85vw] max-w-[650px] max-h-[650px] pointer-events-none opacity-[0.12] dark:opacity-[0.08] z-0 flex items-center justify-center overflow-hidden">
-          <motion.img
-            src="/watermark.png"
-            alt="Elite Force Coin Watermark"
-            className="w-full h-full object-contain"
-            animate={{ rotate: 360 }}
-            transition={{ duration: 120, repeat: Infinity, ease: "linear" }}
-          />
-        </div>
+        {/* 3D Rotating Gold Coin Watermark */}
+        <Coin3D />
 
 
 
