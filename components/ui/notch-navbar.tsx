@@ -80,7 +80,7 @@ export function NotchNavbar({ className, ...props }: React.HTMLAttributes<HTMLEl
           </div>
 
           {/* Responsive Notch Container - 3 Slices */}
-          <div className="flex h-16 relative z-10 shrink-0 -ml-px">
+          <div className="flex h-16 relative z-10 shrink-0 -ml-px w-[550px] lg:w-[650px]">
             
             {/* Left Slice (Corner) */}
             <div className="w-[50px] h-full relative shrink-0">
