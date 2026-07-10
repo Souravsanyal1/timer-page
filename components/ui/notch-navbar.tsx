@@ -103,43 +103,40 @@ export function NotchNavbar({ className, ...props }: React.HTMLAttributes<HTMLEl
                    </svg>
                </div>
 
-               {/* Content Layer */}
-               <div className="relative w-full h-full flex items-end justify-between pb-2 px-4 md:px-8">
-                 
-                 {/* Left Placeholder for alignment */}
-                 <div className="hidden md:block w-32" />
-
-                 {/* Logo & Name (Center) */}
-                 <div className="flex justify-center items-center gap-2.5 shrink-0 mx-2 md:mx-4 mt-0.5">
-                   {props.logo || (
-                     <>
-                       <LogoIcon size={24} />
-                       <span className="font-extrabold text-sm tracking-[0.18em] text-foreground select-none uppercase">
-                         Elite Force
-                       </span>
-                     </>
-                   )}
-                 </div>
-
-                 {/* Desktop Right Nav (Wallet) */}
-                 <div className="hidden md:flex gap-4 items-center shrink-0">
-                    {wallet.isConnected ? (
-                      <GenerateButton
-                        hue={30}
-                        text={wallet.shortAddress || "Connected"}
-                        generatingText="Disconnecting"
-                        onClick={() => setWalletModalOpen(true)}
-                      />
-                    ) : (
-                      <GenerateButton
-                        hue={30}
-                        text="Connect"
-                        generatingText="Connecting"
-                        onClick={() => setWalletModalOpen(true)}
-                      />
+                {/* Content Layer */}
+                <div className="relative w-full h-full flex items-end justify-end pb-2 px-4 md:px-8">
+                  
+                  {/* Logo & Name (Centered Absolutely) */}
+                  <div className="absolute left-1/2 bottom-[10px] -translate-x-1/2 flex items-center gap-2.5 shrink-0 z-20">
+                    {props.logo || (
+                      <>
+                        <LogoIcon size={24} />
+                        <span className="font-extrabold text-sm tracking-[0.18em] text-foreground select-none uppercase">
+                          Elite Force
+                        </span>
+                      </>
                     )}
-                 </div>
-               </div>
+                  </div>
+
+                  {/* Desktop Right Nav (Wallet) */}
+                  <div className="hidden md:flex gap-4 items-center shrink-0">
+                     {wallet.isConnected ? (
+                       <GenerateButton
+                         hue={30}
+                         text={wallet.shortAddress || "Connected"}
+                         generatingText="Disconnecting"
+                         onClick={() => setWalletModalOpen(true)}
+                       />
+                     ) : (
+                       <GenerateButton
+                         hue={30}
+                         text="Connect"
+                         generatingText="Connecting"
+                         onClick={() => setWalletModalOpen(true)}
+                       />
+                     )}
+                  </div>
+                </div>
 
             </div>
 
