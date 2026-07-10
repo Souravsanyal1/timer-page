@@ -92,7 +92,6 @@ export function NotchNavbar({ className, ...props }: React.HTMLAttributes<HTMLEl
 
                {/* Desktop Right Nav (Theme + Wallet) */}
                <div className="hidden md:flex gap-4 items-center shrink-0">
-                  <ThemeToggle />
                   {wallet.isConnected ? (
                     <GenerateButton
                       hue={30}
@@ -112,7 +111,6 @@ export function NotchNavbar({ className, ...props }: React.HTMLAttributes<HTMLEl
 
                {/* Mobile Right Actions (Theme + Compact Wallet) */}
                <div className="md:hidden flex items-center gap-3 mb-1">
-                 <MobileThemeToggle />
                  {wallet.isConnected ? (
                    <GenerateButton
                      hue={30}
