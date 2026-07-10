@@ -674,10 +674,10 @@ export default function FocusTimerPage() {
               className="select-none mb-6 flex flex-wrap items-center justify-center gap-x-[0.3em] font-black uppercase tracking-[0.05em] leading-none"
               style={{ fontSize: "clamp(3.5rem, 11vw, 8.5rem)", letterSpacing: "-0.04em" }}
             >
-              <FlipText className="text-foreground" duration={2} delay={0.1}>
+              <FlipText className="text-foreground" duration={4.5} delay={0.1}>
                 COMING
               </FlipText>
-              <FlipText className="text-[#FF8A00]" duration={2} delay={0.4}>
+              <FlipText className="text-[#FF8A00]" duration={4.5} delay={0.8}>
                 SOON
               </FlipText>
             </motion.div>
