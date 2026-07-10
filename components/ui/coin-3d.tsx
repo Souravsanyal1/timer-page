@@ -6,7 +6,7 @@ export default function Coin3D() {
   return (
     <div
       className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none z-0"
-      style={{ width: 520, height: 520, opacity: 0.2 }}
+      style={{ width: 780, height: 780, opacity: 0.2 }}
     >
       {/* Outer glow ring */}
       <div
