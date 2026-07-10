@@ -16,6 +16,7 @@ import { SiGooglecalendar, SiNotion } from "react-icons/si";
 import { AnimatedNumber } from "@/components/ui/animated-number";
 import { FlipFadeText } from "@/components/ui/flip-fade-text";
 import { PopButton } from "@/components/ui/pop-button";
+import { FlipText } from "@/components/ui/flip-text";
 import { KineticTextLoader } from "@/components/ui/kinetic-text-loader";
 import { Atom } from "react-loading-indicators";
 import { StackedLogos } from "@/components/ui/stacked-logos";
@@ -344,80 +345,6 @@ function SettingsDrawer({ open, onClose }: { open: boolean; onClose: () => void 
   );
 }
 
-/* ─────────────── Animated Coming Soon ─────────────── */
-function AnimatedComingSoon() {
-  const coming = "COMING".split("");
-  const soon = "SOON".split("");
-
-  return (
-    <div
-      className="mt-8 flex items-center justify-center gap-3 font-black uppercase tracking-[0.25em]"
-      style={{ fontSize: "clamp(1.5rem, 4vw, 3rem)", perspective: "1000px" }}
-    >
-      {/* COMING */}
-      <div className="flex gap-[0.1em]" style={{ transformStyle: "preserve-3d" }}>
-        {coming.map((char, i) => (
-          <motion.span
-            key={`c-${i}`}
-            initial={{ rotateX: 90, y: 15, opacity: 0, filter: "blur(4px)" }}
-            animate={{ rotateX: 0, y: [0, -6, 0], opacity: 1, filter: "blur(0px)" }}
-            transition={{
-              rotateX: { duration: 0.6, ease: [0.2, 0.65, 0.3, 0.9], delay: i * 0.05 },
-              opacity: { duration: 0.4, delay: i * 0.05 },
-              filter: { duration: 0.4, delay: i * 0.05 },
-              y: {
-                duration: 2.2,
-                repeat: Infinity,
-                repeatType: "reverse",
-                ease: "easeInOut",
-                delay: i * 0.12 + 0.6,
-              }
-            }}
-            className="inline-block text-foreground"
-            style={{ transformStyle: "preserve-3d" }}
-          >
-            {char}
-          </motion.span>
-        ))}
-      </div>
-
-      {/* SOON */}
-      <div className="flex gap-[0.1em]" style={{ transformStyle: "preserve-3d" }}>
-        {soon.map((char, i) => {
-          const index = coming.length + i;
-          return (
-            <motion.span
-              key={`s-${i}`}
-              initial={{ rotateX: 90, y: 15, opacity: 0, filter: "blur(4px)" }}
-              animate={{ rotateX: 0, y: [0, -6, 0], opacity: 1, filter: "blur(0px)" }}
-              transition={{
-                rotateX: { duration: 0.6, ease: [0.2, 0.65, 0.3, 0.9], delay: index * 0.05 },
-                opacity: { duration: 0.4, delay: index * 0.05 },
-                filter: { duration: 0.4, delay: index * 0.05 },
-                y: {
-                  duration: 2.2,
-                  repeat: Infinity,
-                  repeatType: "reverse",
-                  ease: "easeInOut",
-                  delay: index * 0.12 + 0.6,
-                }
-              }}
-              className="inline-block"
-              style={{
-                transformStyle: "preserve-3d",
-                color: "#FF8A00",
-                textShadow: "0 0 25px rgba(255,138,0,0.35)",
-              }}
-            >
-              {char}
-            </motion.span>
-          );
-        })}
-      </div>
-    </div>
-  );
-}
-
 /* ─────────────── Contact Section Animation Variants ─────────────── */
 const contactGridVariants = {
   hidden: { opacity: 0 },
@@ -742,27 +669,15 @@ export default function FocusTimerPage() {
               initial={{ opacity: 0, y: 60 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 2.2, duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
-              className="select-none mb-2"
-              style={{ lineHeight: "0.88", letterSpacing: "-0.04em" }}
+              className="select-none mb-6 flex flex-wrap items-center justify-center gap-x-[0.3em] font-black uppercase tracking-[0.05em] leading-none"
+              style={{ fontSize: "clamp(3.5rem, 11vw, 8.5rem)", letterSpacing: "-0.04em" }}
             >
-              <div className="block text-foreground font-black"
-                style={{ fontSize: "clamp(3.5rem,11vw,8.5rem)" }}>
-                ELITE
-              </div>
-
-              <div className="block font-black mt-1"
-                style={{
-                  fontSize: "clamp(3.5rem,11vw,8.5rem)",
-                  background: "linear-gradient(135deg,#FFB000 0%,#FF8A00 50%,#FF6B00 100%)",
-                  WebkitBackgroundClip: "text",
-                  WebkitTextFillColor: "transparent",
-                  backgroundClip: "text",
-                }}>
-                FORCE
-              </div>
-
-              {/* ── Coming Soon Text ── */}
-              <AnimatedComingSoon />
+              <FlipText className="text-foreground" duration={2} delay={0.1}>
+                COMING
+              </FlipText>
+              <FlipText className="text-[#FF8A00]" duration={2} delay={0.4}>
+                SOON
+              </FlipText>
             </motion.div>
 
             {/* Flip text subtitle - removed */}
