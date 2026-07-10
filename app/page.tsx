@@ -660,7 +660,7 @@ export default function FocusTimerPage() {
         />
 
         {/* Rotating Watermark Logo in the background */}
-        <div className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[85vw] h-[85vw] max-w-[650px] max-h-[650px] pointer-events-none opacity-[0.04] dark:opacity-[0.02] z-0 flex items-center justify-center overflow-hidden">
+        <div className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[85vw] h-[85vw] max-w-[650px] max-h-[650px] pointer-events-none opacity-[0.12] dark:opacity-[0.08] z-0 flex items-center justify-center overflow-hidden">
           <motion.img
             src="/ef-logo.png"
             alt="Elite Force Coin Watermark"
