@@ -27,7 +27,7 @@ import { WalletModal, WalletIcons } from "@/components/ui/wallet-modal";
 import { FaqAccordion } from "@/components/ui/faq-accordion";
 import LogoIcon from "@/assets/logo/logo-icon";
 import GlassDock from "@/components/ui/glass-dock";
-import { NotchNavbar } from "@/components/ui/notch-navbar";
+import { SpotlightNavbar } from "@/components/ui/spotlight-navbar";
 
 /* ─────────────── 6-Month Countdown (ends Jan 3, 2027 12:00 AM) ─────────────── */
 // Target: January 3, 2027 at 00:00:00 local time
@@ -641,7 +641,7 @@ export default function FocusTimerPage() {
 
       <SettingsDrawer open={settingsOpen} onClose={() => setSettingsOpen(false)} />
       <WalletModal open={walletModalOpen} onClose={() => setWalletModalOpen(false)} />
-      <NotchNavbar />
+      <SpotlightNavbar />
 
       {/* Floating Glass Dock at Bottom Center */}
       <div className="fixed bottom-6 left-1/2 -translate-x-1/2 z-50 scale-90 sm:scale-100 pointer-events-auto">
