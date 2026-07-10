@@ -104,10 +104,10 @@ export function NotchNavbar({ className, ...props }: React.HTMLAttributes<HTMLEl
                </div>
 
                 {/* Content Layer */}
-                <div className="relative w-full h-full flex items-end justify-end pb-2 px-4 md:px-8">
+                <div className="relative w-full h-full flex items-end justify-between pb-2 px-4 md:px-8">
                   
-                  {/* Logo & Name (Centered Absolutely) */}
-                  <div className="absolute left-1/2 bottom-[10px] -translate-x-1/2 flex items-center gap-2.5 shrink-0 z-20">
+                  {/* Logo & Name (Left aligned) */}
+                  <div className="flex items-center gap-2.5 shrink-0 z-20 mb-0.5">
                     {props.logo || (
                       <>
                         <LogoIcon size={24} />
